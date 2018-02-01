@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ccf2ff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.madelene.controller.OwnerFormController">
+   <left>
+      <HBox prefHeight="300.0" prefWidth="23.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" />
+         </children></HBox>
+   </left>
+   <right>
+      <HBox prefHeight="300.0" prefWidth="23.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" />
+         </children></HBox>
+   </right>
+   <top>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="53.0" prefWidth="830.0" text="Product &amp; Price List">
+               <font>
+                  <Font size="36.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="30.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="485.0">
+               <children>
+                  <Button fx:id="btnBackCashier" mnemonicParsing="false" onAction="#btnBackCashierAct" text="Back" />
+               </children>
+               <HBox.margin>
+                  <Insets right="30.0" top="10.0" />
+               </HBox.margin>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <content>
+            <TableView fx:id="tbleProduct" prefHeight="351.0" prefWidth="530.0">
+              <columns>
+                <TableColumn prefWidth="128.0" text="Kode Barang" />
+                <TableColumn prefWidth="134.0" text="Nama Barang" />
+                  <TableColumn minWidth="0.0" prefWidth="119.0" text="Harga Jual" />
+                  <TableColumn minWidth="0.0" prefWidth="45.0" text="Stok" />
+              </columns>
+            </TableView>
+         </content>
+      </ScrollPane>
+   </center>
+   <bottom>
+      <HBox prefHeight="38.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>

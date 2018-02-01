@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ccf2ff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.madelene.controller.CashierFormController">
+   <center>
+      <GridPane BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnTransaction" mnemonicParsing="false" onAction="#btnTransactionAct" prefHeight="150.0" prefWidth="617.0" text="Transaction" GridPane.rowIndex="1" />
+            <Button fx:id="btnProductPriceList" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnProductPriceListAct" prefHeight="150.0" prefWidth="764.0" text="Product &amp; Price List" />
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+   </center>
+   <top>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="53.0" prefWidth="830.0" text="Cashier">
+               <font>
+                  <Font size="36.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="30.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="485.0">
+               <children>
+                  <Button fx:id="btnLogOut" mnemonicParsing="false" onAction="#btnLogOut" text="Log Out" />
+               </children>
+               <HBox.margin>
+                  <Insets right="30.0" top="10.0" />
+               </HBox.margin>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <HBox prefHeight="300.0" prefWidth="23.0" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <HBox prefHeight="300.0" prefWidth="23.0" BorderPane.alignment="CENTER" />
+   </right>
+</BorderPane>
