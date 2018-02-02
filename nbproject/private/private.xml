@@ -3,25 +3,24 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/controller/LoginFormController.java</file>
+            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/dao/RelasiBarangNotaPenjualan.java</file>
+            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/dao/NotaPenjualan.java</file>
             <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/MainApp.java</file>
+            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/dao/Barang.java</file>
             <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/controller/OwnerFormController.java</file>
             <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/controller/CashierFormController.java</file>
-            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/view/SeeStatisticForm.fxml</file>
-            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/controller/SeeTopSalesFormController.java</file>
             <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/controller/AddProductFormController.java</file>
-            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/view/AddCashierForm.fxml</file>
-            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/view/ProductPriceListForm.fxml</file>
+            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/view/CoverPage.fxml</file>
             <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/controller/ProductPriceListFormController.java</file>
-            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/controller/SalesReportController.java</file>
-            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/controller/AddCashierFormController.java</file>
-            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/view/TransactionForm.fxml</file>
-            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/view/SalesReport.fxml</file>
+            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/view/UserList.fxml</file>
+            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/dao/DaoServiceUser.java</file>
+            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/dao/DaoServiceBarang.java</file>
+            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/controller/CoverPageController.java</file>
             <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/view/AddProductForm.fxml</file>
             <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/utility/Utility.java</file>
             <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/view/CashierForm.fxml</file>
-            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/controller/TransactionFormController.java</file>
-            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/controller/SeeStatisticFormController.java</file>
+            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/dao/DaoServiceNota.java</file>
+            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/dao/User.java</file>
         </group>
     </open-files>
 </project-private>

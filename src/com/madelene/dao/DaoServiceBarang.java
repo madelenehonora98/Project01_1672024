@@ -5,10 +5,19 @@
  */
 package com.madelene.dao;
 
+import java.util.List;
+
 /**
  *
  * @author Madelene
  */
-public class NewClass {
+public interface DaoServiceBarang<Barang> {
 
+    int addData(Barang object);
+
+    int deleteData(Barang object);
+
+    int updateData(Barang object);
+
+    List<Barang> showAllData();
 }

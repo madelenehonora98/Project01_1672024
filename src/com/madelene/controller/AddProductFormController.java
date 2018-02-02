@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 
 /**
  * FXML Controller class
@@ -22,6 +23,8 @@ public class AddProductFormController implements Initializable {
 
     @FXML
     private Button btnBackOwner;
+    @FXML
+    private BorderPane bpAddProduct;
     @FXML
     private Button btnSubmitAddProduct;
     @FXML

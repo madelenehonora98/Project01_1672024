@@ -11,25 +11,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
-import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
  *
  * @author Madelene
  */
-public class ProductPriceListFormController implements Initializable {
+public class UserListController implements Initializable {
 
     @FXML
-    private Button btnBack;
-    @FXML
-    private TableView<?> tbleProduct;
-
-    @FXML
-    private void tbleProduct() {
-        Barang barang = tbleProduct.getSelectionModel().getSelectedItem();
-    }
+    private Button btnBackOwner;
 
     /**
      * Initializes the controller class.
@@ -40,11 +31,7 @@ public class ProductPriceListFormController implements Initializable {
     }
 
     @FXML
-    private void btnBackAct(ActionEvent event) {
-    }
-
-    @FXML
-    private void tbProductMouseClicked(MouseEvent event) {
+    private void btnBackOwnerAct(ActionEvent event) {
     }
 
 }

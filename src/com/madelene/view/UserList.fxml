@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="609.0" prefWidth="753.0" style="-fx-background-color: #ccf2ff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.madelene.controller.UserListController">
+   <left>
+      <HBox prefHeight="300.0" prefWidth="23.0" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <HBox prefHeight="300.0" prefWidth="23.0" BorderPane.alignment="CENTER" />
+   </right>
+   <top>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="53.0" prefWidth="830.0" text="User List">
+               <font>
+                  <Font size="36.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="30.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="485.0">
+               <children>
+                  <Button fx:id="btnBackOwner" mnemonicParsing="false" onAction="#btnBackOwnerAct" text="Back" />
+               </children>
+               <HBox.margin>
+                  <Insets right="30.0" top="10.0" />
+               </HBox.margin>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn prefWidth="115.0" text="IdPengguna" />
+          <TableColumn prefWidth="122.0" text="Nama Depan" />
+            <TableColumn minWidth="0.0" prefWidth="149.0" text="Nama Belakang" />
+            <TableColumn minWidth="0.0" prefWidth="112.0" text="Alamat" />
+            <TableColumn prefWidth="116.0" text="No Telepon" />
+            <TableColumn minWidth="0.0" prefWidth="56.0" text="Jabatan" />
+        </columns>
+      </TableView>
+   </center>
+   <bottom>
+      <HBox prefHeight="20.0" prefWidth="607.0" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>

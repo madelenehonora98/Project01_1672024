@@ -1,0 +1,105 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+-- -----------------------------------------------------
+-- Schema dbPenjualan
+-- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `dbPenjualan` ;
+
+-- -----------------------------------------------------
+-- Schema dbPenjualan
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `dbPenjualan` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `dbPenjualan` ;
+
+-- -----------------------------------------------------
+-- Table `dbPenjualan`.`Barang`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dbPenjualan`.`Barang` (
+  `KodeBarang` INT NOT NULL,
+  `NamaBarang` VARCHAR(45) NOT NULL,
+  `HargaBeli` DOUBLE NOT NULL,
+  `HargaJual` DOUBLE NOT NULL,
+  `Stok` INT NOT NULL,
+  PRIMARY KEY (`KodeBarang`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `dbPenjualan`.`UserRole`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dbPenjualan`.`UserRole` (
+  `idUserRole` VARCHAR(5) NOT NULL,
+  `Jabatan` VARCHAR(45) NULL,
+  PRIMARY KEY (`idUserRole`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `dbPenjualan`.`User`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dbPenjualan`.`User` (
+  `IdPengguna` DECIMAL(10,0) NOT NULL,
+  `NamaDepan` VARCHAR(45) NOT NULL,
+  `NamaBelakang` VARCHAR(45) NOT NULL,
+  `Alamat` VARCHAR(45) NOT NULL,
+  `NoTelepon` DECIMAL(10,0) NOT NULL,
+  `UserRole_idUserRole` VARCHAR(5) NOT NULL,
+  PRIMARY KEY (`IdPengguna`),
+  INDEX `fk_User_UserRole1_idx` (`UserRole_idUserRole` ASC),
+  CONSTRAINT `fk_User_UserRole1`
+    FOREIGN KEY (`UserRole_idUserRole`)
+    REFERENCES `dbPenjualan`.`UserRole` (`idUserRole`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `dbPenjualan`.`NotaPenjualan`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dbPenjualan`.`NotaPenjualan` (
+  `KodePenjualan` DECIMAL(10,0) NOT NULL,
+  `Nominal` DOUBLE NOT NULL,
+  `TanggalPenjualan` DATE NOT NULL,
+  `NotaPenjualancol` VARCHAR(45) NOT NULL,
+  `User_IdPengguna` DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY (`KodePenjualan`),
+  INDEX `fk_NotaPenjualan_User1_idx` (`User_IdPengguna` ASC),
+  CONSTRAINT `fk_NotaPenjualan_User1`
+    FOREIGN KEY (`User_IdPengguna`)
+    REFERENCES `dbPenjualan`.`User` (`IdPengguna`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `dbPenjualan`.`Barang_has_NotaPenjualan`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dbPenjualan`.`Barang_has_NotaPenjualan` (
+  `Barang_KodeBarang` INT NOT NULL,
+  `NotaPenjualan_KodePenjualan` DECIMAL(10,0) NOT NULL,
+  `JumlahBarangTerjual` INT NOT NULL,
+  PRIMARY KEY (`Barang_KodeBarang`, `NotaPenjualan_KodePenjualan`),
+  INDEX `fk_Barang_has_NotaPenjualan_NotaPenjualan1_idx` (`NotaPenjualan_KodePenjualan` ASC),
+  INDEX `fk_Barang_has_NotaPenjualan_Barang_idx` (`Barang_KodeBarang` ASC),
+  CONSTRAINT `fk_Barang_has_NotaPenjualan_Barang`
+    FOREIGN KEY (`Barang_KodeBarang`)
+    REFERENCES `dbPenjualan`.`Barang` (`KodeBarang`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Barang_has_NotaPenjualan_NotaPenjualan1`
+    FOREIGN KEY (`NotaPenjualan_KodePenjualan`)
+    REFERENCES `dbPenjualan`.`NotaPenjualan` (`KodePenjualan`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

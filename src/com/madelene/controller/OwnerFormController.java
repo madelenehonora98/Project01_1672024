@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -21,7 +22,7 @@ import javafx.scene.control.TableView;
 public class OwnerFormController implements Initializable {
 
     @FXML
-    private Button btnBackCashier;
+    private Button btnBack;
     @FXML
     private TableView<?> tbleProduct;
 
@@ -34,7 +35,11 @@ public class OwnerFormController implements Initializable {
     }
 
     @FXML
-    private void btnBackCashierAct(ActionEvent event) {
+    private void btnBackAct(ActionEvent event) {
+    }
+
+    @FXML
+    private void tbProductMouseClicked(MouseEvent event) {
     }
 
 }
