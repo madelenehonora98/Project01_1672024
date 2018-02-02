@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.madelene.dao;
+package com.madelene.utility;
 
 import java.util.List;
 
@@ -11,13 +11,15 @@ import java.util.List;
  *
  * @author Madelene
  */
-public interface DaoServiceBarang<Barang> {
+public interface DaoService<E> {
 
-    int addData(Barang object);
+    int addData(E object);
 
-    int deleteData(Barang object);
+    int updateData(E object);
 
-    int updateData(Barang object);
+    int deleteData(E object);
 
-    List<Barang> showAllData();
+    List<E> showAllData();
+
+    E getData(Object id);
 }

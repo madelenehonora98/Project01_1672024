@@ -3,17 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.madelene.dao;
+package com.madelene.entity;
 
 /**
  *
  * @author Madelene
  */
-public class NotaPenjualan {
+public class RelasiBarangNotaPenjualan {
 
-    String KodePenjualan;
-    double Nominal;
-    String TanggalPenjualan;
-    User IdPengguna;
-
+    Barang KodeBarang;
+    int JumlahBarangTerjual;
+    NotaPenjualan KodePenjualan;
 }

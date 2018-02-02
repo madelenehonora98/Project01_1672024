@@ -3,15 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.madelene.dao;
+package com.madelene.entity;
 
 /**
  *
  * @author Madelene
  */
-public class RelasiBarangNotaPenjualan {
+public class Barang {
 
-    Barang KodeBarang;
-    int JumlahBarangTerjual;
-    NotaPenjualan KodePenjualan;
+    int KodeBarang;
+    String NamaBarang;
+    double HargaBeli;
+    double HargaJual;
+    int Stok;
+
 }

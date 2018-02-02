@@ -3,21 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.madelene.dao;
-
-import java.util.List;
+package com.madelene.entity;
 
 /**
  *
  * @author Madelene
  */
-public interface DaoServiceUser<User> {
+public class NotaPenjualan {
 
-    int addData(User object);
+    String KodePenjualan;
+    double Nominal;
+    String TanggalPenjualan;
+    User IdPengguna;
 
-    int deleteData(User object);
-
-    int updateData(User object);
-
-    List<User> showAllData();
 }
