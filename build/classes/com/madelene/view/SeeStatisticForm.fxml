@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -8,22 +9,52 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.madelene.controller.SeeStatisticFormController">
-   <children>
-      <Hyperlink fx:id="bckToOwnerForm" layoutX="524.0" layoutY="40.0" text="Back" />
-      <Label layoutX="239.0" layoutY="37.0" prefHeight="42.0" prefWidth="122.0" text="See Statistic">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <StackedBarChart fx:id="drgmStatisticYear" layoutX="16.0" layoutY="91.0" prefHeight="295.0" prefWidth="564.0">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ccf2ff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.madelene.controller.SeeStatisticFormController">
+   <left>
+      <HBox prefHeight="300.0" prefWidth="23.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" />
+         </children></HBox>
+   </left>
+   <right>
+      <HBox prefHeight="300.0" prefWidth="23.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" />
+         </children></HBox>
+   </right>
+   <top>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="53.0" prefWidth="830.0" text="See Statistic By Year">
+               <font>
+                  <Font size="36.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="30.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="485.0">
+               <children>
+                  <Button fx:id="btnBackOwner" mnemonicParsing="false" onAction="#btnBackOwnerAct" text="Back" />
+               </children>
+               <HBox.margin>
+                  <Insets right="30.0" top="10.0" />
+               </HBox.margin>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <StackedBarChart BorderPane.alignment="CENTER">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>
         <yAxis>
-          <NumberAxis side="LEFT" />
+          <NumberAxis fx:id="StatisticSales" side="LEFT" />
         </yAxis>
       </StackedBarChart>
-   </children>
-</AnchorPane>
+   </center>
+   <bottom>
+      <HBox prefHeight="22.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -7,20 +8,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="575.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.madelene.controller.OwnerFormController">
-   <children>
-      <GridPane layoutX="6.0" layoutY="168.0" prefHeight="407.0" prefWidth="588.0">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ccf2ff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.madelene.controller.CashierFormController">
+   <center>
+      <GridPane BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Button fx:id="btnProductAndPriceList" mnemonicParsing="false" prefHeight="204.0" prefWidth="651.0" text="Product &amp; Price List" />
-               </children>
-            </HBox>
-            <HBox alignment="TOP_CENTER" layoutX="304.0" layoutY="140.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-               <children>
-                  <Button fx:id="btnTransaction" mnemonicParsing="false" prefHeight="203.0" prefWidth="627.0" text="Transaction" />
-               </children>
-            </HBox>
+            <Button fx:id="btnTransaction" mnemonicParsing="false" onAction="#btnTransactionAct" prefHeight="150.0" prefWidth="617.0" text="Transaction" GridPane.rowIndex="1" />
+            <Button fx:id="btnProductPriceList" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnProductPriceListAct" prefHeight="150.0" prefWidth="764.0" text="Product &amp; Price List" />
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -30,11 +23,33 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <Label layoutX="227.0" layoutY="75.0" text="Cashier">
-         <font>
-            <Font name="System Bold" size="47.0" />
-         </font>
-      </Label>
-      <Hyperlink fx:id="logOutLink" layoutX="498.0" layoutY="14.0" text="Log Out" />
-   </children>
-</AnchorPane>
+   </center>
+   <top>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="53.0" prefWidth="830.0" text="Cashier">
+               <font>
+                  <Font size="36.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="30.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="485.0">
+               <children>
+                  <Button fx:id="btnLogOut" mnemonicParsing="false" onAction="#btnLogOut" text="Log Out" />
+               </children>
+               <HBox.margin>
+                  <Insets right="30.0" top="10.0" />
+               </HBox.margin>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <HBox prefHeight="300.0" prefWidth="23.0" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <HBox prefHeight="300.0" prefWidth="23.0" BorderPane.alignment="CENTER" />
+   </right>
+</BorderPane>

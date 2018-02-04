@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ccf2ff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.madelene.controller.OwnerFormController">
+<BorderPane fx:id="brdPaneOwner" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ccf2ff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.madelene.controller.OwnerFormController">
    <top>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -23,7 +23,7 @@
             </Label>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="485.0">
                <children>
-                  <Button fx:id="btnLogOut" mnemonicParsing="false" onAction="#btnLogOut" text="Log Out" />
+                  <Button fx:id="btnLogOut" mnemonicParsing="false" onAction="#btnLogOutAct" text="Log Out" />
                </children>
                <HBox.margin>
                   <Insets right="30.0" top="10.0" />

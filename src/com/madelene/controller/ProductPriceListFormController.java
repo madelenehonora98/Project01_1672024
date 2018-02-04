@@ -26,10 +26,6 @@ public class ProductPriceListFormController implements Initializable {
     @FXML
     private TableView<?> tbleProduct;
 
-    @FXML
-    private void tbleProduct() {
-        Barang barang = tbleProduct.getSelectionModel().getSelectedItem();
-    }
 
     /**
      * Initializes the controller class.

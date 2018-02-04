@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 
 /**
  *
@@ -26,17 +27,84 @@ public class UserDaoImpl implements DaoService<User> {
 
     @Override
     public int addData(User object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int result = 0;
+        try {
+            try (Connection connection = Utility.creatConnection()) {
+                connection.setAutoCommit(false);
+                String query
+                        = "INSERT INTO user(IdPengguna,NamaDepan, NamaBelakang,Alamat,NoTelepon,UserRole_idUserRole) VALUES (?,?,?,?,?,?)";
+                PreparedStatement ps = connection.prepareStatement(query);
+                ps.setString(1, object.getIdPengguna());
+                ps.setString(2, object.getNamaDepan());
+                ps.setString(3, object.getNamaBelakang());
+                ps.setString(4, object.getAlamat());
+                ps.setString(5, object.getNoTelepon());
+                ps.setString(6, object.getIdUserRole().getIdUserRole());
+                if (ps.executeUpdate() != 0) {
+                    connection.commit();
+                    result = 1;
+                } else {
+                    connection.rollback();
+                }
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println(ex);
+        }
+        return result;
+
     }
 
     @Override
     public int updateData(User object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int result = 0;
+        try {
+            try (Connection connection = Utility.creatConnection()) {
+                connection.setAutoCommit(false);
+                String query
+                        = "UPDATE user SET NamaDepan = ?, NamaBelakang = ?, Alamat=?, NoTelepon = ?, UserRole_idUserRole=? WHERE IdPengguna=?";
+                PreparedStatement ps = connection.prepareStatement(query);
+                ps.setString(1, object.getIdPengguna());
+                ps.setString(2, object.getNamaDepan());
+                ps.setString(3, object.getNamaBelakang());
+                ps.setString(4, object.getAlamat());
+                ps.setString(5, object.getNoTelepon());
+                ps.setString(6, object.getIdUserRole().getIdUserRole());
+                if (ps.executeUpdate() != 0) {
+                    connection.commit();
+                    result = 1;
+                } else {
+                    connection.rollback();
+                }
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Utility.showAlert("Error", ex.getMessage(), Alert.AlertType.ERROR);
+        }
+        return result;
+
     }
 
     @Override
     public int deleteData(User object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int result = 0;
+        try {
+            try (Connection connection = Utility.creatConnection()) {
+                connection.setAutoCommit(false);
+                String query
+                        = "DELETE FROM user WHERE IdPengguna=?";
+                PreparedStatement ps = connection.prepareStatement(query);
+                ps.setString(1, object.getIdPengguna());
+
+                if (ps.executeUpdate() != 0) {
+                    connection.commit();
+                    result = 1;
+                } else {
+                    connection.rollback();
+                }
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println(ex);
+        }
+        return result;
     }
 
     @Override
@@ -53,7 +121,7 @@ public class UserDaoImpl implements DaoService<User> {
                     user.setNamaDepan(rs.getString("NamaDepan"));
                     user.setNamaBelakang(rs.getString("NamaBelakang"));
                     user.setAlamat(rs.getString("Alamat"));
-                    user.setNoTelepon(rs.getString("NoTelepom"));
+                    user.setNoTelepon(rs.getString("NoTelepon"));
                     UserRole userRole = new UserRole();
                     userRole.setIdUserRole(rs.getString("UserRole_idUserRole"));
 
