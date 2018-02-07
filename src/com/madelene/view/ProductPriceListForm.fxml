@@ -32,9 +32,10 @@
                   <Insets left="30.0" top="10.0" />
                </HBox.margin>
             </Label>
+            <HBox prefHeight="100.0" prefWidth="41.0" />
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="485.0">
                <children>
-                  <Button fx:id="btnBack" mnemonicParsing="false" onAction="#btnBackAct" text="Back" />
+                  <Button fx:id="btnBack" mnemonicParsing="false" onAction="#btnBackAct" prefHeight="39.0" prefWidth="81.0" text="Back" />
                </children>
                <HBox.margin>
                   <Insets right="30.0" top="10.0" />
@@ -58,7 +59,4 @@
          </content>
       </ScrollPane>
    </center>
-   <bottom>
-      <HBox prefHeight="38.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
-   </bottom>
 </BorderPane>

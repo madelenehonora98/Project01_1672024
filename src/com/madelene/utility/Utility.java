@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TextInputControl;
 
 /**
  *
@@ -33,5 +34,14 @@ public class Utility {
         alert.setContentText(content);
         alert.setTitle(title);
         alert.showAndWait();
+    }
+
+    public static boolean isEmptyField(TextInputControl... textFields) {
+        for (TextInputControl tic : textFields) {
+            if (tic.getText().trim().isEmpty()) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -32,17 +32,13 @@ public class OwnerFormController implements Initializable {
     @FXML
     private Button btnSeeStatistic;
     @FXML
-    private Button btnAddProduct;
-    @FXML
-    private Button btnSeeTopSales;
-    @FXML
-    private Button btnAddCashier;
-    @FXML
-    private Button btnSeeStatistic1;
-    @FXML
-    private Button btnSeeStatistic11;
-    @FXML
     private BorderPane brdPaneOwner;
+    @FXML
+    private Button btnSalesReport;
+    @FXML
+    private Button btnProductList;
+    @FXML
+    private Button btnUserList;
 
     /**
      * Initializes the controller class.
@@ -73,28 +69,6 @@ public class OwnerFormController implements Initializable {
         }
     }
 
-    @FXML
-    private void btnAddProductAct(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource(
-                    "view/AddProductForm.fxml"));
-            BorderPane pane = loader.load();
-            Scene scene = new Scene(pane);
-            Stage secondStage = new Stage();
-            secondStage.setScene(scene);
-            secondStage.setTitle("Add Product Form");
-            secondStage.show();
-
-            //Close login stage
-            brdPaneOwner.getScene().getWindow().hide();
-        } catch (IOException ex) {
-            Logger.getLogger(LoginFormController.class.getName()).
-                    log(Level.SEVERE, null, ex);
-        }
-    }
-
-    @FXML
     private void btnSeeTopSalesAct(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -105,27 +79,6 @@ public class OwnerFormController implements Initializable {
             Stage secondStage = new Stage();
             secondStage.setScene(scene);
             secondStage.setTitle("See Top Sales Form");
-            secondStage.show();
-
-            //Close login stage
-            brdPaneOwner.getScene().getWindow().hide();
-        } catch (IOException ex) {
-            Logger.getLogger(LoginFormController.class.getName()).
-                    log(Level.SEVERE, null, ex);
-        }
-    }
-
-    @FXML
-    private void btnAddCashierAct(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource(
-                    "view/AddCashierForm.fxml"));
-            BorderPane pane = loader.load();
-            Scene scene = new Scene(pane);
-            Stage secondStage = new Stage();
-            secondStage.setScene(scene);
-            secondStage.setTitle("Add Cashier Form");
             secondStage.show();
 
             //Close login stage
@@ -157,6 +110,70 @@ public class OwnerFormController implements Initializable {
                     log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    @FXML
+    private void btnSalesReportAct(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource(
+                    "view/SalesReportForm.fxml"));
+            BorderPane pane = loader.load();
+            Scene scene = new Scene(pane);
+            Stage secondStage = new Stage();
+            secondStage.setScene(scene);
+            secondStage.setTitle("Sales Report Form");
+            secondStage.show();
+
+            //Close login stage
+            brdPaneOwner.getScene().getWindow().hide();
+        } catch (IOException ex) {
+            Logger.getLogger(LoginFormController.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    @FXML
+    private void btnProductListAct(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource(
+                    "view/ProductPriceListOwnerForm.fxml"));
+            BorderPane pane = loader.load();
+            Scene scene = new Scene(pane);
+            Stage secondStage = new Stage();
+            secondStage.setScene(scene);
+            secondStage.setTitle("Product And Price List Form");
+            secondStage.show();
+
+            //Close login stage
+            brdPaneOwner.getScene().getWindow().hide();
+        } catch (IOException ex) {
+            Logger.getLogger(LoginFormController.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void btnUserListAct(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource(
+                    "view/UserListForm.fxml"));
+            BorderPane pane = loader.load();
+            Scene scene = new Scene(pane);
+            Stage secondStage = new Stage();
+            secondStage.setScene(scene);
+            secondStage.setTitle("User List Form");
+            secondStage.show();
+
+            //Close owner stage
+            brdPaneOwner.getScene().getWindow().hide();
+        } catch (IOException ex) {
+            Logger.getLogger(LoginFormController.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
     }
 
 }

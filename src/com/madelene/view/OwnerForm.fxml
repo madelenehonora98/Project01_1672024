@@ -40,16 +40,13 @@
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnSeeStatistic" mnemonicParsing="false" onAction="#btnSeeStatisticAct" prefHeight="281.0" prefWidth="479.0" text="Sales Statistic" GridPane.rowIndex="2" />
-            <Button fx:id="btnAddProduct" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnAddProductAct" prefHeight="281.0" prefWidth="479.0" text="Add Product" GridPane.rowIndex="1" />
-            <Button fx:id="btnSeeTopSales" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnSeeTopSalesAct" prefHeight="281.0" prefWidth="479.0" text="Sales Report" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="btnAddCashier" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnAddCashierAct" prefHeight="281.0" prefWidth="479.0" text="Add Cashier" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="btnSeeStatistic1" layoutX="10.0" layoutY="110.0" mnemonicParsing="false" onAction="#btnSeeStatisticAct" prefHeight="281.0" prefWidth="479.0" text="Product List" />
-            <Button fx:id="btnSeeStatistic11" layoutX="10.0" layoutY="210.0" mnemonicParsing="false" onAction="#btnSeeStatisticAct" prefHeight="281.0" prefWidth="479.0" text="User List" GridPane.columnIndex="1" />
+            <Button fx:id="btnSeeStatistic" mnemonicParsing="false" onAction="#btnSeeStatisticAct" prefHeight="281.0" prefWidth="479.0" text="Sales Statistic" GridPane.rowIndex="1" />
+            <Button fx:id="btnSalesReport" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnSalesReportAct" prefHeight="281.0" prefWidth="479.0" text="Sales Report" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="btnProductList" layoutX="10.0" layoutY="110.0" mnemonicParsing="false" onAction="#btnProductListAct" prefHeight="281.0" prefWidth="479.0" text="Product List" />
+            <Button fx:id="btnUserList" layoutX="10.0" layoutY="210.0" mnemonicParsing="false" onAction="#btnUserListAct" prefHeight="281.0" prefWidth="479.0" text="User List" GridPane.columnIndex="1" />
          </children>
       </GridPane>
    </center>

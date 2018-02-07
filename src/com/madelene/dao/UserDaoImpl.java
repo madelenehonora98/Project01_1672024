@@ -32,14 +32,22 @@ public class UserDaoImpl implements DaoService<User> {
             try (Connection connection = Utility.creatConnection()) {
                 connection.setAutoCommit(false);
                 String query
-                        = "INSERT INTO user(IdPengguna,NamaDepan, NamaBelakang,Alamat,NoTelepon,UserRole_idUserRole) VALUES (?,?,?,?,?,?)";
+                        = "INSERT INTO user(IdPengguna,NamaDepan, NamaBelakang,Alamat,NoTelepon,UserRole_idUserRole,Password) VALUES (?,?,?,?,?,?)";
                 PreparedStatement ps = connection.prepareStatement(query);
                 ps.setString(1, object.getIdPengguna());
                 ps.setString(2, object.getNamaDepan());
                 ps.setString(3, object.getNamaBelakang());
                 ps.setString(4, object.getAlamat());
                 ps.setString(5, object.getNoTelepon());
+
+//                UserRole userRole = new UserRole();
+//                userRole.setIdUserRole(rs.getString("UserRole_idUserRole"));
+//                object.setIdUserRole(userRole);
+                //Foreign key IdUserRole dari UserRole
                 ps.setString(6, object.getIdUserRole().getIdUserRole());
+
+                ps.setString(7, object.getPassword());
+                ps.setString(8, object.getJenisKelamin());
                 if (ps.executeUpdate() != 0) {
                     connection.commit();
                     result = 1;
@@ -61,14 +69,18 @@ public class UserDaoImpl implements DaoService<User> {
             try (Connection connection = Utility.creatConnection()) {
                 connection.setAutoCommit(false);
                 String query
-                        = "UPDATE user SET NamaDepan = ?, NamaBelakang = ?, Alamat=?, NoTelepon = ?, UserRole_idUserRole=? WHERE IdPengguna=?";
+                        = "UPDATE user SET NamaDepan = ?, NamaBelakang = ?, Alamat=?, NoTelepon = ?, UserRole_idUserRole=?, Password=?, JenisKelamin = ? WHERE IdPengguna=?";
                 PreparedStatement ps = connection.prepareStatement(query);
                 ps.setString(1, object.getIdPengguna());
                 ps.setString(2, object.getNamaDepan());
                 ps.setString(3, object.getNamaBelakang());
                 ps.setString(4, object.getAlamat());
                 ps.setString(5, object.getNoTelepon());
+
+                //Foreign key IdUserRole dari UserRole
                 ps.setString(6, object.getIdUserRole().getIdUserRole());
+                ps.setString(7, object.getPassword());
+                ps.setString(8, object.getJenisKelamin());
                 if (ps.executeUpdate() != 0) {
                     connection.commit();
                     result = 1;
@@ -122,6 +134,10 @@ public class UserDaoImpl implements DaoService<User> {
                     user.setNamaBelakang(rs.getString("NamaBelakang"));
                     user.setAlamat(rs.getString("Alamat"));
                     user.setNoTelepon(rs.getString("NoTelepon"));
+                    user.setPassword(rs.getString("Password"));
+                    user.setJenisKelamin(rs.getString("JenisKelamin"));
+
+                    //Foreign key IdUserRole dari UserRole
                     UserRole userRole = new UserRole();
                     userRole.setIdUserRole(rs.getString("UserRole_idUserRole"));
 
@@ -140,8 +156,33 @@ public class UserDaoImpl implements DaoService<User> {
     }
 
     @Override
-    public User getData(Object id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public User getData(User id) {
+
+        try {
+            try (Connection connection = Utility.creatConnection()) {
+                connection.setAutoCommit(false);
+                String query
+                        = "SELECT u.IdPengguna, u.Password, ur.UserRole_idUserRole FROM user u join userrole ur on u.UserRole_idUserRole = ur.idUserRole WHERE u.IdPengguna=? and u.Password=?";
+                PreparedStatement ps = connection.prepareStatement(query);
+                ps.setString(1, id.getIdPengguna());
+                ps.setString(2, id.getPassword());
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    User user = new User();
+                    user.setIdPengguna(rs.getString("u.IdPengguna"));
+
+                    user.setPassword(rs.getString("u.Password"));
+//                    user.setIdUserRole(rs.get);
+
+                    return user;
+                }
+//masukin semua yang di select
+
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println(ex);
+        }
+        return null;
     }
 
 }

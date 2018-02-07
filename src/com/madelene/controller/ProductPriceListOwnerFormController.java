@@ -6,17 +6,23 @@
 package com.madelene.controller;
 
 import com.madelene.MainApp;
+import com.madelene.dao.BarangDaoImpl;
+import com.madelene.entity.Barang;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -25,18 +31,37 @@ import javafx.stage.Stage;
  *
  * @author Madelene
  */
-public class UserListController implements Initializable {
+public class ProductPriceListOwnerFormController implements Initializable {
 
     @FXML
-    private Button btnBackOwner;
+    private Button btnBack;
     @FXML
-    private BorderPane bpUserListForm;
+    private Button btnAddProduct;
     @FXML
-    private Button btnAddUser;
+    private Button btnEditProduct;
     @FXML
-    private Button btnEditUser;
+    private Button btnDelProduct;
     @FXML
-    private Button btnDelUser;
+    private TableView<?> tbleProduct;
+    @FXML
+    private BorderPane bpPPLO;
+    private BarangDaoImpl barangDao;
+    private ObservableList<Barang> barangs;
+
+    public ObservableList<Barang> getBarangs() {
+        if (barangs == null) {
+            barangs = FXCollections.observableArrayList();
+            barangs.addAll(getBarangDao().showAllData());
+        }
+        return barangs;
+    }
+
+    public BarangDaoImpl getBarangDao() {
+        if (barangDao == null) {
+            barangDao = new BarangDaoImpl();
+        }
+        return barangDao;
+    }
 
     /**
      * Initializes the controller class.
@@ -47,7 +72,7 @@ public class UserListController implements Initializable {
     }
 
     @FXML
-    private void btnBackOwnerAct(ActionEvent event) {
+    private void btnBackAct(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource(
@@ -59,7 +84,8 @@ public class UserListController implements Initializable {
             secondStage.setTitle("Owner Form");
             secondStage.show();
 
-            bpUserListForm.getScene().getWindow().hide();
+            //Close login stage
+            bpPPLO.getScene().getWindow().hide();
         } catch (IOException ex) {
             Logger.getLogger(LoginFormController.class.getName()).
                     log(Level.SEVERE, null, ex);
@@ -67,16 +93,16 @@ public class UserListController implements Initializable {
     }
 
     @FXML
-    private void btnAddUserAct(ActionEvent event) {
+    private void btnAddProductAct(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource(
-                    "view/AddCashierForm.fxml"));
+                    "view/AddProductForm.fxml"));
             BorderPane pane = loader.load();
             Scene scene = new Scene(pane);
             Stage secondStage = new Stage();
             secondStage.setScene(scene);
-            secondStage.setTitle("Add Cashier Form");
+            secondStage.setTitle("Add Product Form");
             secondStage.show();
 
         } catch (IOException ex) {
@@ -86,11 +112,15 @@ public class UserListController implements Initializable {
     }
 
     @FXML
-    private void btnEditUserAct(ActionEvent event) {
+    private void btnEditProductAct(ActionEvent event) {
     }
 
     @FXML
-    private void btnDelUserAct(ActionEvent event) {
+    private void btnDelProductAct(ActionEvent event) {
+    }
+
+    @FXML
+    private void tbProductMouseClicked(MouseEvent event) {
     }
 
 }

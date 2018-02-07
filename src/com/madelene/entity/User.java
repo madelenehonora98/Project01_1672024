@@ -17,6 +17,24 @@ public class User {
     String Alamat;
     String NoTelepon;
     UserRole idUserRole;
+    String Password;
+    String JenisKelamin;
+
+    public String getJenisKelamin() {
+        return JenisKelamin;
+    }
+
+    public void setJenisKelamin(String JenisKelamin) {
+        this.JenisKelamin = JenisKelamin;
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String Password) {
+        this.Password = Password;
+    }
 
     public String getIdPengguna() {
         return IdPengguna;
@@ -67,13 +85,16 @@ public class User {
     }
 
     public User(String IdPengguna, String NamaDepan, String NamaBelakang,
-            String Alamat, String NoTelepon, UserRole idUserRole) {
+            String Alamat, String NoTelepon, UserRole idUserRole,
+            String Password, String JenisKelamin) {
         this.IdPengguna = IdPengguna;
         this.NamaDepan = NamaDepan;
         this.NamaBelakang = NamaBelakang;
         this.Alamat = Alamat;
         this.NoTelepon = NoTelepon;
         this.idUserRole = idUserRole;
+        this.Password = Password;
+        this.JenisKelamin = JenisKelamin;
     }
 
     public User() {

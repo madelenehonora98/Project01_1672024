@@ -3,26 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/entity/Barang.java</file>
-            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/MainApp.java</file>
             <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/controller/LoginFormController.java</file>
-            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/dao/BarangDaoImpl.java</file>
-            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/entity/NotaPenjualan.java</file>
-            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/controller/OwnerFormController.java</file>
             <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/dao/UserDaoImpl.java</file>
-            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/controller/CashierFormController.java</file>
-            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/entity/User.java</file>
-            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/utility/DaoService.java</file>
             <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/controller/AddProductFormController.java</file>
-            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/entity/UserRole.java</file>
-            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/view/CoverPage.fxml</file>
-            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/controller/ProductPriceListFormController.java</file>
-            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/view/UserList.fxml</file>
-            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/controller/CoverPageController.java</file>
-            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/entity/RelasiBarangNotaPenjualan.java</file>
-            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/view/AddProductForm.fxml</file>
             <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/utility/Utility.java</file>
-            <file>file:/D:/IT%20Maranatha/smt%204/OOPL/Project01_1672024/src/com/madelene/view/CashierForm.fxml</file>
         </group>
     </open-files>
 </project-private>

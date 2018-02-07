@@ -17,6 +17,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -45,7 +47,13 @@ public class AddCashierFormController implements Initializable {
     @FXML
     private TextField txtNoTelepon;
     @FXML
-    private TextField txtJabatan;
+    private ComboBox<?> cbIdUserRole;
+    @FXML
+    private ComboBox<?> cbJnsKelamin;
+    @FXML
+    private PasswordField txtPass;
+    @FXML
+    private PasswordField txtVerifyPass;
 
     /**
      * Initializes the controller class.
@@ -60,12 +68,12 @@ public class AddCashierFormController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource(
-                    "view/OwnerForm.fxml"));
+                    "view/UserList.fxml"));
             BorderPane pane = loader.load();
             Scene scene = new Scene(pane);
             Stage secondStage = new Stage();
             secondStage.setScene(scene);
-            secondStage.setTitle("Owner Form");
+            secondStage.setTitle("User List Form");
             secondStage.show();
 
             //Close login stage
@@ -78,6 +86,18 @@ public class AddCashierFormController implements Initializable {
 
     @FXML
     private void btnSubmitAddCashierAct(ActionEvent event) {
+    }
+
+    @FXML
+    private void cbIdUserRoleAct(ActionEvent event) {
+    }
+
+    @FXML
+    private void cbJnsKelaminAct(ActionEvent event) {
+    }
+
+    @FXML
+    private void txtVerifyPassAct(ActionEvent event) {
     }
 
 }

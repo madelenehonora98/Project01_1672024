@@ -8,12 +8,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="bpAddCashier" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="471.0" prefWidth="761.0" style="-fx-background-color: #ccf2ff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.madelene.controller.AddProductFormController">
+<BorderPane fx:id="bpAddCashier" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="471.0" prefWidth="761.0" style="-fx-background-color: #ccf2ff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.madelene.controller.AddCashierFormController">
    <center>
       <GridPane prefHeight="239.0" prefWidth="452.0" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="137.0" minWidth="10.0" prefWidth="127.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.0" minWidth="10.0" prefWidth="205.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="216.0" minWidth="10.0" prefWidth="148.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="211.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -26,12 +28,12 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="30.0" prefWidth="157.0" text="Id Pengguna">
+                  <Label prefHeight="30.0" prefWidth="155.0" text="Id Pengguna">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="61.0" prefWidth="218.0">
+                  <HBox alignment="CENTER_RIGHT" prefHeight="46.0" prefWidth="41.0">
                      <children>
                         <Label prefHeight="32.0" prefWidth="0.0" text=":">
                            <font>
@@ -49,7 +51,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="61.0" prefWidth="218.0">
+                  <HBox alignment="CENTER_RIGHT" prefHeight="46.0" prefWidth="35.0">
                      <children>
                         <Label prefHeight="32.0" prefWidth="0.0" text=":">
                            <font>
@@ -60,14 +62,14 @@
                   </HBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="71.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="71.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <children>
                   <Label prefHeight="30.0" prefWidth="157.0" text="Nama Belakang">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="61.0" prefWidth="218.0">
+                  <HBox alignment="CENTER_RIGHT" prefHeight="46.0" prefWidth="26.0">
                      <children>
                         <Label prefHeight="32.0" prefWidth="0.0" text=":">
                            <font>
@@ -80,12 +82,12 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="131.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                <children>
-                  <Label prefHeight="30.0" prefWidth="157.0" text="Alamat">
+                  <Label prefHeight="30.0" prefWidth="128.0" text="Alamat">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="61.0" prefWidth="218.0">
+                  <HBox alignment="CENTER_RIGHT" prefHeight="46.0" prefWidth="103.0">
                      <children>
                         <Label prefHeight="32.0" prefWidth="0.0" text=":">
                            <font>
@@ -103,7 +105,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="61.0" prefWidth="218.0">
+                  <HBox alignment="CENTER_RIGHT" prefHeight="46.0" prefWidth="49.0">
                      <children>
                         <Label prefHeight="32.0" prefWidth="0.0" text=":">
                            <font>
@@ -114,9 +116,9 @@
                   </HBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="251.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="251.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
                <children>
-                  <Label prefHeight="30.0" prefWidth="157.0" text="Jabatan">
+                  <Label prefHeight="30.0" prefWidth="525.0" text="Id User Role">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -134,32 +136,101 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <TextField fx:id="txtIdPengguna" prefHeight="39.0" prefWidth="303.0" />
+                  <TextField fx:id="txtIdPengguna" prefHeight="39.0" prefWidth="188.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" layoutX="353.0" layoutY="20.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <TextField fx:id="txtNamaDepan" prefHeight="39.0" prefWidth="303.0" />
+                  <TextField fx:id="txtNamaDepan" prefHeight="39.0" prefWidth="186.0" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" layoutX="353.0" layoutY="66.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <HBox alignment="CENTER" layoutX="353.0" layoutY="66.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <children>
-                  <TextField fx:id="txtNamaBelakang" prefHeight="39.0" prefWidth="303.0" />
+                  <TextField fx:id="txtNamaBelakang" prefHeight="39.0" prefWidth="190.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" layoutX="353.0" layoutY="112.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
-                  <TextField fx:id="txtAlamat" prefHeight="39.0" prefWidth="303.0" />
+                  <TextField fx:id="txtAlamat" prefHeight="39.0" prefWidth="189.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" layoutX="353.0" layoutY="158.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <children>
-                  <TextField fx:id="txtNoTelepon" prefHeight="39.0" prefWidth="303.0" />
+                  <TextField fx:id="txtNoTelepon" prefHeight="39.0" prefWidth="189.0" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" layoutX="353.0" layoutY="204.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <HBox alignment="CENTER" layoutX="353.0" layoutY="204.0" prefHeight="46.0" prefWidth="158.0" GridPane.columnIndex="3">
                <children>
-                  <TextField fx:id="txtJabatan" prefHeight="39.0" prefWidth="303.0" />
+                  <ComboBox fx:id="cbIdUserRole" onAction="#cbIdUserRoleAct" prefHeight="39.0" prefWidth="188.0" promptText="Id User Role" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="158.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="298.0" text="Jenis Kelamin">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="46.0" prefWidth="103.0">
+                     <children>
+                        <Label prefHeight="32.0" prefWidth="0.0" text=":">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <ComboBox fx:id="cbJnsKelamin" onAction="#cbJnsKelaminAct" prefHeight="39.0" prefWidth="171.0" promptText="Jenis Kelamin" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="204.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="157.0" text="Password">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="46.0" prefWidth="49.0">
+                     <children>
+                        <Label prefHeight="32.0" prefWidth="0.0" text=":">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="250.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="229.0" text="Verify Password">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="46.0" prefWidth="49.0">
+                     <children>
+                        <Label prefHeight="32.0" prefWidth="0.0" text=":">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="495.0" layoutY="66.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <children>
+                  <PasswordField fx:id="txtPass" prefHeight="39.0" prefWidth="190.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="142.0" layoutY="250.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="5">
+               <children>
+                  <PasswordField fx:id="txtVerifyPass" onAction="#txtVerifyPassAct" prefHeight="39.0" prefWidth="196.0" />
                </children>
             </HBox>
          </children>
@@ -204,6 +275,6 @@
       </HBox>
    </bottom>
    <right>
-      <HBox prefHeight="286.0" prefWidth="45.0" BorderPane.alignment="CENTER" />
+      <HBox prefHeight="286.0" prefWidth="29.0" BorderPane.alignment="CENTER" />
    </right>
 </BorderPane>

@@ -26,7 +26,6 @@ public class ProductPriceListFormController implements Initializable {
     @FXML
     private TableView<?> tbleProduct;
 
-
     /**
      * Initializes the controller class.
      */
@@ -37,6 +36,7 @@ public class ProductPriceListFormController implements Initializable {
 
     @FXML
     private void btnBackAct(ActionEvent event) {
+
     }
 
     @FXML

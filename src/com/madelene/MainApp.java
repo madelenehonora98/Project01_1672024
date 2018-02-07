@@ -19,7 +19,9 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MainApp.class.getResource("view/CoverPage.fxml"));
+        loader.
+                setLocation(MainApp.class.
+                        getResource("view/OwnerForm.fxml"));
         BorderPane pane = loader.load();
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);

@@ -11,7 +11,7 @@ package com.madelene.entity;
  */
 public class Barang {
 
-    int KodeBarang;
+    String KodeBarang;
     String NamaBarang;
     double HargaBeli;
     double HargaJual;
@@ -20,7 +20,7 @@ public class Barang {
     public Barang() {
     }
 
-    public Barang(int KodeBarang, String NamaBarang, double HargaBeli,
+    public Barang(String KodeBarang, String NamaBarang, double HargaBeli,
             double HargaJual, int Stok) {
         this.KodeBarang = KodeBarang;
         this.NamaBarang = NamaBarang;
@@ -29,11 +29,11 @@ public class Barang {
         this.Stok = Stok;
     }
 
-    public int getKodeBarang() {
+    public String getKodeBarang() {
         return KodeBarang;
     }
 
-    public void setKodeBarang(int KodeBarang) {
+    public void setKodeBarang(String KodeBarang) {
         this.KodeBarang = KodeBarang;
     }
 
