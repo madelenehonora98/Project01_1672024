@@ -32,10 +32,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ImageView fx:id="imgLogo" fitHeight="191.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../img/Cashier-2-icon.png" />
-                     </image></ImageView>
+                  <ImageView fx:id="imgLogo" fitHeight="191.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">

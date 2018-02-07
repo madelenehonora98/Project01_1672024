@@ -31,7 +31,7 @@ public class BarangDaoImpl implements DaoService<Barang> {
         try {
             try (Connection connection = Utility.creatConnection()) {
                 connection.setAutoCommit(false);
-                System.out.println("papa");
+
                 String query
                         = "INSERT INTO barang(KodeBarang, NamaBarang, HargaBeli, HargaJual,Stok) VALUES (?,?,?,?,?)";
                 PreparedStatement ps = connection.prepareStatement(query);
@@ -42,7 +42,7 @@ public class BarangDaoImpl implements DaoService<Barang> {
                 ps.setInt(5, object.getStok());
 
                 if (ps.executeUpdate() != 0) {
-                    System.out.println("caca");
+
                     connection.commit();
                     result = 1;
                 } else {

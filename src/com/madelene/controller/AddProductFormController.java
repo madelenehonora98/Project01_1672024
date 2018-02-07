@@ -87,12 +87,6 @@ public class AddProductFormController implements Initializable {
 
     @FXML
     private void btnSubmitAddProductAct(ActionEvent event) {
-        System.out.println(txtHargaBeli.getText());
-        System.out.println(txtNamaBarang.getText());
-        System.out.println(txtHargaJual.getText());
-        System.out.println(txtKodeBarang.getText());
-        System.out.println(txtStok.getText());
-        System.out.println("aaa");
 
         if (!Utility.isEmptyField(txtKodeBarang, txtNamaBarang, txtHargaBeli,
                 txtHargaJual, txtStok)) {

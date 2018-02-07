@@ -24,6 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -47,6 +48,7 @@ public class ProductPriceListOwnerFormController implements Initializable {
     private BorderPane bpPPLO;
     private BarangDaoImpl barangDao;
     private ObservableList<Barang> barangs;
+    private Stage addProductStage;
 
     public ObservableList<Barang> getBarangs() {
         if (barangs == null) {
@@ -95,15 +97,27 @@ public class ProductPriceListOwnerFormController implements Initializable {
     @FXML
     private void btnAddProductAct(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource(
-                    "view/AddProductForm.fxml"));
-            BorderPane pane = loader.load();
-            Scene scene = new Scene(pane);
-            Stage secondStage = new Stage();
-            secondStage.setScene(scene);
-            secondStage.setTitle("Add Product Form");
-            secondStage.show();
+            if (addProductStage == null) {
+                addProductStage = new Stage();
+                addProductStage.setTitle("Add Product Form");
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(MainApp.class.getResource(
+                        "view/AddProductForm.fxml"));
+                BorderPane root = loader.load();
+                Scene scene = new Scene(root);
+                AddProductFormController addProductFormController = loader.
+                        getController();
+                addProductFormController.setMainController(this);
+                addProductStage.setScene(scene);
+                addProductStage.initOwner(bpPPLO.getScene().getWindow());
+                addProductStage.initModality(Modality.WINDOW_MODAL);
+
+            }
+            if (!addProductStage.isShowing()) {
+                addProductStage.show();
+            } else {
+                addProductStage.toFront();
+            }
 
         } catch (IOException ex) {
             Logger.getLogger(LoginFormController.class.getName()).
