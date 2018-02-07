@@ -162,7 +162,9 @@ public class UserDaoImpl implements DaoService<User> {
             try (Connection connection = Utility.creatConnection()) {
                 connection.setAutoCommit(false);
                 String query
-                        = "SELECT u.IdPengguna, u.Password, ur.UserRole_idUserRole FROM user u join userrole ur on u.UserRole_idUserRole = ur.idUserRole WHERE u.IdPengguna=? and u.Password=?";
+                        = "SELECT u.IdPengguna, u.Password  FROM user u  join userrole ur on u.UserRole_idUserRole = ur.idUserRole WHERE u.IdPengguna=? and u.Password=?";
+                //belum ada ur.UserRole_idUserRole
+                //
                 PreparedStatement ps = connection.prepareStatement(query);
                 ps.setString(1, id.getIdPengguna());
                 ps.setString(2, id.getPassword());

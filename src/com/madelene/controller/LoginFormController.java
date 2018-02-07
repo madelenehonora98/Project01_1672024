@@ -85,12 +85,12 @@ public class LoginFormController implements Initializable {
 
             //Antara owner atau cashier
             loader.setLocation(MainApp.class.getResource(
-                    "view/LoginForm.fxml"));
+                    "view/OwnerForm.fxml"));
             BorderPane pane = loader.load();
             Scene scene = new Scene(pane);
             Stage secondStage = new Stage();
             secondStage.setScene(scene);
-            secondStage.setTitle("Login Form");
+            secondStage.setTitle("Owner Form");
             secondStage.show();
 
             //Close login stage
@@ -98,7 +98,7 @@ public class LoginFormController implements Initializable {
 
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Username atau Password anda salah!");
+            alert.setContentText("Id User atau Password anda salah!");
             alert.showAndWait();
 
         }

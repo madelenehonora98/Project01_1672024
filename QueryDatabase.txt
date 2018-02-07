@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `dbPenjualan`.`User` (
   `NamaDepan` VARCHAR(45) NOT NULL,
   `NamaBelakang` VARCHAR(45) NOT NULL,
   `Alamat` VARCHAR(45) NOT NULL,
-  `NoTelepon` DECIMAL(10,0) NOT NULL,
+  `NoTelepon` VARCHAR(10) NOT NULL,
   `UserRole_idUserRole` VARCHAR(5) NOT NULL,
   `Password` VARCHAR(45) NOT NULL,
   `JenisKelamin` VARCHAR(45) NULL,

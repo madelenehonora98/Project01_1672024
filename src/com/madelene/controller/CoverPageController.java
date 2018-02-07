@@ -17,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -29,8 +30,7 @@ import javafx.stage.Stage;
 public class CoverPageController implements Initializable {
 
     @FXML
-    private ImageView imgLogo = new ImageView(
-            "/com/madelene/pictures/Cashier-2-icon.png");
+    private ImageView imgLogo;
     @FXML
     private Button btnLogIn;
     @FXML
@@ -42,6 +42,7 @@ public class CoverPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        imgLogo.setImage(new Image("/com/madelene/pictures/Cashier-2-icon.png"));
     }
 
     @FXML

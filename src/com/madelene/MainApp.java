@@ -21,7 +21,7 @@ public class MainApp extends Application {
         FXMLLoader loader = new FXMLLoader();
         loader.
                 setLocation(MainApp.class.
-                        getResource("view/CoverPageForm.fxml"));
+                        getResource("view/CoverPage.fxml"));
         BorderPane pane = loader.load();
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
