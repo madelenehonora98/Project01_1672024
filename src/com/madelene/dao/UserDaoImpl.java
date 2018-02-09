@@ -32,7 +32,7 @@ public class UserDaoImpl implements DaoService<User> {
             try (Connection connection = Utility.creatConnection()) {
                 connection.setAutoCommit(false);
                 String query
-                        = "INSERT INTO user(IdPengguna,NamaDepan, NamaBelakang,Alamat,NoTelepon,UserRole_idUserRole,Password) VALUES (?,?,?,?,?,?)";
+                        = "INSERT INTO user(IdPengguna,NamaDepan, NamaBelakang,Alamat,NoTelepon,UserRole_idUserRole,Password,JenisKelamin) VALUES (?,?,?,?,?,?,?,?)";
                 PreparedStatement ps = connection.prepareStatement(query);
                 ps.setString(1, object.getIdPengguna());
                 ps.setString(2, object.getNamaDepan());
@@ -40,10 +40,6 @@ public class UserDaoImpl implements DaoService<User> {
                 ps.setString(4, object.getAlamat());
                 ps.setString(5, object.getNoTelepon());
 
-//                UserRole userRole = new UserRole();
-//                userRole.setIdUserRole(rs.getString("UserRole_idUserRole"));
-//                object.setIdUserRole(userRole);
-                //Foreign key IdUserRole dari UserRole
                 ps.setString(6, object.getIdUserRole().getIdUserRole());
 
                 ps.setString(7, object.getPassword());
@@ -124,7 +120,8 @@ public class UserDaoImpl implements DaoService<User> {
         ObservableList<User> users = FXCollections.observableArrayList();
         try {
             try (Connection connection = Utility.creatConnection()) {
-                String query = "SELECT * FROM User ORDER BY IdPengguna";
+                String query
+                        = "SELECT u.IdPengguna, u.NamaDepan, u.NamaBelakang, u.Alamat, u.NoTelepon, u.Password, u.JenisKelamin, ur.Jabatan FROM User u JOIN UserRole ur on u.UserRole_idUserRole = ur.idUserRole ORDER BY IdPengguna";
                 PreparedStatement ps = connection.prepareStatement(query);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
@@ -139,7 +136,8 @@ public class UserDaoImpl implements DaoService<User> {
 
                     //Foreign key IdUserRole dari UserRole
                     UserRole userRole = new UserRole();
-                    userRole.setIdUserRole(rs.getString("UserRole_idUserRole"));
+//                   userRole.setIdUserRole(rs.getString("UserRole_idUserRole"));
+                    userRole.setJabatan(rs.getString("Jabatan"));
 
                     user.setIdUserRole(userRole);
                     users.add(user);
@@ -152,6 +150,7 @@ public class UserDaoImpl implements DaoService<User> {
             Logger.getLogger(UserDaoImpl.class.getName()).
                     log(Level.SEVERE, null, ex);
         }
+        System.out.println(users);
         return users;
     }
 
@@ -162,9 +161,8 @@ public class UserDaoImpl implements DaoService<User> {
             try (Connection connection = Utility.creatConnection()) {
                 connection.setAutoCommit(false);
                 String query
-                        = "SELECT u.IdPengguna, u.Password  FROM user u  join userrole ur on u.UserRole_idUserRole = ur.idUserRole WHERE u.IdPengguna=? and u.Password=?";
-                //belum ada ur.UserRole_idUserRole
-                //
+                        = "SELECT u.IdPengguna, u.Password, ur.idUserRole FROM user u  join userrole ur on u.UserRole_idUserRole = ur.idUserRole WHERE u.IdPengguna=? and u.Password=?";
+
                 PreparedStatement ps = connection.prepareStatement(query);
                 ps.setString(1, id.getIdPengguna());
                 ps.setString(2, id.getPassword());
@@ -174,7 +172,10 @@ public class UserDaoImpl implements DaoService<User> {
                     user.setIdPengguna(rs.getString("u.IdPengguna"));
 
                     user.setPassword(rs.getString("u.Password"));
-//                    user.setIdUserRole(rs.get);
+
+                    UserRole userRole = new UserRole();
+                    userRole.setIdUserRole(rs.getString("idUserRole"));
+                    user.setIdUserRole(userRole);
 
                     return user;
                 }

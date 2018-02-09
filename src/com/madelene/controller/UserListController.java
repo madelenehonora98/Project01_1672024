@@ -6,17 +6,25 @@
 package com.madelene.controller;
 
 import com.madelene.MainApp;
+import com.madelene.dao.UserDaoImpl;
+import com.madelene.entity.User;
+import com.madelene.entity.UserRole;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -37,13 +45,49 @@ public class UserListController implements Initializable {
     private Button btnEditUser;
     @FXML
     private Button btnDelUser;
+    @FXML
+    private TableColumn<User, String> colIdPengguna;
+    @FXML
+    private TableColumn<User, String> colNamaDepan;
+    @FXML
+    private TableColumn<User, String> colNamaBelakang;
+    @FXML
+    private TableColumn<User, String> colAlamat;
+    @FXML
+    private TableColumn<User, String> colNoTelepon;
+    @FXML
+    private TableColumn<UserRole, String> colJabatan;
+
+    private UserDaoImpl userDaoImpl;
+    ObservableList<User> users;
+    @FXML
+    private TableView<User> tbUserList;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        userDaoImpl = new UserDaoImpl();
+        users = FXCollections.observableArrayList();
+        users = userDaoImpl.showAllData();
+
+        tbUserList.setItems(users);
+
+        colIdPengguna.setCellValueFactory(new PropertyValueFactory<>(
+                "IdPengguna"));
+        colNamaDepan.
+                setCellValueFactory(new PropertyValueFactory<>("NamaDepan"));
+        colNamaBelakang.setCellValueFactory(new PropertyValueFactory<>(
+                "NamaBelakang"));
+        colAlamat.setCellValueFactory(new PropertyValueFactory<>("Alamat"));
+        colNoTelepon.
+                setCellValueFactory(new PropertyValueFactory<>("NoTelepon"));
+        colJabatan.setCellValueFactory(new PropertyValueFactory<>("Jabatan"));
+        //colJabatan.setCellValueFactory(p -> p.getValue().getIdUserRole().
+        //                jabatanPropertyProperty
+
+//        ()
     }
 
     @FXML

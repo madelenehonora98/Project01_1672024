@@ -8,7 +8,6 @@ package com.madelene.controller;
 import com.madelene.MainApp;
 import com.madelene.dao.UserDaoImpl;
 import com.madelene.entity.User;
-import com.madelene.entity.UserRole;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -79,19 +78,30 @@ public class LoginFormController implements Initializable {
             alert.setContentText("Login berhasil");
             alert.showAndWait();
 
-            FXMLLoader loader = new FXMLLoader();
-
-            UserRole userRole = user.getIdUserRole();
-
-            //Antara owner atau cashier
-            loader.setLocation(MainApp.class.getResource(
-                    "view/OwnerForm.fxml"));
-            BorderPane pane = loader.load();
-            Scene scene = new Scene(pane);
-            Stage secondStage = new Stage();
-            secondStage.setScene(scene);
-            secondStage.setTitle("Owner Form");
-            secondStage.show();
+            if (getUserDao().getData(user).getIdUserRole().getIdUserRole().
+                    equals("01")) {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(MainApp.class.getResource(
+                        "view/OwnerForm.fxml"));
+                BorderPane pane = loader.load();
+                Scene scene = new Scene(pane);
+                Stage secondStage = new Stage();
+                secondStage.setScene(scene);
+                secondStage.setTitle("Owner Form");
+                secondStage.show();
+            } else if (getUserDao().getData(user).getIdUserRole().
+                    getIdUserRole().
+                    equals("02")) {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(MainApp.class.getResource(
+                        "view/CashierForm.fxml"));
+                BorderPane pane = loader.load();
+                Scene scene = new Scene(pane);
+                Stage secondStage = new Stage();
+                secondStage.setScene(scene);
+                secondStage.setTitle("Cashier Form");
+                secondStage.show();
+            }
 
             //Close login stage
             bpLogin.getScene().getWindow().hide();

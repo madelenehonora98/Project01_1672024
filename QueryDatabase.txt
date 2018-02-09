@@ -19,7 +19,7 @@ USE `dbPenjualan` ;
 -- Table `dbPenjualan`.`Barang`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbPenjualan`.`Barang` (
-  `KodeBarang` DECIMAL(10,0) NOT NULL,
+  `KodeBarang` VARCHAR(4) NOT NULL,
   `NamaBarang` VARCHAR(45) NOT NULL,
   `HargaBeli` DOUBLE NOT NULL,
   `HargaJual` DOUBLE NOT NULL,
@@ -42,14 +42,14 @@ ENGINE = InnoDB;
 -- Table `dbPenjualan`.`User`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbPenjualan`.`User` (
-  `IdPengguna` DECIMAL(10,0) NOT NULL,
+  `IdPengguna` VARCHAR(20) NOT NULL,
   `NamaDepan` VARCHAR(45) NOT NULL,
   `NamaBelakang` VARCHAR(45) NOT NULL,
   `Alamat` VARCHAR(45) NOT NULL,
   `NoTelepon` VARCHAR(10) NOT NULL,
   `UserRole_idUserRole` VARCHAR(5) NOT NULL,
   `Password` VARCHAR(45) NOT NULL,
-  `JenisKelamin` VARCHAR(45) NULL,
+  `JenisKelamin` VARCHAR(15) NOT NULL,
   PRIMARY KEY (`IdPengguna`),
   INDEX `fk_User_UserRole1_idx` (`UserRole_idUserRole` ASC),
   CONSTRAINT `fk_User_UserRole1`
@@ -64,10 +64,10 @@ ENGINE = InnoDB;
 -- Table `dbPenjualan`.`NotaPenjualan`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbPenjualan`.`NotaPenjualan` (
-  `KodePenjualan` DECIMAL(10,0) NOT NULL,
+  `KodePenjualan` VARCHAR(4) NOT NULL,
   `Nominal` DOUBLE NOT NULL,
   `TanggalPenjualan` DATE NOT NULL,
-  `User_IdPengguna` DECIMAL(10,0) NOT NULL,
+  `User_IdPengguna` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`KodePenjualan`),
   INDEX `fk_NotaPenjualan_User1_idx` (`User_IdPengguna` ASC),
   CONSTRAINT `fk_NotaPenjualan_User1`
@@ -82,9 +82,10 @@ ENGINE = InnoDB;
 -- Table `dbPenjualan`.`Barang_has_NotaPenjualan`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbPenjualan`.`Barang_has_NotaPenjualan` (
-  `Barang_KodeBarang` DECIMAL(10,0) NOT NULL,
-  `NotaPenjualan_KodePenjualan` DECIMAL(10,0) NOT NULL,
+  `Barang_KodeBarang` VARCHAR(4) NOT NULL,
+  `NotaPenjualan_KodePenjualan` VARCHAR(4) NOT NULL,
   `JumlahBarangTerjual` INT NOT NULL,
+  `HargaJualSaatIni` DOUBLE NOT NULL,
   PRIMARY KEY (`Barang_KodeBarang`, `NotaPenjualan_KodePenjualan`),
   INDEX `fk_Barang_has_NotaPenjualan_NotaPenjualan1_idx` (`NotaPenjualan_KodePenjualan` ASC),
   INDEX `fk_Barang_has_NotaPenjualan_Barang_idx` (`Barang_KodeBarang` ASC),

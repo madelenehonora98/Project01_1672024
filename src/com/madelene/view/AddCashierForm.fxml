@@ -184,7 +184,10 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <ComboBox fx:id="cbJnsKelamin" onAction="#cbJnsKelaminAct" prefHeight="39.0" prefWidth="171.0" promptText="Jenis Kelamin" />
+                  <RadioButton fx:id="rbLaki" mnemonicParsing="false" prefHeight="27.0" prefWidth="185.0" selected="true" text="Laki-Laki">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="group" />
+                     </toggleGroup></RadioButton>
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="204.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
@@ -231,6 +234,11 @@
             <HBox alignment="CENTER" layoutX="142.0" layoutY="250.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="5">
                <children>
                   <PasswordField fx:id="txtVerifyPass" onAction="#txtVerifyPassAct" prefHeight="39.0" prefWidth="196.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="140.0" layoutY="112.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <children>
+                  <RadioButton fx:id="rbPerempuan" mnemonicParsing="false" prefHeight="27.0" prefWidth="185.0" text="Perempuan" toggleGroup="$group" />
                </children>
             </HBox>
          </children>

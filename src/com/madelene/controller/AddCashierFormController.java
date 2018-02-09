@@ -19,7 +19,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -49,18 +51,32 @@ public class AddCashierFormController implements Initializable {
     @FXML
     private ComboBox<?> cbIdUserRole;
     @FXML
-    private ComboBox<?> cbJnsKelamin;
-    @FXML
     private PasswordField txtPass;
     @FXML
     private PasswordField txtVerifyPass;
+    @FXML
+    private RadioButton rbLaki;
+    @FXML
+    private RadioButton rbPerempuan;
+
+    public ToggleGroup group;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+
+//        group = new ToggleGroup();
+//        rbLaki.setToggleGroup(group);
+//        rbPerempuan.setToggleGroup(group);
+//        rbLaki.setOnMouseClicked(new EventHandler<MouseEvent>(){
+//            @Override
+//            public void handle(MouseEvent event) {
+//                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//            }
+//
+//        });
     }
 
     @FXML
@@ -86,14 +102,11 @@ public class AddCashierFormController implements Initializable {
 
     @FXML
     private void btnSubmitAddCashierAct(ActionEvent event) {
+
     }
 
     @FXML
     private void cbIdUserRoleAct(ActionEvent event) {
-    }
-
-    @FXML
-    private void cbJnsKelaminAct(ActionEvent event) {
     }
 
     @FXML

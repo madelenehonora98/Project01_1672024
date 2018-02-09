@@ -12,8 +12,16 @@
    <center>
       <GridPane BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnTransaction" mnemonicParsing="false" onAction="#btnTransactionAct" prefHeight="150.0" prefWidth="617.0" text="Transaction" GridPane.rowIndex="1" />
-            <Button fx:id="btnProductPriceList" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnProductPriceListAct" prefHeight="150.0" prefWidth="764.0" text="Product &amp; Price List" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="btnProductPriceList" mnemonicParsing="false" onAction="#btnProductPriceListAct" prefHeight="150.0" prefWidth="213.0" text="Product &amp; Price List" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+               <children>
+                  <Button fx:id="btnTransaction" mnemonicParsing="false" onAction="#btnTransactionAct" prefHeight="150.0" prefWidth="215.0" text="Transaction" />
+               </children>
+            </HBox>
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -27,7 +35,7 @@
    <top>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="53.0" prefWidth="830.0" text="Cashier">
+            <Label prefHeight="53.0" prefWidth="834.0" text="Cashier">
                <font>
                   <Font size="36.0" />
                </font>

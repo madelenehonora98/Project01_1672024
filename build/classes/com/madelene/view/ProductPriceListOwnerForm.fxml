@@ -8,17 +8,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="bpPPLO" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ccf2ff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.madelene.controller.ProductPriceListOwnerFormController">
+<BorderPane fx:id="bpPPLO" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="434.0" prefWidth="627.0" style="-fx-background-color: #ccf2ff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.madelene.controller.ProductPriceListOwnerFormController">
    <center>
       <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
-            <TableView fx:id="tbleProduct" onMouseClicked="#tbProductMouseClicked" prefHeight="351.0" prefWidth="530.0">
+            <TableView fx:id="tbleProduct" onMouseClicked="#tbProductMouseClicked" prefHeight="351.0" prefWidth="570.0">
                <columns>
-                  <TableColumn prefWidth="121.0" text="Kode Barang" />
-                  <TableColumn prefWidth="141.0" text="Nama Barang" />
-                  <TableColumn minWidth="0.0" prefWidth="98.0" text="Harga Beli" />
-                  <TableColumn minWidth="0.0" prefWidth="108.0" text="Harga Jual" />
-                  <TableColumn minWidth="0.0" prefWidth="77.0" text="Stok" />
+                  <TableColumn fx:id="colKodeBarang" prefWidth="121.0" text="Kode Barang" />
+                  <TableColumn fx:id="colNamaBarang" prefWidth="141.0" text="Nama Barang" />
+                  <TableColumn fx:id="colHargaBeli" minWidth="0.0" prefWidth="98.0" text="Harga Beli" />
+                  <TableColumn fx:id="colHargaJual" minWidth="0.0" prefWidth="108.0" text="Harga Jual" />
+                  <TableColumn fx:id="colStok" minWidth="0.0" prefWidth="58.0" text="Stok" />
                </columns>
             </TableView>
          </content>
@@ -116,4 +116,7 @@
          </children>
       </HBox>
    </top>
+   <bottom>
+      <HBox prefHeight="24.0" prefWidth="627.0" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>

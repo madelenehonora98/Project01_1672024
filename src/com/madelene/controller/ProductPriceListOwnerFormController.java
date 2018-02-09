@@ -21,6 +21,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -49,6 +50,16 @@ public class ProductPriceListOwnerFormController implements Initializable {
     private BarangDaoImpl barangDao;
     private ObservableList<Barang> barangs;
     private Stage addProductStage;
+    @FXML
+    private TableColumn<?, ?> colKodeBarang;
+    @FXML
+    private TableColumn<?, ?> colNamaBarang;
+    @FXML
+    private TableColumn<?, ?> colHargaBeli;
+    @FXML
+    private TableColumn<?, ?> colHargaJual;
+    @FXML
+    private TableColumn<?, ?> colStok;
 
     public ObservableList<Barang> getBarangs() {
         if (barangs == null) {

@@ -5,6 +5,9 @@
  */
 package com.madelene.entity;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 /**
  *
  * @author Madelene
@@ -36,6 +39,39 @@ public class UserRole {
 
     public void setJabatan(String Jabatan) {
         this.Jabatan = Jabatan;
+    }
+
+//    private String jabatanProperty;
+//
+//    /**
+//     * Get the value of jabatanProperty
+//     *
+//     * @return the value of jabatanProperty
+//     */
+//    public String getJabatanProperty() {
+//        return jabatanProperty;
+//    }
+//
+//    /**
+//     * Set the value of jabatanProperty
+//     *
+//     * @param jabatanProperty new value of jabatanProperty
+//     */
+//    public void setJabatanProperty(String jabatanProperty) {
+//        this.jabatanProperty = jabatanProperty;
+//    }
+    private final StringProperty jabatanProperty = new SimpleStringProperty();
+
+    public String getJabatanProperty() {
+        return jabatanProperty.get();
+    }
+
+    public void setJabatanProperty(String value) {
+        jabatanProperty.set(value);
+    }
+
+    public StringProperty jabatanPropertyProperty() {
+        return jabatanProperty;
     }
 
 }

@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 
@@ -25,6 +26,16 @@ public class ProductPriceListFormController implements Initializable {
     private Button btnBack;
     @FXML
     private TableView<?> tbleProduct;
+    @FXML
+    private TableColumn<?, ?> colKodeBarang;
+    @FXML
+    private TableColumn<?, ?> colNamaBarang;
+    @FXML
+    private TableColumn<?, ?> colHargaBeli;
+    @FXML
+    private TableColumn<?, ?> colHargaJual;
+    @FXML
+    private TableColumn<?, ?> colStok;
 
     /**
      * Initializes the controller class.

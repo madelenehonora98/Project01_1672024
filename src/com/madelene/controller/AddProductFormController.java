@@ -105,6 +105,12 @@ public class AddProductFormController implements Initializable {
                         productPriceListOwnerFormController.
                         getBarangDao().showAllData());
             }
+
+            txtKodeBarang.clear();
+            txtNamaBarang.clear();
+            txtHargaBeli.clear();
+            txtHargaJual.clear();
+            txtStok.clear();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Masih ada yang kosong");

@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ccf2ff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.madelene.controller.ProductPriceListFormController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="678.0" style="-fx-background-color: #ccf2ff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.madelene.controller.ProductPriceListFormController">
    <left>
       <HBox prefHeight="300.0" prefWidth="23.0" BorderPane.alignment="CENTER">
          <children>
@@ -45,18 +45,21 @@
       </HBox>
    </top>
    <center>
-      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ScrollPane prefHeight="298.0" prefWidth="616.0" BorderPane.alignment="CENTER">
          <content>
-            <TableView fx:id="tbleProduct" onMouseClicked="#tbProductMouseClicked" prefHeight="351.0" prefWidth="530.0">
+            <TableView fx:id="tbleProduct" onMouseClicked="#tbProductMouseClicked" prefHeight="351.0" prefWidth="614.0" tableMenuButtonVisible="true">
               <columns>
-                <TableColumn prefWidth="121.0" text="Kode Barang" />
-                <TableColumn prefWidth="141.0" text="Nama Barang" />
-                  <TableColumn minWidth="0.0" prefWidth="98.0" text="Harga Beli" />
-                  <TableColumn minWidth="0.0" prefWidth="108.0" text="Harga Jual" />
-                  <TableColumn minWidth="0.0" prefWidth="77.0" text="Stok" />
+                <TableColumn fx:id="colKodeBarang" prefWidth="121.0" text="Kode Barang" />
+                <TableColumn fx:id="colNamaBarang" prefWidth="149.0" text="Nama Barang" />
+                  <TableColumn fx:id="colHargaBeli" minWidth="0.0" prefWidth="124.0" text="Harga Beli" />
+                  <TableColumn fx:id="colHargaJual" minWidth="0.0" prefWidth="120.0" text="Harga Jual" />
+                  <TableColumn fx:id="colStok" minWidth="0.0" prefWidth="99.0" text="Stok" />
               </columns>
             </TableView>
          </content>
       </ScrollPane>
    </center>
+   <bottom>
+      <HBox prefHeight="36.0" prefWidth="678.0" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>
