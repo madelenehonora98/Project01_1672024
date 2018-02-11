@@ -5,99 +5,122 @@
  */
 package com.madelene.entity;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 /**
  *
  * @author Madelene
  */
 public class User {
 
-    String IdPengguna;
-    String NamaDepan;
-    String NamaBelakang;
-    String Alamat;
-    String NoTelepon;
-    UserRole idUserRole;
-    String Password;
-    String JenisKelamin;
-
-    public String getJenisKelamin() {
-        return JenisKelamin;
-    }
-
-    public void setJenisKelamin(String JenisKelamin) {
-        this.JenisKelamin = JenisKelamin;
-    }
-
-    public String getPassword() {
-        return Password;
-    }
-
-    public void setPassword(String Password) {
-        this.Password = Password;
-    }
+    private final StringProperty idPengguna = new SimpleStringProperty();
 
     public String getIdPengguna() {
-        return IdPengguna;
+        return idPengguna.get();
     }
 
-    public void setIdPengguna(String IdPengguna) {
-        this.IdPengguna = IdPengguna;
+    public void setIdPengguna(String value) {
+        idPengguna.set(value);
     }
 
-    public String getNamaDepan() {
-        return NamaDepan;
+    public StringProperty idPenggunaProperty() {
+        return idPengguna;
     }
-
-    public void setNamaDepan(String NamaDepan) {
-        this.NamaDepan = NamaDepan;
-    }
+    private final StringProperty NamaBelakang = new SimpleStringProperty();
 
     public String getNamaBelakang() {
+        return NamaBelakang.get();
+    }
+
+    public void setNamaBelakang(String value) {
+        NamaBelakang.set(value);
+    }
+
+    public StringProperty NamaBelakangProperty() {
         return NamaBelakang;
     }
-
-    public void setNamaBelakang(String NamaBelakang) {
-        this.NamaBelakang = NamaBelakang;
-    }
+    private final StringProperty Alamat = new SimpleStringProperty();
 
     public String getAlamat() {
+        return Alamat.get();
+    }
+
+    public void setAlamat(String value) {
+        Alamat.set(value);
+    }
+
+    public StringProperty AlamatProperty() {
         return Alamat;
     }
-
-    public void setAlamat(String Alamat) {
-        this.Alamat = Alamat;
-    }
+    private final StringProperty NoTelepon = new SimpleStringProperty();
 
     public String getNoTelepon() {
+        return NoTelepon.get();
+    }
+
+    public void setNoTelepon(String value) {
+        NoTelepon.set(value);
+    }
+
+    public StringProperty NoTeleponProperty() {
         return NoTelepon;
     }
+    private final StringProperty Password = new SimpleStringProperty();
 
-    public void setNoTelepon(String NoTelepon) {
-        this.NoTelepon = NoTelepon;
+    public String getPassword() {
+        return Password.get();
     }
 
+    public void setPassword(String value) {
+        Password.set(value);
+    }
+
+    public StringProperty PasswordProperty() {
+        return Password;
+    }
+    private final StringProperty JenisKelamin = new SimpleStringProperty();
+
+    public String getJenisKelamin() {
+        return JenisKelamin.get();
+    }
+
+    public void setJenisKelamin(String value) {
+        JenisKelamin.set(value);
+    }
+
+    public StringProperty JenisKelaminProperty() {
+        return JenisKelamin;
+    }
+    private final ObjectProperty<UserRole> idUserRole
+            = new SimpleObjectProperty<>();
+
     public UserRole getIdUserRole() {
+        return idUserRole.get();
+    }
+
+    public void setIdUserRole(UserRole value) {
+        idUserRole.set(value);
+    }
+
+    public ObjectProperty idUserRoleProperty() {
         return idUserRole;
     }
 
-    public void setIdUserRole(UserRole idUserRole) {
-        this.idUserRole = idUserRole;
+    private final StringProperty NamaDepan = new SimpleStringProperty();
+
+    public String getNamaDepan() {
+        return NamaDepan.get();
     }
 
-    public User(String IdPengguna, String NamaDepan, String NamaBelakang,
-            String Alamat, String NoTelepon, UserRole idUserRole,
-            String Password, String JenisKelamin) {
-        this.IdPengguna = IdPengguna;
-        this.NamaDepan = NamaDepan;
-        this.NamaBelakang = NamaBelakang;
-        this.Alamat = Alamat;
-        this.NoTelepon = NoTelepon;
-        this.idUserRole = idUserRole;
-        this.Password = Password;
-        this.JenisKelamin = JenisKelamin;
+    public void setNamaDepan(String value) {
+        NamaDepan.set(value);
     }
 
-    public User() {
+    public StringProperty NamaDepanProperty() {
+        return NamaDepan;
     }
 
 }

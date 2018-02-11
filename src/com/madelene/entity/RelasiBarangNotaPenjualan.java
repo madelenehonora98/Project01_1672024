@@ -5,48 +5,59 @@
  */
 package com.madelene.entity;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
+
 /**
  *
  * @author Madelene
  */
 public class RelasiBarangNotaPenjualan {
 
-    Barang KodeBarang;
-    int JumlahBarangTerjual;
-    NotaPenjualan KodePenjualan;
-
-    public RelasiBarangNotaPenjualan() {
-    }
-
-    public RelasiBarangNotaPenjualan(Barang KodeBarang, int JumlahBarangTerjual,
-            NotaPenjualan KodePenjualan) {
-        this.KodeBarang = KodeBarang;
-        this.JumlahBarangTerjual = JumlahBarangTerjual;
-        this.KodePenjualan = KodePenjualan;
-    }
+    private final ObjectProperty<Barang> KodeBarang
+            = new SimpleObjectProperty<>();
 
     public Barang getKodeBarang() {
+        return KodeBarang.get();
+    }
+
+    public void setKodeBarang(Barang value) {
+        KodeBarang.set(value);
+    }
+
+    public ObjectProperty KodeBarangProperty() {
         return KodeBarang;
     }
-
-    public void setKodeBarang(Barang KodeBarang) {
-        this.KodeBarang = KodeBarang;
-    }
-
-    public int getJumlahBarangTerjual() {
-        return JumlahBarangTerjual;
-    }
-
-    public void setJumlahBarangTerjual(int JumlahBarangTerjual) {
-        this.JumlahBarangTerjual = JumlahBarangTerjual;
-    }
+    private final ObjectProperty<NotaPenjualan> KodePenjualan
+            = new SimpleObjectProperty<>();
 
     public NotaPenjualan getKodePenjualan() {
+        return KodePenjualan.get();
+    }
+
+    public void setKodePenjualan(NotaPenjualan value) {
+        KodePenjualan.set(value);
+    }
+
+    public ObjectProperty KodePenjualanProperty() {
         return KodePenjualan;
     }
 
-    public void setKodePenjualan(NotaPenjualan KodePenjualan) {
-        this.KodePenjualan = KodePenjualan;
+    private final IntegerProperty JumlahBarangTerjual
+            = new SimpleIntegerProperty();
+
+    public int getJumlahBarangTerjual() {
+        return JumlahBarangTerjual.get();
+    }
+
+    public void setJumlahBarangTerjual(int value) {
+        JumlahBarangTerjual.set(value);
+    }
+
+    public IntegerProperty JumlahBarangTerjualProperty() {
+        return JumlahBarangTerjual;
     }
 
 }

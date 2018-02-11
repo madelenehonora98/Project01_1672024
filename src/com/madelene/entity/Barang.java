@@ -1,9 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.madelene.entity;
+
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 /**
  *
@@ -11,62 +13,71 @@ package com.madelene.entity;
  */
 public class Barang {
 
-    String KodeBarang;
-    String NamaBarang;
-    double HargaBeli;
-    double HargaJual;
-    int Stok;
-
-    public Barang() {
-    }
-
-    public Barang(String KodeBarang, String NamaBarang, double HargaBeli,
-            double HargaJual, int Stok) {
-        this.KodeBarang = KodeBarang;
-        this.NamaBarang = NamaBarang;
-        this.HargaBeli = HargaBeli;
-        this.HargaJual = HargaJual;
-        this.Stok = Stok;
-    }
+    private final StringProperty KodeBarang = new SimpleStringProperty();
 
     public String getKodeBarang() {
+        return KodeBarang.get();
+    }
+
+    public void setKodeBarang(String value) {
+        KodeBarang.set(value);
+    }
+
+    public StringProperty KodeBarangProperty() {
         return KodeBarang;
     }
-
-    public void setKodeBarang(String KodeBarang) {
-        this.KodeBarang = KodeBarang;
-    }
-
-    public String getNamaBarang() {
-        return NamaBarang;
-    }
-
-    public void setNamaBarang(String NamaBarang) {
-        this.NamaBarang = NamaBarang;
-    }
+    private final DoubleProperty HargaBeli = new SimpleDoubleProperty();
 
     public double getHargaBeli() {
+        return HargaBeli.get();
+    }
+
+    public void setHargaBeli(double value) {
+        HargaBeli.set(value);
+    }
+
+    public DoubleProperty HargaBeliProperty() {
         return HargaBeli;
     }
-
-    public void setHargaBeli(double HargaBeli) {
-        this.HargaBeli = HargaBeli;
-    }
+    private final DoubleProperty HargaJual = new SimpleDoubleProperty();
 
     public double getHargaJual() {
+        return HargaJual.get();
+    }
+
+    public void setHargaJual(double value) {
+        HargaJual.set(value);
+    }
+
+    public DoubleProperty HargaJualProperty() {
         return HargaJual;
     }
-
-    public void setHargaJual(double HargaJual) {
-        this.HargaJual = HargaJual;
-    }
+    private final IntegerProperty Stok = new SimpleIntegerProperty();
 
     public int getStok() {
+        return Stok.get();
+    }
+
+    public void setStok(int value) {
+        Stok.set(value);
+    }
+
+    public IntegerProperty StokProperty() {
         return Stok;
     }
 
-    public void setStok(int Stok) {
-        this.Stok = Stok;
+    private final StringProperty NamaBarang = new SimpleStringProperty();
+
+    public String getNamaBarang() {
+        return NamaBarang.get();
+    }
+
+    public void setNamaBarang(String value) {
+        NamaBarang.set(value);
+    }
+
+    public StringProperty NamaBarangProperty() {
+        return NamaBarang;
     }
 
 }

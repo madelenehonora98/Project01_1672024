@@ -23,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -44,22 +45,22 @@ public class ProductPriceListOwnerFormController implements Initializable {
     @FXML
     private Button btnDelProduct;
     @FXML
-    private TableView<?> tbleProduct;
+    private TableView<Barang> tbleProduct;
     @FXML
     private BorderPane bpPPLO;
     private BarangDaoImpl barangDao;
     private ObservableList<Barang> barangs;
     private Stage addProductStage;
     @FXML
-    private TableColumn<?, ?> colKodeBarang;
+    private TableColumn<Barang, String> colKodeBarang;
     @FXML
-    private TableColumn<?, ?> colNamaBarang;
+    private TableColumn<Barang, String> colNamaBarang;
     @FXML
-    private TableColumn<?, ?> colHargaBeli;
+    private TableColumn<Barang, Double> colHargaBeli;
     @FXML
-    private TableColumn<?, ?> colHargaJual;
+    private TableColumn<Barang, Double> colHargaJual;
     @FXML
-    private TableColumn<?, ?> colStok;
+    private TableColumn<Barang, Integer> colStok;
 
     public ObservableList<Barang> getBarangs() {
         if (barangs == null) {
@@ -81,7 +82,23 @@ public class ProductPriceListOwnerFormController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        barangDao = new BarangDaoImpl();
+        barangs = FXCollections.observableArrayList();
+        barangs = barangDao.showAllData();
+
+        tbleProduct.setItems(barangs);
+
+        colKodeBarang.setCellValueFactory(new PropertyValueFactory<>(
+                "KodeBarang"));
+        colNamaBarang.
+                setCellValueFactory(new PropertyValueFactory<>("NamaBarang"));
+        colHargaBeli.setCellValueFactory(new PropertyValueFactory<>(
+                "HargaBeli"));
+        colHargaJual.
+                setCellValueFactory(new PropertyValueFactory<>("HargaJual"));
+        colStok.
+                setCellValueFactory(new PropertyValueFactory<>("Stok"));
+
     }
 
     @FXML

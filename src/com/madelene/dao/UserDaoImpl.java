@@ -121,10 +121,14 @@ public class UserDaoImpl implements DaoService<User> {
         try {
             try (Connection connection = Utility.creatConnection()) {
                 String query
-                        = "SELECT u.IdPengguna, u.NamaDepan, u.NamaBelakang, u.Alamat, u.NoTelepon, u.Password, u.JenisKelamin, ur.Jabatan FROM User u JOIN UserRole ur on u.UserRole_idUserRole = ur.idUserRole ORDER BY IdPengguna";
+                        = "SELECT u.IdPengguna, u.NamaDepan, u.NamaBelakang, u.Alamat, u.NoTelepon, u.Password, u.JenisKelamin, ur.idUserRole, ur.Jabatan FROM User u JOIN UserRole ur on u.UserRole_idUserRole = ur.idUserRole ORDER BY IdPengguna";
                 PreparedStatement ps = connection.prepareStatement(query);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
+                    UserRole userRole = new UserRole();
+                    userRole.setIdUserRole(rs.getString("idUserRole"));
+                    userRole.setJabatan(rs.getString("Jabatan"));
+
                     User user = new User();
                     user.setIdPengguna(rs.getString("IdPengguna"));
                     user.setNamaDepan(rs.getString("NamaDepan"));
@@ -135,10 +139,7 @@ public class UserDaoImpl implements DaoService<User> {
                     user.setJenisKelamin(rs.getString("JenisKelamin"));
 
                     //Foreign key IdUserRole dari UserRole
-                    UserRole userRole = new UserRole();
 //                   userRole.setIdUserRole(rs.getString("UserRole_idUserRole"));
-                    userRole.setJabatan(rs.getString("Jabatan"));
-
                     user.setIdUserRole(userRole);
                     users.add(user);
                 }

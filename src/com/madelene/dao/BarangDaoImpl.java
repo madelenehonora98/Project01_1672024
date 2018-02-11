@@ -12,7 +12,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -108,7 +107,7 @@ public class BarangDaoImpl implements DaoService<Barang> {
     }
 
     @Override
-    public List<Barang> showAllData() {
+    public ObservableList<Barang> showAllData() {
         ObservableList<Barang> barangs = FXCollections.observableArrayList();
         try {
             try (Connection connection = Utility.creatConnection()) {

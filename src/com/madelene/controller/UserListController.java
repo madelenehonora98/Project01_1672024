@@ -8,7 +8,6 @@ package com.madelene.controller;
 import com.madelene.MainApp;
 import com.madelene.dao.UserDaoImpl;
 import com.madelene.entity.User;
-import com.madelene.entity.UserRole;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -56,9 +55,9 @@ public class UserListController implements Initializable {
     @FXML
     private TableColumn<User, String> colNoTelepon;
     @FXML
-    private TableColumn<UserRole, String> colJabatan;
+    private TableColumn<User, String> colJabatan;
 
-    private UserDaoImpl userDaoImpl;
+    private UserDaoImpl userDao;
     ObservableList<User> users;
     @FXML
     private TableView<User> tbUserList;
@@ -66,11 +65,26 @@ public class UserListController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    public UserDaoImpl getUserDao() {
+        if (userDao == null) {
+            userDao = new UserDaoImpl();
+        }
+        return userDao;
+    }
+
+    public ObservableList<User> getUsers() {
+        if (users == null) {
+            users = FXCollections.observableArrayList();
+            users.addAll(getUserDao().showAllData());
+        }
+        return users;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        userDaoImpl = new UserDaoImpl();
+        userDao = new UserDaoImpl();
         users = FXCollections.observableArrayList();
-        users = userDaoImpl.showAllData();
+        users = userDao.showAllData();
 
         tbUserList.setItems(users);
 
@@ -83,11 +97,9 @@ public class UserListController implements Initializable {
         colAlamat.setCellValueFactory(new PropertyValueFactory<>("Alamat"));
         colNoTelepon.
                 setCellValueFactory(new PropertyValueFactory<>("NoTelepon"));
-        colJabatan.setCellValueFactory(new PropertyValueFactory<>("Jabatan"));
-        //colJabatan.setCellValueFactory(p -> p.getValue().getIdUserRole().
-        //                jabatanPropertyProperty
+        colJabatan.setCellValueFactory(p -> p.getValue().getIdUserRole().
+                JabatanProperty());
 
-//        ()
     }
 
     @FXML

@@ -14,64 +14,31 @@ import javafx.beans.property.StringProperty;
  */
 public class UserRole {
 
-    String idUserRole;
-    String Jabatan;
-
-    public UserRole() {
-    }
-
-    public UserRole(String idUserRole, String Jabatan) {
-        this.idUserRole = idUserRole;
-        this.Jabatan = Jabatan;
-    }
+    private final StringProperty idUserRole = new SimpleStringProperty();
 
     public String getIdUserRole() {
+        return idUserRole.get();
+    }
+
+    public void setIdUserRole(String value) {
+        idUserRole.set(value);
+    }
+
+    public StringProperty idUserRoleProperty() {
         return idUserRole;
     }
 
-    public void setIdUserRole(String idUserRole) {
-        this.idUserRole = idUserRole;
-    }
+    private final StringProperty Jabatan = new SimpleStringProperty();
 
     public String getJabatan() {
+        return Jabatan.get();
+    }
+
+    public void setJabatan(String value) {
+        Jabatan.set(value);
+    }
+
+    public StringProperty JabatanProperty() {
         return Jabatan;
     }
-
-    public void setJabatan(String Jabatan) {
-        this.Jabatan = Jabatan;
-    }
-
-//    private String jabatanProperty;
-//
-//    /**
-//     * Get the value of jabatanProperty
-//     *
-//     * @return the value of jabatanProperty
-//     */
-//    public String getJabatanProperty() {
-//        return jabatanProperty;
-//    }
-//
-//    /**
-//     * Set the value of jabatanProperty
-//     *
-//     * @param jabatanProperty new value of jabatanProperty
-//     */
-//    public void setJabatanProperty(String jabatanProperty) {
-//        this.jabatanProperty = jabatanProperty;
-//    }
-    private final StringProperty jabatanProperty = new SimpleStringProperty();
-
-    public String getJabatanProperty() {
-        return jabatanProperty.get();
-    }
-
-    public void setJabatanProperty(String value) {
-        jabatanProperty.set(value);
-    }
-
-    public StringProperty jabatanPropertyProperty() {
-        return jabatanProperty;
-    }
-
 }

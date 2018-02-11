@@ -6,6 +6,9 @@
 package com.madelene.controller;
 
 import com.madelene.MainApp;
+import com.madelene.entity.User;
+import com.madelene.entity.UserRole;
+import com.madelene.utility.Utility;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
@@ -49,7 +53,7 @@ public class AddCashierFormController implements Initializable {
     @FXML
     private TextField txtNoTelepon;
     @FXML
-    private ComboBox<?> cbIdUserRole;
+    private ComboBox<UserRole> cbIdUserRole;
     @FXML
     private PasswordField txtPass;
     @FXML
@@ -61,11 +65,14 @@ public class AddCashierFormController implements Initializable {
 
     public ToggleGroup group;
 
+    private UserListController userListController;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        cbIdUserRole.setItems(value);
 
 //        group = new ToggleGroup();
 //        rbLaki.setToggleGroup(group);
@@ -100,9 +107,60 @@ public class AddCashierFormController implements Initializable {
         }
     }
 
+    public void setMainController(
+            UserListController userListController) {
+        this.userListController
+                = userListController;
+
+    }
+
     @FXML
     private void btnSubmitAddCashierAct(ActionEvent event) {
+        if (!Utility.isEmptyField(txtIdPengguna, txtNamaDepan, txtNamaBelakang,
+                txtAlamat, txtNoTelepon, txtPass, txtVerifyPass)) {
+            User user = new User();
+            user.setIdPengguna(txtIdPengguna.getText().trim());
+            user.setNamaDepan(txtNamaDepan.getText().trim());
+            user.setNamaBelakang(txtNamaBelakang.getText().trim());
+            user.setAlamat(txtAlamat.getText().trim());
+            user.setNoTelepon(txtNoTelepon.getText().trim());
 
+            //Buat ID ROLE SAMA JENIS KELAMIN
+//            user.setIdPengguna(txtIdPengguna.getText().trim());
+//            user.setIdPengguna(txtIdPengguna.getText().trim());
+            //buat cek pass yang sudah sama atau belum
+            if (!txtPass.getText().trim().equals(txtVerifyPass.getText().
+                    trim())) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Password tidak sama");
+                alert.showAndWait();
+
+                txtPass.clear();
+                txtVerifyPass.clear();
+            } else {
+                user.setPassword(txtPass.getText().trim());
+            }
+
+            if (userListController.getUserDao().addData(
+                    user) == 1) {
+
+                userListController.getUsers().clear();
+                userListController.getUsers().addAll(userListController.
+                        getUserDao().showAllData());
+            }
+
+            txtIdPengguna.clear();
+            txtNamaDepan.clear();
+            txtNamaBelakang.clear();
+            txtAlamat.clear();
+            txtPass.clear();
+            txtVerifyPass.clear();
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Masih ada yang kosong");
+            alert.showAndWait();
+        }
     }
 
     @FXML
@@ -111,6 +169,9 @@ public class AddCashierFormController implements Initializable {
 
     @FXML
     private void txtVerifyPassAct(ActionEvent event) {
+        if (!txtPass.equals(txtVerifyPass)) {
+
+        }
     }
 
 }
