@@ -6,6 +6,7 @@
 package com.madelene.controller;
 
 import com.madelene.MainApp;
+import com.madelene.dao.UserRoleDaoImpl;
 import com.madelene.entity.User;
 import com.madelene.entity.UserRole;
 import com.madelene.utility.Utility;
@@ -14,6 +15,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -67,23 +70,32 @@ public class AddCashierFormController implements Initializable {
 
     private UserListController userListController;
 
+    private ObservableList<UserRole> roles;
+    private UserRoleDaoImpl roleDao;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        cbIdUserRole.setItems(value);
+        cbIdUserRole.setItems(getRoles());
 
-//        group = new ToggleGroup();
-//        rbLaki.setToggleGroup(group);
-//        rbPerempuan.setToggleGroup(group);
-//        rbLaki.setOnMouseClicked(new EventHandler<MouseEvent>(){
-//            @Override
-//            public void handle(MouseEvent event) {
-//                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//            }
-//
-//        });
+    }
+
+    public ObservableList<UserRole> getRoles() {
+        if (roles == null) {
+            roles = FXCollections.observableArrayList();
+            roles.addAll(getRoleDao().showAllData());
+        }
+        return roles;
+
+    }
+
+    public UserRoleDaoImpl getRoleDao() {
+        if (roleDao == null) {
+            roleDao = new UserRoleDaoImpl();
+        }
+        return roleDao;
     }
 
     @FXML
@@ -116,6 +128,7 @@ public class AddCashierFormController implements Initializable {
 
     @FXML
     private void btnSubmitAddCashierAct(ActionEvent event) {
+
         if (!Utility.isEmptyField(txtIdPengguna, txtNamaDepan, txtNamaBelakang,
                 txtAlamat, txtNoTelepon, txtPass, txtVerifyPass)) {
             User user = new User();
@@ -125,9 +138,13 @@ public class AddCashierFormController implements Initializable {
             user.setAlamat(txtAlamat.getText().trim());
             user.setNoTelepon(txtNoTelepon.getText().trim());
 
-            //Buat ID ROLE SAMA JENIS KELAMIN
-//            user.setIdPengguna(txtIdPengguna.getText().trim());
-//            user.setIdPengguna(txtIdPengguna.getText().trim());
+            if (group.getSelectedToggle().equals(rbLaki)) {
+                user.setJenisKelamin("Laki-laki");
+            } else if (group.getToggles().equals(rbPerempuan)) {
+                user.setJenisKelamin("Perempuan");
+            }
+            user.setIdUserRole(cbIdUserRole.getValue());
+
             //buat cek pass yang sudah sama atau belum
             if (!txtPass.getText().trim().equals(txtVerifyPass.getText().
                     trim())) {
@@ -155,6 +172,8 @@ public class AddCashierFormController implements Initializable {
             txtAlamat.clear();
             txtPass.clear();
             txtVerifyPass.clear();
+            txtNoTelepon.clear();
+            cbIdUserRole.setValue(null);
 
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);

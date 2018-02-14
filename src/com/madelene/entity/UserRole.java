@@ -41,4 +41,10 @@ public class UserRole {
     public StringProperty JabatanProperty() {
         return Jabatan;
     }
+
+    @Override
+    public String toString() {
+        return getJabatan();
+    }
+
 }

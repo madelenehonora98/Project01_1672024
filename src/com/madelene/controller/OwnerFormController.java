@@ -117,7 +117,7 @@ public class OwnerFormController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource(
-                    "view/SalesReportForm.fxml"));
+                    "view/SalesReport.fxml"));
             BorderPane pane = loader.load();
             Scene scene = new Scene(pane);
             Stage secondStage = new Stage();

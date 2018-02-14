@@ -25,6 +25,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -33,6 +34,10 @@ import javafx.stage.Stage;
  * @author Madelene
  */
 public class UserListController implements Initializable {
+
+    private AddCashierFormController addCashierController;
+
+    private Stage secondStage;
 
     @FXML
     private Button btnBackOwner;
@@ -124,20 +129,31 @@ public class UserListController implements Initializable {
 
     @FXML
     private void btnAddUserAct(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource(
-                    "view/AddCashierForm.fxml"));
-            BorderPane pane = loader.load();
-            Scene scene = new Scene(pane);
-            Stage secondStage = new Stage();
-            secondStage.setScene(scene);
-            secondStage.setTitle("Add Cashier Form");
-            secondStage.show();
+        if (secondStage == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(MainApp.class.getResource(
+                        "view/AddCashierForm.fxml"));
+                BorderPane pane = loader.load();
+                Scene scene = new Scene(pane);
+                secondStage = new Stage();
+                addCashierController = loader.getController();
+                addCashierController.setMainController(this);
+                secondStage.setScene(scene);
+                secondStage.initOwner(bpUserListForm.getScene().getWindow());
+                secondStage.initModality(Modality.APPLICATION_MODAL);
+                secondStage.setTitle("Add Cashier Form");
+                secondStage.show();
 
-        } catch (IOException ex) {
-            Logger.getLogger(LoginFormController.class.getName()).
-                    log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(LoginFormController.class.getName()).
+                        log(Level.SEVERE, null, ex);
+            }
+        }
+        if (secondStage.isShowing() && !secondStage.isFocused()) {
+            secondStage.toFront();
+        } else {
+            secondStage.show();
         }
     }
 

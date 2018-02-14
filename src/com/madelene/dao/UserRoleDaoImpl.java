@@ -10,8 +10,12 @@ import com.madelene.utility.DaoService;
 import com.madelene.utility.Utility;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.control.Alert;
 
 /**
@@ -96,7 +100,27 @@ public class UserRoleDaoImpl implements DaoService<UserRole> {
 
     @Override
     public List<UserRole> showAllData() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<UserRole> roles = new ArrayList<>();
+        String query = "SELECT U.* FROM UserRole u ORDER BY u.idUserRole";
+        try {
+            Connection connection = Utility.creatConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                UserRole role = new UserRole();
+                role.setIdUserRole(rs.getString("idUserRole"));
+                role.setJabatan(rs.getString("Jabatan"));
+                roles.add(role);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserRoleDaoImpl.class.getName()).log(Level.SEVERE,
+                    null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UserRoleDaoImpl.class.getName()).log(Level.SEVERE,
+                    null, ex);
+        }
+        return roles;
     }
 
     @Override

@@ -118,7 +118,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="251.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
                <children>
-                  <Label prefHeight="30.0" prefWidth="525.0" text="Id User Role">
+                  <Label prefHeight="30.0" prefWidth="525.0" text="Jabatan">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -161,7 +161,7 @@
             </HBox>
             <HBox alignment="CENTER" layoutX="353.0" layoutY="204.0" prefHeight="46.0" prefWidth="158.0" GridPane.columnIndex="3">
                <children>
-                  <ComboBox fx:id="cbIdUserRole" onAction="#cbIdUserRoleAct" prefHeight="39.0" prefWidth="188.0" promptText="Id User Role" />
+                  <ComboBox fx:id="cbIdUserRole" onAction="#cbIdUserRoleAct" prefHeight="39.0" prefWidth="188.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="158.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
@@ -250,7 +250,7 @@
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="53.0" prefWidth="422.0" text="Add Cashier">
+            <Label prefHeight="53.0" prefWidth="422.0" text="Add User">
                <font>
                   <Font size="36.0" />
                </font>
