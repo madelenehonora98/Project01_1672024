@@ -162,7 +162,7 @@ public class UserDaoImpl implements DaoService<User> {
             try (Connection connection = Utility.creatConnection()) {
                 connection.setAutoCommit(false);
                 String query
-                        = "SELECT u.IdPengguna, u.Password, ur.idUserRole FROM user u  join userrole ur on u.UserRole_idUserRole = ur.idUserRole WHERE u.IdPengguna=? and u.Password=?";
+                        = "SELECT u.IdPengguna, u.Password, u.Alamat, u.NoTelepon, u.JenisKelamin, u.NamaDepan, u.NamaBelakang, ur.idUserRole FROM user u  join userrole ur on u.UserRole_idUserRole = ur.idUserRole WHERE u.IdPengguna=? and u.Password=?";
 
                 PreparedStatement ps = connection.prepareStatement(query);
                 ps.setString(1, id.getIdPengguna());
@@ -173,6 +173,11 @@ public class UserDaoImpl implements DaoService<User> {
                     user.setIdPengguna(rs.getString("u.IdPengguna"));
 
                     user.setPassword(rs.getString("u.Password"));
+                    user.setAlamat(rs.getString("Alamat"));
+                    user.setNamaDepan(rs.getString("NamaDepan"));
+                    user.setNamaBelakang(rs.getString("NamaBelakang"));
+                    user.setNoTelepon(rs.getString("NoTelepon"));
+                    user.setJenisKelamin(rs.getString("JenisKelamin"));
 
                     UserRole userRole = new UserRole();
                     userRole.setIdUserRole(rs.getString("idUserRole"));
@@ -180,7 +185,6 @@ public class UserDaoImpl implements DaoService<User> {
 
                     return user;
                 }
-//masukin semua yang di select
 
             }
         } catch (ClassNotFoundException | SQLException ex) {

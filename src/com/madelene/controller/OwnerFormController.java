@@ -17,6 +17,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -30,8 +32,6 @@ public class OwnerFormController implements Initializable {
     @FXML
     private Button btnLogOut;
     @FXML
-    private Button btnSeeStatistic;
-    @FXML
     private BorderPane brdPaneOwner;
     @FXML
     private Button btnSalesReport;
@@ -39,16 +39,18 @@ public class OwnerFormController implements Initializable {
     private Button btnProductList;
     @FXML
     private Button btnUserList;
+    @FXML
+    private ImageView imgOwner;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        imgOwner.
+                setImage(new Image("com/madelene/pictures/Businessman-512.png"));
     }
 
-    @FXML
     private void btnSeeStatisticAct(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader();

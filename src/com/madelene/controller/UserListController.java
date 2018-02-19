@@ -20,10 +20,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -36,6 +39,7 @@ import javafx.stage.Stage;
 public class UserListController implements Initializable {
 
     private AddCashierFormController addCashierController;
+    private EditCashierFormController editCashierController;
 
     private Stage secondStage;
 
@@ -62,8 +66,10 @@ public class UserListController implements Initializable {
     @FXML
     private TableColumn<User, String> colJabatan;
 
+    public User selectedUser;
+
     private UserDaoImpl userDao;
-    ObservableList<User> users;
+    private ObservableList<User> users;
     @FXML
     private TableView<User> tbUserList;
 
@@ -159,10 +165,59 @@ public class UserListController implements Initializable {
 
     @FXML
     private void btnEditUserAct(ActionEvent event) {
+        if (secondStage == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(MainApp.class.getResource(
+                        "view/EditCashierForm.fxml"));
+                BorderPane pane = loader.load();
+                Scene scene = new Scene(pane);
+                secondStage = new Stage();
+                addCashierController = loader.getController();
+                addCashierController.setMainController(this);
+                secondStage.setScene(scene);
+                secondStage.initOwner(bpUserListForm.getScene().getWindow());
+                secondStage.initModality(Modality.APPLICATION_MODAL);
+                secondStage.setTitle("Edit Cashier Form");
+                secondStage.show();
+
+            } catch (IOException ex) {
+                Logger.getLogger(LoginFormController.class.getName()).
+                        log(Level.SEVERE, null, ex);
+            }
+        }
+        if (secondStage.isShowing() && !secondStage.isFocused()) {
+            secondStage.toFront();
+        } else {
+            secondStage.show();
+        }
     }
 
     @FXML
     private void btnDelUserAct(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("Are you sure you want to delete this data?");
+        alert.showAndWait().ifPresent(jawaban -> {
+            if (jawaban == ButtonType.OK) {
+                if (getUserDao().deleteData(selectedUser) == 1) {
+                    getUsers().clear();
+                    getUsers().addAll(getUserDao().showAllData());
+
+                    tbUserList.refresh();
+                }
+            }
+
+        });
+    }
+
+    @FXML
+    private void tbUserClickedAct(MouseEvent event) {
+        selectedUser = tbUserList.getSelectionModel().getSelectedItem();
+        if (selectedUser != null) {
+            btnDelUser.setDisable(false);
+            btnEditUser.setDisable(false);
+        }
+
     }
 
 }

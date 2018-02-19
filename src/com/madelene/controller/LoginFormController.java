@@ -75,7 +75,7 @@ public class LoginFormController implements Initializable {
         user.setPassword(txtPassword.getText());
         if (getUserDao().getData(user) != null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Login berhasil");
+            alert.setContentText("Login Suceed");
             alert.showAndWait();
 
             if (getUserDao().getData(user).getIdUserRole().getIdUserRole().
@@ -108,7 +108,7 @@ public class LoginFormController implements Initializable {
 
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Id User atau Password anda salah!");
+            alert.setContentText("Your Id or Password is wrong!");
             alert.showAndWait();
 
         }

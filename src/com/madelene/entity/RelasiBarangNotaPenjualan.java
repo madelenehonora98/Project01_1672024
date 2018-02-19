@@ -5,8 +5,10 @@
  */
 package com.madelene.entity;
 
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
@@ -58,6 +60,31 @@ public class RelasiBarangNotaPenjualan {
 
     public IntegerProperty JumlahBarangTerjualProperty() {
         return JumlahBarangTerjual;
+    }
+    private final DoubleProperty HargaJualSaatItu = new SimpleDoubleProperty();
+
+    public double getHargaJualSaatItu() {
+        return HargaJualSaatItu.get();
+    }
+
+    public void setHargaJualSaatItu(double value) {
+        HargaJualSaatItu.set(value);
+    }
+
+    public DoubleProperty HargaJualSaatItuProperty() {
+        return HargaJualSaatItu;
+    }
+
+    public RelasiBarangNotaPenjualan(Integer jumlah, Double HargaSaatItu,
+            Barang kdBarang) {
+
+        this.setJumlahBarangTerjual(jumlah);
+        this.setHargaJualSaatItu(HargaSaatItu);
+        this.setKodeBarang(kdBarang);
+
+    }
+
+    public RelasiBarangNotaPenjualan() {
     }
 
 }

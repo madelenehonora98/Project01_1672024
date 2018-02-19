@@ -20,7 +20,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -61,6 +63,10 @@ public class ProductPriceListOwnerFormController implements Initializable {
     private TableColumn<Barang, Double> colHargaJual;
     @FXML
     private TableColumn<Barang, Integer> colStok;
+
+    private Stage secondStage;
+
+    public Barang selectedBarang;
 
     public ObservableList<Barang> getBarangs() {
         if (barangs == null) {
@@ -124,33 +130,35 @@ public class ProductPriceListOwnerFormController implements Initializable {
 
     @FXML
     private void btnAddProductAct(ActionEvent event) {
-        try {
-            if (addProductStage == null) {
-                addProductStage = new Stage();
-                addProductStage.setTitle("Add Product Form");
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(MainApp.class.getResource(
-                        "view/AddProductForm.fxml"));
-                BorderPane root = loader.load();
-                Scene scene = new Scene(root);
-                AddProductFormController addProductFormController = loader.
-                        getController();
-                addProductFormController.setMainController(this);
-                addProductStage.setScene(scene);
-                addProductStage.initOwner(bpPPLO.getScene().getWindow());
-                addProductStage.initModality(Modality.WINDOW_MODAL);
+        if (secondStage == null) {
+            try {
+                if (addProductStage == null) {
+                    addProductStage = new Stage();
+                    addProductStage.setTitle("Add Product Form");
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(MainApp.class.getResource(
+                            "view/AddProductForm.fxml"));
+                    BorderPane root = loader.load();
+                    Scene scene = new Scene(root);
+                    AddProductFormController addProductFormController = loader.
+                            getController();
+                    addProductFormController.setMainController(this);
+                    addProductStage.setScene(scene);
+                    addProductStage.initOwner(bpPPLO.getScene().getWindow());
+                    addProductStage.initModality(Modality.WINDOW_MODAL);
 
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(LoginFormController.class.getName()).
+                        log(Level.SEVERE, null, ex);
             }
-            if (!addProductStage.isShowing()) {
-                addProductStage.show();
-            } else {
-                addProductStage.toFront();
-            }
-
-        } catch (IOException ex) {
-            Logger.getLogger(LoginFormController.class.getName()).
-                    log(Level.SEVERE, null, ex);
         }
+        if (!addProductStage.isShowing()) {
+            addProductStage.show();
+        } else {
+            addProductStage.toFront();
+        }
+
     }
 
     @FXML
@@ -159,10 +167,28 @@ public class ProductPriceListOwnerFormController implements Initializable {
 
     @FXML
     private void btnDelProductAct(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("Are you sure you want to delete this data?");
+        alert.showAndWait().ifPresent(jawaban -> {
+            if (jawaban == ButtonType.OK) {
+                if (getBarangDao().deleteData(selectedBarang) == 1) {
+                    getBarangs().clear();
+                    getBarangs().addAll(getBarangDao().showAllData());
+
+                    tbleProduct.refresh();
+                }
+            }
+
+        });
     }
 
     @FXML
     private void tbProductMouseClicked(MouseEvent event) {
+        selectedBarang = tbleProduct.getSelectionModel().getSelectedItem();
+        if (selectedBarang != null) {
+            btnDelProduct.setDisable(false);
+            btnEditProduct.setDisable(false);
+        }
     }
 
 }

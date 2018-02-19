@@ -37,10 +37,10 @@ import javafx.stage.Stage;
  *
  * @author Madelene
  */
-public class AddCashierFormController implements Initializable {
+public class EditCashierFormController implements Initializable {
 
     @FXML
-    private BorderPane bpAddCashier;
+    private BorderPane bpEditCashier;
     @FXML
     private Button btnBackOwner;
     @FXML
@@ -58,18 +58,17 @@ public class AddCashierFormController implements Initializable {
     @FXML
     private ComboBox<UserRole> cbIdUserRole;
     @FXML
+    private RadioButton rbLaki;
+    @FXML
+    private ToggleGroup group;
+    @FXML
     private PasswordField txtPass;
     @FXML
     private PasswordField txtVerifyPass;
     @FXML
-    private RadioButton rbLaki;
-    @FXML
     private RadioButton rbPerempuan;
 
-    public ToggleGroup group;
-
     private UserListController userListController;
-
     private ObservableList<UserRole> roles;
     private UserRoleDaoImpl roleDao;
 
@@ -79,6 +78,23 @@ public class AddCashierFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cbIdUserRole.setItems(getRoles());
+        txtIdPengguna.setText(userListController.selectedUser.getIdPengguna());
+        txtNamaDepan.setText(userListController.selectedUser.getNamaDepan());
+        txtNamaBelakang.setText(userListController.selectedUser.
+                getNamaBelakang());
+        txtAlamat.setText(userListController.selectedUser.getAlamat());
+        txtNoTelepon.setText(userListController.selectedUser.getNoTelepon());
+        txtPass.setText(userListController.selectedUser.getPassword());
+        txtVerifyPass.setText(userListController.selectedUser.getPassword());
+        if (userListController.selectedUser.getJenisKelamin().
+                equals("Laki-laki")) {
+            rbLaki.setSelected(true);
+            rbPerempuan.setSelected(false);
+        } else if (userListController.selectedUser.getJenisKelamin().equals(
+                "Perempuan")) {
+            rbPerempuan.setSelected(true);
+            rbLaki.setSelected(false);
+        }
 
     }
 
@@ -111,23 +127,19 @@ public class AddCashierFormController implements Initializable {
             secondStage.setTitle("User List Form");
             secondStage.show();
 
-            bpAddCashier.getScene().getWindow().hide();
+            bpEditCashier.getScene().getWindow().hide();
         } catch (IOException ex) {
             Logger.getLogger(LoginFormController.class.getName()).
                     log(Level.SEVERE, null, ex);
         }
     }
 
-    public void setMainController(
-            UserListController userListController) {
-        this.userListController
-                = userListController;
-
+    public void setMainController(UserListController userListController) {
+        this.userListController = userListController;
     }
 
     @FXML
     private void btnSubmitAddCashierAct(ActionEvent event) {
-
         if (!Utility.isEmptyField(txtIdPengguna, txtNamaDepan, txtNamaBelakang,
                 txtAlamat, txtNoTelepon, txtPass, txtVerifyPass)) {
             User user = new User();
@@ -157,7 +169,7 @@ public class AddCashierFormController implements Initializable {
                 user.setPassword(txtPass.getText().trim());
             }
 
-            if (userListController.getUserDao().addData(
+            if (userListController.getUserDao().updateData(
                     user) == 1) {
 
                 userListController.getUsers().clear();

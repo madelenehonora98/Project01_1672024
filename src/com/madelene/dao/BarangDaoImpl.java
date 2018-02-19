@@ -137,30 +137,31 @@ public class BarangDaoImpl implements DaoService<Barang> {
 
     @Override
     public Barang getData(Barang id) {
-        Barang b = null;
-//        try {
-//            try (Connection connection = Utility.creatConnection()) {
-//                connection.setAutoCommit(false);
-//                String query
-//                        = "SELECT NamaBarang, HargaBeli, HargaJual, Stok FROM Barang WHERE KodeBarang=?";
-//                PreparedStatement ps = connection.prepareStatement(query);
-//                ps.setString(1, id.getIdPengguna());
-//                ps.setString(2, id.getPassword());
-//                ResultSet rs = ps.executeQuery();
-//                if (rs.next()) {
-//                    User user = new User();
-//                    user.setIdPengguna(rs.getString("u.IdPengguna"));
-//
-//                    user.setPassword(rs.getString("u.Password"));
-//
-//                    return user;
-//                }
-////masukin semua yang di select
-//
-//            }
-//        } catch (ClassNotFoundException | SQLException ex) {
-//            System.out.println(ex);
-//        }
-        return b;
+
+        try {
+            try (Connection connection = Utility.creatConnection()) {
+                connection.setAutoCommit(false);
+                String query
+                        = "SELECT NamaBarang, HargaBeli, HargaJual, Stok FROM Barang WHERE KodeBarang=?";
+                PreparedStatement ps = connection.prepareStatement(query);
+
+                ps.setString(1, id.getKodeBarang());
+
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    Barang barang = new Barang();
+                    barang.setNamaBarang(rs.getString("NamaBarang"));
+                    barang.setHargaBeli(rs.getDouble("HargaBeli"));
+                    barang.setHargaJual(rs.getDouble("HargaJual"));
+                    barang.setStok(rs.getInt("Stok"));
+
+                    return barang;
+                }
+
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println(ex);
+        }
+        return null;
     }
 }

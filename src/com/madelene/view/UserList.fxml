@@ -80,12 +80,12 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                            <children>
-                              <Button fx:id="btnEditUser" mnemonicParsing="false" onAction="#btnEditUserAct" text="Edit" />
+                              <Button fx:id="btnEditUser" disable="true" mnemonicParsing="false" onAction="#btnEditUserAct" text="Edit" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
                            <children>
-                              <Button fx:id="btnDelUser" mnemonicParsing="false" onAction="#btnDelUserAct" text="Delete" />
+                              <Button fx:id="btnDelUser" disable="true" mnemonicParsing="false" onAction="#btnDelUserAct" text="Delete" />
                            </children>
                         </HBox>
                      </children>
@@ -96,7 +96,7 @@
       </HBox>
    </top>
    <center>
-      <TableView fx:id="tbUserList" prefHeight="200.0" prefWidth="200.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
+      <TableView fx:id="tbUserList" onMouseClicked="#tbUserClickedAct" prefHeight="200.0" prefWidth="200.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="colIdPengguna" prefWidth="115.0" text="IdPengguna" />
           <TableColumn fx:id="colNamaDepan" prefWidth="122.0" text="Nama Depan" />

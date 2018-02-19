@@ -15,6 +15,14 @@ public class Barang {
 
     private final StringProperty KodeBarang = new SimpleStringProperty();
 
+    public Barang() {
+    }
+
+    public Barang(String kdBarang, String nmBarang) {
+        this.setKodeBarang(kdBarang);
+        this.setNamaBarang(nmBarang);
+    }
+
     public String getKodeBarang() {
         return KodeBarang.get();
     }
@@ -80,4 +88,7 @@ public class Barang {
         return NamaBarang;
     }
 
+    public String toString() {
+        return getKodeBarang() + " - " + getNamaBarang();
+    }
 }

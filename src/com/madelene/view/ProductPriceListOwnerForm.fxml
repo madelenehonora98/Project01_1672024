@@ -9,21 +9,6 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane fx:id="bpPPLO" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="434.0" prefWidth="627.0" style="-fx-background-color: #ccf2ff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.madelene.controller.ProductPriceListOwnerFormController">
-   <center>
-      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <content>
-            <TableView fx:id="tbleProduct" onMouseClicked="#tbProductMouseClicked" prefHeight="351.0" prefWidth="570.0">
-               <columns>
-                  <TableColumn fx:id="colKodeBarang" prefWidth="121.0" text="Kode Barang" />
-                  <TableColumn fx:id="colNamaBarang" prefWidth="141.0" text="Nama Barang" />
-                  <TableColumn fx:id="colHargaBeli" minWidth="0.0" prefWidth="98.0" text="Harga Beli" />
-                  <TableColumn fx:id="colHargaJual" minWidth="0.0" prefWidth="108.0" text="Harga Jual" />
-                  <TableColumn fx:id="colStok" minWidth="0.0" prefWidth="58.0" text="Stok" />
-               </columns>
-            </TableView>
-         </content>
-      </ScrollPane>
-   </center>
    <left>
       <HBox prefHeight="300.0" prefWidth="23.0" BorderPane.alignment="CENTER">
          <children>
@@ -83,12 +68,12 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                            <children>
-                              <Button fx:id="btnEditProduct" mnemonicParsing="false" onAction="#btnEditProductAct" text="Edit" />
+                              <Button fx:id="btnEditProduct" disable="true" mnemonicParsing="false" onAction="#btnEditProductAct" text="Edit" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
                            <children>
-                              <Button fx:id="btnDelProduct" mnemonicParsing="false" onAction="#btnDelProductAct" text="Delete" />
+                              <Button fx:id="btnDelProduct" disable="true" mnemonicParsing="false" onAction="#btnDelProductAct" text="Delete" />
                            </children>
                         </HBox>
                      </children>
@@ -119,4 +104,15 @@
    <bottom>
       <HBox prefHeight="24.0" prefWidth="627.0" BorderPane.alignment="CENTER" />
    </bottom>
+   <center>
+      <TableView fx:id="tbleProduct" onMouseClicked="#tbProductMouseClicked" prefHeight="351.0" prefWidth="570.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
+         <columns>
+            <TableColumn fx:id="colKodeBarang" prefWidth="121.0" text="Kode Barang" />
+            <TableColumn fx:id="colNamaBarang" prefWidth="141.0" text="Nama Barang" />
+            <TableColumn fx:id="colHargaBeli" minWidth="0.0" prefWidth="108.0" text="Harga Beli" />
+            <TableColumn fx:id="colHargaJual" minWidth="0.0" prefWidth="111.0" text="Harga Jual" />
+            <TableColumn fx:id="colStok" minWidth="0.0" prefWidth="81.0" text="Stok" />
+         </columns>
+      </TableView>
+   </center>
 </BorderPane>

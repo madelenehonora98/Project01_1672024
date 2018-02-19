@@ -17,6 +17,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -35,13 +37,15 @@ public class CashierFormController implements Initializable {
     private Button btnProductPriceList;
     @FXML
     private BorderPane bpCashierForm;
+    @FXML
+    private ImageView imgCashier;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        imgCashier.setImage(new Image("/com/madelene/pictures/Transaction.png"));
     }
 
     @FXML
