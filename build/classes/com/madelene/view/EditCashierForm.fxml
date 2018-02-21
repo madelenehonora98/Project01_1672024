@@ -132,7 +132,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <TextField fx:id="txtIdPengguna" disable="true" editable="false" prefHeight="39.0" prefWidth="188.0" />
+                  <ComboBox fx:id="cbIdPengguna" onAction="#cbIdPenggunaAct" prefHeight="39.0" prefWidth="181.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" layoutX="353.0" layoutY="20.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">

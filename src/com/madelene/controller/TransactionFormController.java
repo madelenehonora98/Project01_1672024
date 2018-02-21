@@ -7,6 +7,7 @@ package com.madelene.controller;
 
 import com.madelene.MainApp;
 import com.madelene.dao.BarangDaoImpl;
+import com.madelene.dao.RelasiBarangNotaPenjualanDaoImpl;
 import com.madelene.entity.Barang;
 import com.madelene.entity.RelasiBarangNotaPenjualan;
 import com.madelene.utility.Utility;
@@ -78,6 +79,7 @@ public class TransactionFormController implements Initializable {
 
     private int tmpNominal = 0;
     private String tmpKodeTransaksi;
+    private RelasiBarangNotaPenjualanDaoImpl relasiDao;
 
     /**
      * Initializes the controller class.
@@ -85,17 +87,25 @@ public class TransactionFormController implements Initializable {
     public ObservableList<RelasiBarangNotaPenjualan> getNotaPenjualans() {
         if (notaPenjualans == null) {
             notaPenjualans = FXCollections.observableArrayList();
+
         }
         return notaPenjualans;
     }
 
+    public RelasiBarangNotaPenjualanDaoImpl getRelasiDao() {
+        if (relasiDao == null) {
+            relasiDao = new RelasiBarangNotaPenjualanDaoImpl();
+        }
+        return relasiDao;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        if (getNotaPenjualans().size() < 0) {
+        //notaPenjualans = relasiDao.showAllData();
+        if (getNotaPenjualans().isEmpty()) {
             tmpKodeTransaksi = "1";
         } else {
             tmpKodeTransaksi = String.valueOf(getNotaPenjualans().size() + 1);
-
         }
 
         txtKodeTransaksi.setText(tmpKodeTransaksi);

@@ -15,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -78,32 +79,24 @@ public class RelasiBarangNotaPenjualanDaoImpl implements
                     RelasiBarangNotaPenjualan relasiNotaBarang
                             = new RelasiBarangNotaPenjualan();
                     User user = new User();
-                    user.setIdPengguna(rs.getString("IdPengguna"));
-
                     NotaPenjualan nota = new NotaPenjualan();
-                    nota.setKodePenjualan(rs.getInt("KodePenjualan"));
-                    nota.setNominal(rs.getDouble("Nominal"));
-                    nota.setTanggalPenjualan(rs.getString("TanggalPenjualan"));
-                    nota.setIdPengguna(user);
-
                     Barang barang = new Barang();
-                    barang.setKodeBarang(rs.getString("KodeBarang"));
+                    user.setIdPengguna(rs.getString("u.IdPengguna"));
+                    nota.setKodePenjualan(rs.getInt("np.KodePenjualan"));
+                    nota.
+                            setTanggalPenjualan(rs.getString(
+                                    "np.TanggalPenjualan"));
+                    barang.setKodeBarang(rs.getString("b.KodeBarang"));
 
-                    relasiNotaBarang.setKodeBarang(barang);
-
-                    relasiNotaBarang.getKodePenjualan().setKodePenjualan(rs.
-                            getInt("KodePenjualan"));
-                    relasiNotaBarang.getKodePenjualan().setNominal(rs.getDouble(
-                            "Nominal"));
-                    relasiNotaBarang.getKodePenjualan().setTanggalPenjualan(rs.
-                            getString("TanggalPenjualan"));
-
-                    relasiNotaBarang.setHargaJualSaatItu(rs.getDouble(
-                            "HargaSaatItu"));
                     relasiNotaBarang.setJumlahBarangTerjual(rs.getInt(
-                            "JumlahBarang"));
-
+                            "rbn.JumlahBarangTerjual"));
+                    relasiNotaBarang.setHargaJualSaatItu(rs.getDouble(
+                            "rbn.HargaJualSaatIni"));
+                    relasiNotaBarang.setKodeBarang(barang);
+                    nota.setIdPengguna(user);
+                    relasiNotaBarang.setKodePenjualan(nota);
                     relasiPenjualans.add(relasiNotaBarang);
+
                 }
             }
         } catch (SQLException ex) {
@@ -119,6 +112,51 @@ public class RelasiBarangNotaPenjualanDaoImpl implements
     @Override
     public RelasiBarangNotaPenjualan getData(RelasiBarangNotaPenjualan id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<RelasiBarangNotaPenjualan> showData(
+            String object) {
+        ObservableList<RelasiBarangNotaPenjualan> relasiPenjualans
+                = FXCollections.
+                observableArrayList();
+        try {
+            try (Connection connection = Utility.creatConnection()) {
+                String query
+                        = "SELECT np.KodePenjualan, rbn.JumlahBarangTerjual, b.KodeBarang, rbn.HargaJualSaatIni, np.TanggalPenjualan, u.IdPengguna FROM barang_has_notapenjualan rbn JOIN NotaPenjualan np ON rbn.NotaPenjualan_KodePenjualan = np.KodePenjualan JOIN User u ON np.User_IdPengguna = u.IdPengguna JOIN Barang b ON b.KodeBarang = rbn.Barang_KodeBarang WHERE LEFT(np.TanggalPenjualan,4) = LEFT(?,4) ORDER BY KodePenjualan";
+                PreparedStatement ps = connection.prepareStatement(query);
+                ps.setString(1, object);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    RelasiBarangNotaPenjualan relasiNotaBarang
+                            = new RelasiBarangNotaPenjualan();
+                    User user = new User();
+                    NotaPenjualan nota = new NotaPenjualan();
+                    Barang barang = new Barang();
+                    user.setIdPengguna(rs.getString("u.IdPengguna"));
+                    nota.setKodePenjualan(rs.getInt("np.KodePenjualan"));
+                    nota.
+                            setTanggalPenjualan(rs.getString(
+                                    "np.TanggalPenjualan"));
+                    barang.setKodeBarang(rs.getString("b.KodeBarang"));
+                    relasiNotaBarang.setJumlahBarangTerjual(rs.getInt(
+                            "rbn.JumlahBarangTerjual"));
+                    relasiNotaBarang.setHargaJualSaatItu(rs.getDouble(
+                            "rbn.HargaJualSaatIni"));
+                    relasiNotaBarang.setKodeBarang(barang);
+                    nota.setIdPengguna(user);
+                    relasiNotaBarang.setKodePenjualan(nota);
+                    relasiPenjualans.add(relasiNotaBarang);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDaoImpl.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UserDaoImpl.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return relasiPenjualans;
     }
 
 }

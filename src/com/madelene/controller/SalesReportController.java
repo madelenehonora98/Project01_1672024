@@ -25,7 +25,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -39,7 +38,7 @@ public class SalesReportController implements Initializable {
     @FXML
     private Button btnBackOwner;
     @FXML
-    private ComboBox<?> cmboSortBy;
+    private ComboBox<String> cmboSortBy;
     @FXML
     private TableView<RelasiBarangNotaPenjualan> tblePenjualan;
     @FXML
@@ -53,14 +52,16 @@ public class SalesReportController implements Initializable {
     @FXML
     private TableColumn<RelasiBarangNotaPenjualan, String> colKodeBarang;
     @FXML
-    private TableColumn<RelasiBarangNotaPenjualan, Integer> colJumlahBarang;
+    private TableColumn<RelasiBarangNotaPenjualan, String> colJumlahBarang;
     @FXML
     private TableColumn<RelasiBarangNotaPenjualan, String> colTotal;
 
     private ObservableList<RelasiBarangNotaPenjualan> notaPenjualans;
+    private ObservableList<RelasiBarangNotaPenjualan> notaPenjualansByYears;
     @FXML
-    private TableColumn<RelasiBarangNotaPenjualan, Double> colHargaSaatItu;
+    private TableColumn<RelasiBarangNotaPenjualan, String> colHargaSaatItu;
     private RelasiBarangNotaPenjualanDaoImpl relasiDao;
+    private ObservableList<String> years;
 
     /**
      * Initializes the controller class.
@@ -68,6 +69,7 @@ public class SalesReportController implements Initializable {
     public ObservableList<RelasiBarangNotaPenjualan> getNotaPenjualans() {
         if (notaPenjualans == null) {
             notaPenjualans = FXCollections.observableArrayList();
+            notaPenjualans.addAll(getRelasiDao().showAllData());
         }
         return notaPenjualans;
     }
@@ -79,23 +81,45 @@ public class SalesReportController implements Initializable {
         return relasiDao;
     }
 
+    public ObservableList<RelasiBarangNotaPenjualan> getNotaPenjualansByYear() {
+        if (notaPenjualansByYears == null) {
+            notaPenjualansByYears = FXCollections.observableArrayList();
+
+        }
+        return notaPenjualans;
+    }
+
+    public ObservableList<String> getYears() {
+        if (years == null) {
+            years = FXCollections.observableArrayList();
+
+            for (int i = 2018; i >= 2000; i--) {
+                years.add(String.valueOf(i));
+            }
+
+        }
+        return years;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        cmboSortBy.setItems(getYears());
         relasiDao = new RelasiBarangNotaPenjualanDaoImpl();
         notaPenjualans = FXCollections.observableArrayList();
         notaPenjualans = relasiDao.showAllData();
+
         tblePenjualan.setItems(getNotaPenjualans());
 
         colKodeBarang.setCellValueFactory((
                 TableColumn.CellDataFeatures<RelasiBarangNotaPenjualan, String> param)
                 -> new SimpleStringProperty(
-                        param.getValue().getKodeBarang().getKodeBarang() + " - "
-                        + param.getValue().getKodeBarang().getNamaBarang()));
+                        param.getValue().getKodeBarang().getKodeBarang()));
 
-        colJumlahBarang.setCellValueFactory(new PropertyValueFactory<>(
-                "JumlahBarang"));
-        
+        colJumlahBarang.setCellValueFactory((
+                TableColumn.CellDataFeatures<RelasiBarangNotaPenjualan, String> param)
+                -> new SimpleStringProperty(String.valueOf(param.getValue().
+                        getJumlahBarangTerjual())));
+
         colTotal.setCellValueFactory((
                 TableColumn.CellDataFeatures<RelasiBarangNotaPenjualan, String> param)
                 -> new SimpleStringProperty("Rp." + String.valueOf(param.
@@ -114,9 +138,10 @@ public class SalesReportController implements Initializable {
                 TableColumn.CellDataFeatures<RelasiBarangNotaPenjualan, String> param)
                 -> new SimpleStringProperty(String.valueOf(param.getValue().
                         getKodePenjualan().getTanggalPenjualan())));
-
-        colHargaSaatItu.setCellValueFactory(new PropertyValueFactory<>(
-                "HargaSaatItu"));
+        colHargaSaatItu.setCellValueFactory((
+                TableColumn.CellDataFeatures<RelasiBarangNotaPenjualan, String> param)
+                -> new SimpleStringProperty(String.valueOf(param.getValue().
+                        getHargaJualSaatItu())));
     }
 
     @FXML
@@ -132,12 +157,17 @@ public class SalesReportController implements Initializable {
             secondStage.setTitle("Owner Form");
             secondStage.show();
 
-            //Close login stage
             bpSalesReportForm.getScene().getWindow().hide();
         } catch (IOException ex) {
             Logger.getLogger(LoginFormController.class.getName()).
                     log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    private void cmboSortByAction(ActionEvent event) {
+        notaPenjualans.clear();
+        notaPenjualans.addAll(this.relasiDao.showData(cmboSortBy.getValue()));
     }
 
 }

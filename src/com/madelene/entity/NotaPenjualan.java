@@ -85,4 +85,10 @@ public class NotaPenjualan {
     public DoubleProperty NominalProperty() {
         return Nominal;
     }
+
+    @Override
+    public String toString() {
+        return getTanggalPenjualan();
+    }
+
 }

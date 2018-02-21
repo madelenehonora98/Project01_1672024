@@ -68,7 +68,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                            <children>
-                              <Button fx:id="btnEditProduct" disable="true" mnemonicParsing="false" onAction="#btnEditProductAct" text="Edit" />
+                              <Button fx:id="btnEditProduct" mnemonicParsing="false" onAction="#btnEditProductAct" text="Edit" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">

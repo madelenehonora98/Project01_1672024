@@ -5,23 +5,17 @@
  */
 package com.madelene.controller;
 
-import com.madelene.MainApp;
 import com.madelene.dao.UserRoleDaoImpl;
 import com.madelene.entity.User;
 import com.madelene.entity.UserRole;
 import com.madelene.utility.Utility;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -30,7 +24,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -101,7 +94,7 @@ public class EditCashierFormController implements Initializable {
     public ObservableList<UserRole> getRoles() {
         if (roles == null) {
             roles = FXCollections.observableArrayList();
-            roles.addAll(getRoleDao().showAllData());
+            roles.add(userListController.selectedUser.getIdUserRole());
         }
         return roles;
 
@@ -116,22 +109,7 @@ public class EditCashierFormController implements Initializable {
 
     @FXML
     private void btnBackOwnerAct(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource(
-                    "view/UserList.fxml"));
-            BorderPane pane = loader.load();
-            Scene scene = new Scene(pane);
-            Stage secondStage = new Stage();
-            secondStage.setScene(scene);
-            secondStage.setTitle("User List Form");
-            secondStage.show();
-
-            bpEditCashier.getScene().getWindow().hide();
-        } catch (IOException ex) {
-            Logger.getLogger(LoginFormController.class.getName()).
-                    log(Level.SEVERE, null, ex);
-        }
+        bpEditCashier.getScene().getWindow().hide();
     }
 
     public void setMainController(UserListController userListController) {
@@ -147,7 +125,6 @@ public class EditCashierFormController implements Initializable {
             user.setNamaDepan(txtNamaDepan.getText().trim());
             user.setNamaBelakang(txtNamaBelakang.getText().trim());
             user.setAlamat(txtAlamat.getText().trim());
-            user.setNoTelepon(txtNoTelepon.getText().trim());
 
             if (group.getSelectedToggle().equals(rbLaki)) {
                 user.setJenisKelamin("Laki-laki");
@@ -155,6 +132,13 @@ public class EditCashierFormController implements Initializable {
                 user.setJenisKelamin("Perempuan");
             }
             user.setIdUserRole(cbIdUserRole.getValue());
+
+            if (!isNumber(txtNoTelepon.getText(), "Nomor Telepon")) {
+                txtNoTelepon.clear();
+
+            } else {
+                user.setNoTelepon(txtNoTelepon.getText().trim());
+            }
 
             //buat cek pass yang sudah sama atau belum
             if (!txtPass.getText().trim().equals(txtVerifyPass.getText().
@@ -202,6 +186,17 @@ public class EditCashierFormController implements Initializable {
         if (!txtPass.equals(txtVerifyPass)) {
 
         }
+    }
+
+    public static final boolean isNumber(String number, String name) {
+        try {
+            Integer.parseInt(number);
+        } catch (NumberFormatException numberFormatException) {
+            Utility.showAlert("Not a number", name + " is not a number",
+                    Alert.AlertType.ERROR);
+            return false;
+        }
+        return true;
     }
 
 }

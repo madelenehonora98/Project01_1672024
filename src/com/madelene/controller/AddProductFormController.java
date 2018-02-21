@@ -5,24 +5,17 @@
  */
 package com.madelene.controller;
 
-import com.madelene.MainApp;
 import com.madelene.entity.Barang;
 import com.madelene.utility.Utility;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -66,23 +59,8 @@ public class AddProductFormController implements Initializable {
 
     @FXML
     private void btnBackOwnerAct(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource(
-                    "view/ProductPriceListOwnerForm.fxml"));
-            BorderPane pane = loader.load();
-            Scene scene = new Scene(pane);
-            Stage secondStage = new Stage();
-            secondStage.setScene(scene);
-            secondStage.setTitle("Product And Price List Form");
-            secondStage.show();
+        bpAddProduct.getScene().getWindow().hide();
 
-            //Close login stage
-            bpAddProduct.getScene().getWindow().hide();
-        } catch (IOException ex) {
-            Logger.getLogger(LoginFormController.class.getName()).
-                    log(Level.SEVERE, null, ex);
-        }
     }
 
     @FXML
@@ -93,9 +71,26 @@ public class AddProductFormController implements Initializable {
             Barang barang = new Barang();
             barang.setKodeBarang(txtKodeBarang.getText().trim());
             barang.setNamaBarang(txtNamaBarang.getText().trim());
-            barang.setHargaBeli(Double.valueOf(txtHargaBeli.getText().trim()));
-            barang.setHargaJual(Double.valueOf(txtHargaJual.getText().trim()));
-            barang.setStok(Integer.valueOf(txtStok.getText().trim()));
+
+            if (!isNumber(txtHargaBeli.getText(), "Harga Beli")) {
+                txtHargaBeli.clear();
+            } else {
+                barang.setHargaBeli(Double.
+                        valueOf(txtHargaBeli.getText().trim()));
+            }
+
+            if (!isNumber(txtHargaJual.getText(), "Harga Jual")) {
+                txtHargaJual.clear();
+            } else {
+                barang.setHargaJual(Double.
+                        valueOf(txtHargaJual.getText().trim()));
+            }
+
+            if (!isNumber(txtStok.getText(), "Stok")) {
+                txtHargaJual.clear();
+            } else {
+                barang.setStok(Integer.valueOf(txtStok.getText().trim()));
+            }
 
             if (productPriceListOwnerFormController.getBarangDao().addData(
                     barang) == 1) {
@@ -104,18 +99,30 @@ public class AddProductFormController implements Initializable {
                 productPriceListOwnerFormController.getBarangs().addAll(
                         productPriceListOwnerFormController.
                         getBarangDao().showAllData());
+
+                txtKodeBarang.clear();
+                txtNamaBarang.clear();
+                txtHargaBeli.clear();
+                txtHargaJual.clear();
+                txtStok.clear();
             }
 
-            txtKodeBarang.clear();
-            txtNamaBarang.clear();
-            txtHargaBeli.clear();
-            txtHargaJual.clear();
-            txtStok.clear();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Masih ada yang kosong");
             alert.showAndWait();
         }
+    }
+
+    public static final boolean isNumber(String number, String name) {
+        try {
+            Integer.parseInt(number);
+        } catch (NumberFormatException numberFormatException) {
+            Utility.showAlert("Not a number", name + " is not a number",
+                    Alert.AlertType.ERROR);
+            return false;
+        }
+        return true;
     }
 
 }

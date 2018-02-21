@@ -21,5 +21,7 @@ public interface DaoService<E> {
 
     List<E> showAllData();
 
+    List<E> showData(String object);
+
     E getData(E id);
 }

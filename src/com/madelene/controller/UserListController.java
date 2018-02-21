@@ -42,6 +42,7 @@ public class UserListController implements Initializable {
     private EditCashierFormController editCashierController;
 
     private Stage secondStage;
+    private Stage editStage;
 
     @FXML
     private Button btnBackOwner;
@@ -131,6 +132,7 @@ public class UserListController implements Initializable {
             Logger.getLogger(LoginFormController.class.getName()).
                     log(Level.SEVERE, null, ex);
         }
+
     }
 
     @FXML
@@ -165,31 +167,31 @@ public class UserListController implements Initializable {
 
     @FXML
     private void btnEditUserAct(ActionEvent event) {
-        if (secondStage == null) {
+        if (editStage == null) {
             try {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(MainApp.class.getResource(
                         "view/EditCashierForm.fxml"));
                 BorderPane pane = loader.load();
                 Scene scene = new Scene(pane);
-                secondStage = new Stage();
-                addCashierController = loader.getController();
-                addCashierController.setMainController(this);
-                secondStage.setScene(scene);
-                secondStage.initOwner(bpUserListForm.getScene().getWindow());
-                secondStage.initModality(Modality.APPLICATION_MODAL);
-                secondStage.setTitle("Edit Cashier Form");
-                secondStage.show();
+                editStage = new Stage();
+                editCashierController = loader.getController();
+                editCashierController.setMainController(this);
+                editStage.setScene(scene);
+                editStage.initOwner(bpUserListForm.getScene().getWindow());
+                editStage.initModality(Modality.APPLICATION_MODAL);
+                editStage.setTitle("Edit Cashier Form");
+                editStage.show();
 
             } catch (IOException ex) {
                 Logger.getLogger(LoginFormController.class.getName()).
                         log(Level.SEVERE, null, ex);
             }
         }
-        if (secondStage.isShowing() && !secondStage.isFocused()) {
-            secondStage.toFront();
+        if (editStage.isShowing() && !editStage.isFocused()) {
+            editStage.toFront();
         } else {
-            secondStage.show();
+            editStage.show();
         }
     }
 

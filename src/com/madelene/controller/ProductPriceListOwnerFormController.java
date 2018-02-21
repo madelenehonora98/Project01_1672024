@@ -64,7 +64,7 @@ public class ProductPriceListOwnerFormController implements Initializable {
     @FXML
     private TableColumn<Barang, Integer> colStok;
 
-    private Stage secondStage;
+    private Stage editBarangStage;
 
     public Barang selectedBarang;
 
@@ -88,6 +88,7 @@ public class ProductPriceListOwnerFormController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         barangDao = new BarangDaoImpl();
         barangs = FXCollections.observableArrayList();
         barangs = barangDao.showAllData();
@@ -120,7 +121,6 @@ public class ProductPriceListOwnerFormController implements Initializable {
             secondStage.setTitle("Owner Form");
             secondStage.show();
 
-            //Close login stage
             bpPPLO.getScene().getWindow().hide();
         } catch (IOException ex) {
             Logger.getLogger(LoginFormController.class.getName()).
@@ -130,7 +130,7 @@ public class ProductPriceListOwnerFormController implements Initializable {
 
     @FXML
     private void btnAddProductAct(ActionEvent event) {
-        if (secondStage == null) {
+        if (addProductStage == null) {
             try {
                 if (addProductStage == null) {
                     addProductStage = new Stage();
@@ -149,7 +149,8 @@ public class ProductPriceListOwnerFormController implements Initializable {
 
                 }
             } catch (IOException ex) {
-                Logger.getLogger(LoginFormController.class.getName()).
+                Logger.getLogger(ProductPriceListOwnerFormController.class.
+                        getName()).
                         log(Level.SEVERE, null, ex);
             }
         }
@@ -158,11 +159,39 @@ public class ProductPriceListOwnerFormController implements Initializable {
         } else {
             addProductStage.toFront();
         }
-
     }
 
     @FXML
     private void btnEditProductAct(ActionEvent event) {
+        if (editBarangStage == null) {
+            try {
+                if (editBarangStage == null) {
+                    editBarangStage = new Stage();
+                    editBarangStage.setTitle("Edit Product Form");
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(MainApp.class.getResource(
+                            "view/EditProductForm.fxml"));
+                    BorderPane root = loader.load();
+                    Scene scene = new Scene(root);
+                    EditProductFormController editProductFormController
+                            = loader.
+                            getController();
+                    editProductFormController.setMainController(this);
+                    editBarangStage.setScene(scene);
+                    editBarangStage.initOwner(bpPPLO.getScene().getWindow());
+                    editBarangStage.initModality(Modality.WINDOW_MODAL);
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(ProductPriceListOwnerFormController.class.
+                        getName()).
+                        log(Level.SEVERE, null, ex);
+            }
+        }
+        if (!editBarangStage.isShowing()) {
+            editBarangStage.show();
+        } else {
+            editBarangStage.toFront();
+        }
     }
 
     @FXML
@@ -176,6 +205,8 @@ public class ProductPriceListOwnerFormController implements Initializable {
                     getBarangs().addAll(getBarangDao().showAllData());
 
                     tbleProduct.refresh();
+                    btnDelProduct.setDisable(true);
+                    btnEditProduct.setDisable(true);
                 }
             }
 

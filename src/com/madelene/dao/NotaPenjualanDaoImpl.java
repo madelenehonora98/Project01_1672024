@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -114,7 +115,7 @@ public class NotaPenjualanDaoImpl implements DaoService<NotaPenjualan> {
         try {
             try (Connection connection = Utility.creatConnection()) {
                 String query
-                        = "SELECT np.KodePenjualan, np.Nominal, np.TanggalPenjualan, u.IdPengguna FROM NotaPenjualan np JOIN User u ON np.IdPengguna = u.IdPengguna  ORDER BY KodePenjualan";
+                        = "SELECT np.KodePenjualan, np.Nominal, np.TanggalPenjualan, u.IdPengguna FROM NotaPenjualan np JOIN User u ON np.User_IdPengguna = u.IdPengguna  ORDER BY KodePenjualan";
                 PreparedStatement ps = connection.prepareStatement(query);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
@@ -143,6 +144,11 @@ public class NotaPenjualanDaoImpl implements DaoService<NotaPenjualan> {
 
     @Override
     public NotaPenjualan getData(NotaPenjualan id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<NotaPenjualan> showData(String object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
