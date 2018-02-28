@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="bpTopSalesForm" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="603.0" prefWidth="870.0" style="-fx-background-color: #ccf2ff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.madelene.controller.TopSalesFormController">
+   <bottom>
+      <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="762.0" BorderPane.alignment="CENTER_RIGHT">
+         <padding>
+            <Insets right="30.0" />
+         </padding>
+      </HBox>
+   </bottom>
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <GridPane prefHeight="391.0" prefWidth="793.0">
+               <children>
+                  <TableView fx:id="tbleTopSales" prefHeight="323.0" prefWidth="1103.0" tableMenuButtonVisible="true" GridPane.columnSpan="6" GridPane.rowIndex="1" GridPane.rowSpan="2">
+                     <columns>
+                        <TableColumn fx:id="colIdBarang" minWidth="0.0" prefWidth="128.0" text="Id Barang" />
+                        <TableColumn fx:id="colNamaBarang" minWidth="0.0" prefWidth="128.0" text="Nama Barang" />
+                        <TableColumn fx:id="colTotal" minWidth="0.0" prefWidth="209.0" text="Jumlah Barang Terjual" />
+                        <TableColumn fx:id="colNominal" minWidth="0.0" prefWidth="112.0" text="Total" />
+                     </columns>
+                  </TableView>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="27.0" prefWidth="122.0" text="Date Range : " />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="70.0" prefWidth="190.0" GridPane.columnIndex="4">
+                     <children>
+                        <DatePicker fx:id="dpTo" prefHeight="39.0" prefWidth="173.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="346.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
+                     <children>
+                        <DatePicker fx:id="dpFrom" prefHeight="39.0" prefWidth="182.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                     <children>
+                        <Label text="From : " />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3">
+                     <children>
+                        <Label alignment="CENTER" text="To : " />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="70.0" prefWidth="82.0" GridPane.columnIndex="5">
+                     <children>
+                        <Button fx:id="btnGo" mnemonicParsing="false" onAction="#btnGoAct" text="Go" />
+                     </children>
+                  </HBox>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="178.0" minWidth="10.0" prefWidth="118.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.0" minWidth="10.0" prefWidth="72.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="273.0" minWidth="10.0" prefWidth="193.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.0" minWidth="10.0" prefWidth="52.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="317.0" minWidth="10.0" prefWidth="182.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="317.0" minWidth="10.0" prefWidth="83.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="430.0" minWidth="0.0" prefWidth="0.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="145.0" minHeight="10.0" prefHeight="125.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+         </children>
+      </HBox>
+   </center>
+   <left>
+      <HBox prefHeight="361.0" prefWidth="31.0" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <HBox prefHeight="286.0" prefWidth="45.0" BorderPane.alignment="CENTER" />
+   </right>
+   <top>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="53.0" prefWidth="422.0" text="Top Sales Report">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="662.0">
+               <children>
+                  <Button fx:id="btnBackSalesReport" mnemonicParsing="false" onAction="#btnBackSalesReportAct" text="Back" />
+               </children>
+               <HBox.margin>
+                  <Insets right="30.0" top="10.0" />
+               </HBox.margin>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets left="30.0" top="10.0" />
+         </BorderPane.margin>
+      </HBox>
+   </top>
+</BorderPane>

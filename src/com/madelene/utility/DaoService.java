@@ -24,4 +24,6 @@ public interface DaoService<E> {
     List<E> showData(String object);
 
     E getData(E id);
+
+    List<E> showTopData(String object, String object2);
 }

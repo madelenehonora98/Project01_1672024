@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubReportTransactionProject011672024" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5c65b42f-5ebe-4b7b-a0f9-751c8492ca9c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="noUrut" class="java.lang.Integer"/>
+	<parameter name="kodeTransaksi" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[$F{notapenjualan_KodePenjualan}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     notapenjualan.`KodePenjualan` AS notapenjualan_KodePenjualan,
+     notapenjualan.`Nominal` AS notapenjualan_Nominal,
+     notapenjualan.`TanggalPenjualan` AS notapenjualan_TanggalPenjualan,
+     notapenjualan.`User_IdPengguna` AS notapenjualan_User_IdPengguna,
+     barang_has_notapenjualan.`Barang_KodeBarang` AS barang_has_notapenjualan_Barang_KodeBarang,
+     barang_has_notapenjualan.`NotaPenjualan_KodePenjualan` AS barang_has_notapenjualan_NotaPenjualan_KodePenjualan,
+     barang_has_notapenjualan.`JumlahBarangTerjual` AS barang_has_notapenjualan_JumlahBarangTerjual,
+     barang_has_notapenjualan.`HargaJualSaatIni` AS barang_has_notapenjualan_HargaJualSaatIni,
+barang_has_notapenjualan.`JumlahBarangTerjual` * barang_has_notapenjualan.`HargaJualSaatIni` AS 'SubTotal',
+     barang.`KodeBarang` AS barang_KodeBarang,
+     barang.`NamaBarang` AS barang_NamaBarang,
+     barang.`HargaBeli` AS barang_HargaBeli,
+     barang.`HargaJual` AS barang_HargaJual,
+     barang.`Stok` AS barang_Stok
+
+FROM
+     `notapenjualan` notapenjualan INNER JOIN `barang_has_notapenjualan` barang_has_notapenjualan ON notapenjualan.`KodePenjualan` = barang_has_notapenjualan.`NotaPenjualan_KodePenjualan`
+     INNER JOIN `barang` barang ON barang_has_notapenjualan.`Barang_KodeBarang` = barang.`KodeBarang`
+
+WHERE notapenjualan.`KodePenjualan` = $P{kodeTransaksi}]]>
+	</queryString>
+	<field name="notapenjualan_KodePenjualan" class="java.lang.Integer"/>
+	<field name="notapenjualan_Nominal" class="java.lang.Double"/>
+	<field name="notapenjualan_TanggalPenjualan" class="java.sql.Date"/>
+	<field name="notapenjualan_User_IdPengguna" class="java.lang.String"/>
+	<field name="barang_has_notapenjualan_Barang_KodeBarang" class="java.lang.String"/>
+	<field name="barang_has_notapenjualan_NotaPenjualan_KodePenjualan" class="java.lang.Integer"/>
+	<field name="barang_has_notapenjualan_JumlahBarangTerjual" class="java.lang.Integer"/>
+	<field name="barang_has_notapenjualan_HargaJualSaatIni" class="java.lang.Double"/>
+	<field name="barang_KodeBarang" class="java.lang.String"/>
+	<field name="barang_NamaBarang" class="java.lang.String"/>
+	<field name="barang_HargaBeli" class="java.lang.Double"/>
+	<field name="barang_HargaJual" class="java.lang.Double"/>
+	<field name="barang_Stok" class="java.lang.Integer"/>
+	<field name="SubTotal" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="69" y="0" width="100" height="20" uuid="3641d63e-8807-4d06-b518-e32aa282247c"/>
+				<textFieldExpression><![CDATA[$F{barang_KodeBarang}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="169" y="0" width="100" height="20" uuid="48201ab8-0356-4651-9fc2-9a45b9ab452a"/>
+				<textFieldExpression><![CDATA[$F{barang_NamaBarang}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="269" y="0" width="100" height="20" uuid="f7598ad0-1a9c-498a-a07e-2212725d0331"/>
+				<textFieldExpression><![CDATA[$F{barang_has_notapenjualan_HargaJualSaatIni}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="369" y="0" width="100" height="20" uuid="664a805a-8540-41bd-b0ae-c5e2afc032b9"/>
+				<textFieldExpression><![CDATA[$F{barang_has_notapenjualan_JumlahBarangTerjual}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="469" y="2" width="86" height="20" uuid="e41d747a-75ed-4967-b7fa-b7b1d3b457e5"/>
+				<textFieldExpression><![CDATA[$F{SubTotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="69" height="20" uuid="137944bd-cad1-4b15-ade4-76e22032aa76"/>
+				<textFieldExpression><![CDATA[$P{noUrut}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

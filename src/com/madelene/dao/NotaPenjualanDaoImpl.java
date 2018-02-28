@@ -33,14 +33,14 @@ public class NotaPenjualanDaoImpl implements DaoService<NotaPenjualan> {
             try (Connection connection = Utility.creatConnection()) {
                 connection.setAutoCommit(false);
                 String query
-                        = "INSERT INTO NotaPenjualan(KodePenjualan, Nominal, TanggalPenjualan, User_IdPengguna) VALUES (?,?,?,?,?)";
+                        = "INSERT INTO NotaPenjualan( Nominal, TanggalPenjualan, User_IdPengguna) VALUES (?,?,?)";
                 PreparedStatement ps = connection.prepareStatement(query);
-                ps.setInt(1, object.getKodePenjualan());
-                ps.setDouble(2, object.getNominal());
-                ps.setString(3, object.getTanggalPenjualan());
+
+                ps.setDouble(1, object.getNominal());
+                ps.setString(2, object.getTanggalPenjualan());
 
                 //Foreign Key IdPengguna dari User
-                ps.setString(4, object.getIdPengguna().getIdPengguna());
+                ps.setString(3, object.getIdPengguna().getIdPengguna());
 
                 if (ps.executeUpdate() != 0) {
                     connection.commit();
@@ -64,12 +64,12 @@ public class NotaPenjualanDaoImpl implements DaoService<NotaPenjualan> {
                 String query
                         = "UPDATE NotaPenjualan SET Nominal=?, TanggalPenjualan=?, User_IdPengguna=? WHERE KodePenjualan=?";
                 PreparedStatement ps = connection.prepareStatement(query);
-                ps.setInt(1, object.getKodePenjualan());
-                ps.setDouble(2, object.getNominal());
-                ps.setString(3, object.getTanggalPenjualan());
+                ps.setInt(4, object.getKodePenjualan());
+                ps.setDouble(1, object.getNominal());
+                ps.setString(2, object.getTanggalPenjualan());
 
                 //Foreign Key IdPengguna dari User
-                ps.setString(4, object.getIdPengguna().getIdPengguna());
+                ps.setString(3, object.getIdPengguna().getIdPengguna());
 
                 if (ps.executeUpdate() != 0) {
                     connection.commit();
@@ -150,6 +150,46 @@ public class NotaPenjualanDaoImpl implements DaoService<NotaPenjualan> {
     @Override
     public List<NotaPenjualan> showData(String object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+    }
+
+    @Override
+    public List<NotaPenjualan> showTopData(String object, String object2) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+//        ObservableList<NotaPenjualan> notas = FXCollections.
+//                observableArrayList();
+//        try {
+//            try (Connection connection = Utility.creatConnection()) {
+//                String query
+//                        = "SELECT b.KodeBarang,b.NamaBarang,SUM(r.JumlahBarangTerjual) AS 'Total Terjual'from notapenjualan np JOIN barang_has_notapenjualan r ON r.NotaPenjualan_KodePenjualan = np.KodePenjualan JOIN Barang b ON b.KodeBarang = r.Barang_KodeBarangwhere np.TanggalPenjualan >'2018-02-23' AND np.TanggalPenjualan < '2018-02-25'GROUP BY b.KodeBarang, b.NamaBarangORDER BY SUM(r.JumlahBarangTerjual) DESC;";
+//                PreparedStatement ps = connection.prepareStatement(query);
+//                ResultSet rs = ps.executeQuery();
+//                while (rs.next()) {
+//                    Barang barang = new Barang();
+//                    RelasiBarangNotaPenjualan relasi = new RelasiBarangNotaPenjualan();
+//                    NotaPenjualan nota = new NotaPenjualan();
+//
+//                    barang.setKodeBarang(rs.getString("KodeBarang"));
+//                    barang.setNamaBarang(rs.getString("NamaBarang"));
+//
+//                    relasi.setJumlahBarangTerjual(rs.getInt("Total Terjual"));
+//                    relasi.setKodeBarang(barang);
+//                    relasi.setKodePenjualan(nota);
+//
+//                    nota.set
+//
+//                    notas.add(nota);
+//                }
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(UserDaoImpl.class.getName()).
+//                    log(Level.SEVERE, null, ex);
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(UserDaoImpl.class.getName()).
+//                    log(Level.SEVERE, null, ex);
+//        }
+//        return notas;
     }
 
 }

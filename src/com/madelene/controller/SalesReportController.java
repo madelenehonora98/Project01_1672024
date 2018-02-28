@@ -62,6 +62,10 @@ public class SalesReportController implements Initializable {
     private TableColumn<RelasiBarangNotaPenjualan, String> colHargaSaatItu;
     private RelasiBarangNotaPenjualanDaoImpl relasiDao;
     private ObservableList<String> years;
+    @FXML
+    private Button btnReset;
+    @FXML
+    private Button btnTopSales;
 
     /**
      * Initializes the controller class.
@@ -86,7 +90,7 @@ public class SalesReportController implements Initializable {
             notaPenjualansByYears = FXCollections.observableArrayList();
 
         }
-        return notaPenjualans;
+        return notaPenjualansByYears;
     }
 
     public ObservableList<String> getYears() {
@@ -168,6 +172,33 @@ public class SalesReportController implements Initializable {
     private void cmboSortByAction(ActionEvent event) {
         notaPenjualans.clear();
         notaPenjualans.addAll(this.relasiDao.showData(cmboSortBy.getValue()));
+    }
+
+    @FXML
+    private void btnResetAct(ActionEvent event) {
+        notaPenjualans.clear();
+        notaPenjualans.addAll(relasiDao.showAllData());
+        cmboSortBy.setValue("Sort By");
+    }
+
+    @FXML
+    private void btnTopSalesAct(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource(
+                    "view/TopSalesForm.fxml"));
+            BorderPane pane = loader.load();
+            Scene scene = new Scene(pane);
+            Stage secondStage = new Stage();
+            secondStage.setScene(scene);
+            secondStage.setTitle("Top Sales Form");
+            secondStage.show();
+
+            bpSalesReportForm.getScene().getWindow().hide();
+        } catch (IOException ex) {
+            Logger.getLogger(LoginFormController.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
     }
 
 }

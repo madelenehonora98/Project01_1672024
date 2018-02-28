@@ -117,7 +117,7 @@ public class AddCashierFormController implements Initializable {
 
             if (group.getSelectedToggle().equals(rbLaki)) {
                 user.setJenisKelamin("Laki-laki");
-            } else if (group.getToggles().equals(rbPerempuan)) {
+            } else if (group.getSelectedToggle().equals(rbPerempuan)) {
                 user.setJenisKelamin("Perempuan");
             }
             user.setIdUserRole(cbIdUserRole.getValue());

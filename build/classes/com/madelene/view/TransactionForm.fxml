@@ -13,7 +13,7 @@
    <bottom>
       <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="739.0" BorderPane.alignment="CENTER_RIGHT">
          <children>
-            <Label text="Total harga :" />
+            <Label text="Total harga : Rp." />
             <Label fx:id="lblTotal">
                <HBox.margin>
                   <Insets right="100.0" />
@@ -69,6 +69,7 @@
               </columnConstraints>
               <rowConstraints>
                   <RowConstraints maxHeight="74.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="74.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="73.0" minHeight="0.0" prefHeight="44.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="83.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="151.0" minHeight="0.0" prefHeight="36.0" vgrow="SOMETIMES" />
@@ -77,7 +78,7 @@
                   <RowConstraints />
               </rowConstraints>
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                      <children>
                         <Label prefHeight="27.0" prefWidth="252.0" text="Kode Barang" />
                         <HBox alignment="CENTER_RIGHT" prefHeight="56.0" prefWidth="26.0">
@@ -87,12 +88,12 @@
                         </HBox>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
-                        <ComboBox fx:id="cbKodeBarang" onAction="#cbKodeBarangAct" prefHeight="39.0" prefWidth="369.0" />
+                        <ComboBox fx:id="cbKodeBarang" onAction="#cbKodeBarangAct" prefHeight="39.0" prefWidth="377.0" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                      <children>
                         <Label prefHeight="27.0" prefWidth="252.0" text="Jumlah " />
                         <HBox alignment="CENTER_RIGHT" prefHeight="56.0" prefWidth="26.0">
@@ -102,18 +103,17 @@
                         </HBox>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" layoutX="179.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <HBox alignment="CENTER" layoutX="179.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
                         <TextField fx:id="txtJumlahBarang" prefHeight="39.0" prefWidth="377.0" />
                      </children>
                   </HBox>
-                  <TableView fx:id="tbCart" prefHeight="186.0" prefWidth="676.0" tableMenuButtonVisible="true" GridPane.columnSpan="2" GridPane.rowIndex="4" GridPane.rowSpan="3">
+                  <TableView fx:id="tbCart" onMouseClicked="#tbCartClickedAction" prefHeight="186.0" prefWidth="676.0" tableMenuButtonVisible="true" GridPane.columnSpan="2" GridPane.rowIndex="5" GridPane.rowSpan="3">
                     <columns>
-                      <TableColumn fx:id="colKodeTransaksi" prefWidth="142.0" text="Kode Transaksi" />
-                      <TableColumn fx:id="colKodeBarang" prefWidth="121.0" text="Kode Barang" />
-                        <TableColumn fx:id="colJumlahBarang" prefWidth="93.0" text="Jumlah" />
-                        <TableColumn fx:id="colHargaSatuan" prefWidth="124.0" text="Harga Satuan" />
-                        <TableColumn fx:id="colTotal" prefWidth="96.0" text="Total" />
+                      <TableColumn fx:id="colKodeBarang" prefWidth="147.0" text="Kode Barang" />
+                        <TableColumn fx:id="colJumlahBarang" prefWidth="132.0" text="Jumlah" />
+                        <TableColumn fx:id="colHargaSatuan" prefWidth="137.0" text="Harga Satuan" />
+                        <TableColumn fx:id="colTotal" prefWidth="114.0" text="Total" />
                     </columns>
                   </TableView>
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
@@ -131,8 +131,8 @@
                         <TextField fx:id="txtKodeTransaksi" disable="true" editable="false" prefHeight="39.0" prefWidth="377.0" />
                      </children>
                   </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3" />
-                  <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4" />
+                  <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -143,10 +143,25 @@
                     </rowConstraints>
                      <children>
                         <Button fx:id="btnAddCart" mnemonicParsing="false" onAction="#btnAddCartAct" text="Add" />
-                        <Button fx:id="btnEditCart" mnemonicParsing="false" onAction="#btnEditCartAct" text="Edit" GridPane.columnIndex="1" />
-                        <Button fx:id="btnDelCart" mnemonicParsing="false" onAction="#btnDelCartAct" text="Delete" GridPane.columnIndex="2" />
+                        <Button fx:id="btnEditCart" disable="true" mnemonicParsing="false" onAction="#btnEditCartAct" text="Edit" GridPane.columnIndex="1" />
+                        <Button fx:id="btnDelCart" disable="true" mnemonicParsing="false" onAction="#btnDelCartAct" text="Delete" GridPane.columnIndex="2" />
                      </children>
                   </GridPane>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <children>
+                        <Label prefHeight="27.0" prefWidth="252.0" text="Id Cashier" />
+                        <HBox alignment="CENTER_RIGHT" prefHeight="56.0" prefWidth="26.0">
+                           <children>
+                              <Label text=":" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="211.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <TextField fx:id="txtIdCashier" disable="true" editable="false" prefHeight="39.0" prefWidth="377.0" />
+                     </children>
+                  </HBox>
                </children>
             </GridPane>
          </children>

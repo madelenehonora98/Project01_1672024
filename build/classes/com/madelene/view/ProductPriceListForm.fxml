@@ -52,7 +52,6 @@
         <columns>
           <TableColumn fx:id="colKodeBarang" prefWidth="121.0" text="Kode Barang" />
           <TableColumn fx:id="colNamaBarang" prefWidth="149.0" text="Nama Barang" />
-            <TableColumn fx:id="colHargaBeli" minWidth="0.0" prefWidth="124.0" text="Harga Beli" />
             <TableColumn fx:id="colHargaJual" minWidth="0.0" prefWidth="120.0" text="Harga Jual" />
             <TableColumn fx:id="colStok" minWidth="0.0" prefWidth="99.0" text="Stok" />
         </columns>

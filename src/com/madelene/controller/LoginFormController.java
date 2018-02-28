@@ -40,6 +40,7 @@ public class LoginFormController implements Initializable {
     private Button btnLogIn;
     @FXML
     private BorderPane bpLogin;
+    public static String tmpIdUser;
 
     public UserDaoImpl getUserDao() {
         if (userDao == null) {
@@ -71,7 +72,7 @@ public class LoginFormController implements Initializable {
     @FXML
     private void btnLogInAct(ActionEvent event) throws IOException {
         User user = new User();
-        user.setIdPengguna(txtUsername.getText());
+        user.setIdPengguna(txtUsername.getText().trim());
         user.setPassword(txtPassword.getText());
         if (getUserDao().getData(user) != null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -92,6 +93,7 @@ public class LoginFormController implements Initializable {
             } else if (getUserDao().getData(user).getIdUserRole().
                     getIdUserRole().
                     equals("02")) {
+                tmpIdUser = user.getIdPengguna();
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(MainApp.class.getResource(
                         "view/CashierForm.fxml"));

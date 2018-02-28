@@ -68,16 +68,16 @@ public class UserDaoImpl implements DaoService<User> {
                 String query
                         = "UPDATE user SET NamaDepan = ?, NamaBelakang = ?, Alamat=?, NoTelepon = ?, UserRole_idUserRole=?, Password=?, JenisKelamin = ? WHERE IdPengguna=?";
                 PreparedStatement ps = connection.prepareStatement(query);
-                ps.setString(1, object.getIdPengguna());
-                ps.setString(2, object.getNamaDepan());
-                ps.setString(3, object.getNamaBelakang());
-                ps.setString(4, object.getAlamat());
-                ps.setString(5, object.getNoTelepon());
+                ps.setString(1, object.getNamaDepan());
+                ps.setString(2, object.getNamaBelakang());
+                ps.setString(3, object.getAlamat());
+                ps.setString(4, object.getNoTelepon());
+                ps.setString(5, object.getIdUserRole().getIdUserRole());
 
                 //Foreign key IdUserRole dari UserRole
-                ps.setString(6, object.getIdUserRole().getIdUserRole());
-                ps.setString(7, object.getPassword());
-                ps.setString(8, object.getJenisKelamin());
+                ps.setString(6, object.getPassword());
+                ps.setString(7, object.getJenisKelamin());
+                ps.setString(8, object.getIdPengguna());
                 if (ps.executeUpdate() != 0) {
                     connection.commit();
                     result = 1;
@@ -152,7 +152,7 @@ public class UserDaoImpl implements DaoService<User> {
             Logger.getLogger(UserDaoImpl.class.getName()).
                     log(Level.SEVERE, null, ex);
         }
-        System.out.println(users);
+
         return users;
     }
 
@@ -196,6 +196,11 @@ public class UserDaoImpl implements DaoService<User> {
 
     @Override
     public List<User> showData(String object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<User> showTopData(String object, String object2) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -64,11 +64,11 @@ public class BarangDaoImpl implements DaoService<Barang> {
                 String query
                         = "UPDATE barang SET  NamaBarang=?, HargaBeli=?, HargaJual=?,Stok = ? WHERE KodeBarang=?";
                 PreparedStatement ps = connection.prepareStatement(query);
-                ps.setString(1, object.getKodeBarang());
-                ps.setString(2, object.getNamaBarang());
-                ps.setDouble(3, object.getHargaBeli());
-                ps.setDouble(4, object.getHargaJual());
-                ps.setInt(5, object.getStok());
+                ps.setString(5, object.getKodeBarang());
+                ps.setString(1, object.getNamaBarang());
+                ps.setDouble(2, object.getHargaBeli());
+                ps.setDouble(3, object.getHargaJual());
+                ps.setInt(4, object.getStok());
 
                 if (ps.executeUpdate() != 0) {
                     connection.commit();
@@ -112,7 +112,8 @@ public class BarangDaoImpl implements DaoService<Barang> {
         ObservableList<Barang> barangs = FXCollections.observableArrayList();
         try {
             try (Connection connection = Utility.creatConnection()) {
-                String query = "SELECT * FROM Barang ORDER BY KodeBarang";
+                String query
+                        = "SELECT KodeBarang, NamaBarang, HargaBeli, HargaJual, Stok FROM Barang ORDER BY KodeBarang";
                 PreparedStatement ps = connection.prepareStatement(query);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
@@ -169,5 +170,40 @@ public class BarangDaoImpl implements DaoService<Barang> {
     @Override
     public List<Barang> showData(String object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Barang> showTopData(String object, String object2) {
+
+        ObservableList<Barang> barangs = FXCollections.observableArrayList();
+        try {
+            try (Connection connection = Utility.creatConnection()) {
+                String query
+                        = "SELECT b.KodeBarang,b.NamaBarang,SUM(r.JumlahBarangTerjual) AS 'Total Terjual' ,((SUM(r.JumlahBarangTerjual) )*r.HargaJualSaatIni) AS 'Total Nominal' from notapenjualan np JOIN barang_has_notapenjualan r ON r.NotaPenjualan_KodePenjualan = np.KodePenjualan JOIN Barang b ON b.KodeBarang = r.Barang_KodeBarang where np.TanggalPenjualan >? AND np.TanggalPenjualan < ? GROUP BY b.KodeBarang, b.NamaBarang ORDER BY SUM(r.JumlahBarangTerjual) DESC";
+                PreparedStatement ps = connection.prepareStatement(query);
+                ps.setString(1, object);
+                ps.setString(2, object2);
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    Barang barang = new Barang();
+
+                    barang.setKodeBarang(rs.getString("KodeBarang"));
+                    barang.setNamaBarang(rs.getString("NamaBarang"));
+                    barang.setStok(rs.getInt("Total Terjual"));
+                    barang.setHargaJual(rs.getDouble("Total Nominal"));
+
+                    barangs.add(barang);
+                }
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDaoImpl.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UserDaoImpl.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return barangs;
     }
 }

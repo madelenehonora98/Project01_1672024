@@ -73,6 +73,8 @@ public class UserListController implements Initializable {
     private ObservableList<User> users;
     @FXML
     private TableView<User> tbUserList;
+    @FXML
+    private TableColumn<?, ?> colPassword;
 
     /**
      * Initializes the controller class.
@@ -111,6 +113,7 @@ public class UserListController implements Initializable {
                 setCellValueFactory(new PropertyValueFactory<>("NoTelepon"));
         colJabatan.setCellValueFactory(p -> p.getValue().getIdUserRole().
                 JabatanProperty());
+        colPassword.setCellValueFactory(new PropertyValueFactory<>("Password"));
 
     }
 
@@ -169,30 +172,37 @@ public class UserListController implements Initializable {
     private void btnEditUserAct(ActionEvent event) {
         if (editStage == null) {
             try {
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(MainApp.class.getResource(
-                        "view/EditCashierForm.fxml"));
-                BorderPane pane = loader.load();
-                Scene scene = new Scene(pane);
-                editStage = new Stage();
-                editCashierController = loader.getController();
-                editCashierController.setMainController(this);
-                editStage.setScene(scene);
-                editStage.initOwner(bpUserListForm.getScene().getWindow());
-                editStage.initModality(Modality.APPLICATION_MODAL);
-                editStage.setTitle("Edit Cashier Form");
-                editStage.show();
+                if (editStage == null) {
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(MainApp.class.getResource(
+                            "view/EditCashierForm.fxml"));
+                    BorderPane pane = loader.load();
+                    Scene scene = new Scene(pane);
+                    editStage = new Stage();
+                    editCashierController = loader.getController();
+                    editCashierController.setMainController(this);
+                    editStage.setScene(scene);
+                    editStage.initOwner(bpUserListForm.getScene().getWindow());
+                    editStage.initModality(Modality.APPLICATION_MODAL);
+                    editStage.setTitle("Edit Cashier Form");
+                    editStage.show();
+
+                }
 
             } catch (IOException ex) {
                 Logger.getLogger(LoginFormController.class.getName()).
                         log(Level.SEVERE, null, ex);
             }
+            tbUserList.refresh();
         }
-        if (editStage.isShowing() && !editStage.isFocused()) {
-            editStage.toFront();
-        } else {
+        if (!editStage.isShowing()) {
             editStage.show();
+
+        } else {
+            editStage.toFront();
         }
+        selectedUser = null;
+        btnDelUser.setDisable(true);
     }
 
     @FXML
@@ -210,6 +220,9 @@ public class UserListController implements Initializable {
             }
 
         });
+
+        selectedUser = null;
+        btnDelUser.setDisable(true);
     }
 
     @FXML
@@ -217,7 +230,7 @@ public class UserListController implements Initializable {
         selectedUser = tbUserList.getSelectionModel().getSelectedItem();
         if (selectedUser != null) {
             btnDelUser.setDisable(false);
-            btnEditUser.setDisable(false);
+
         }
 
     }

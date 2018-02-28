@@ -5,6 +5,7 @@
  */
 package com.madelene.controller;
 
+import com.madelene.dao.UserDaoImpl;
 import com.madelene.dao.UserRoleDaoImpl;
 import com.madelene.entity.User;
 import com.madelene.entity.UserRole;
@@ -36,10 +37,7 @@ public class EditCashierFormController implements Initializable {
     private BorderPane bpEditCashier;
     @FXML
     private Button btnBackOwner;
-    @FXML
-    private Button btnSubmitAddCashier;
-    @FXML
-    private TextField txtIdPengguna;
+
     @FXML
     private TextField txtNamaDepan;
     @FXML
@@ -64,37 +62,43 @@ public class EditCashierFormController implements Initializable {
     private UserListController userListController;
     private ObservableList<UserRole> roles;
     private UserRoleDaoImpl roleDao;
+    @FXML
+    private ComboBox<User> cbIdPengguna;
+    private UserDaoImpl userDaoImpl;
+    private ObservableList<User> users;
+    @FXML
+    private Button btnSubmitEditCashier;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        cbIdUserRole.setItems(getRoles());
-        txtIdPengguna.setText(userListController.selectedUser.getIdPengguna());
-        txtNamaDepan.setText(userListController.selectedUser.getNamaDepan());
-        txtNamaBelakang.setText(userListController.selectedUser.
-                getNamaBelakang());
-        txtAlamat.setText(userListController.selectedUser.getAlamat());
-        txtNoTelepon.setText(userListController.selectedUser.getNoTelepon());
-        txtPass.setText(userListController.selectedUser.getPassword());
-        txtVerifyPass.setText(userListController.selectedUser.getPassword());
-        if (userListController.selectedUser.getJenisKelamin().
-                equals("Laki-laki")) {
-            rbLaki.setSelected(true);
-            rbPerempuan.setSelected(false);
-        } else if (userListController.selectedUser.getJenisKelamin().equals(
-                "Perempuan")) {
-            rbPerempuan.setSelected(true);
-            rbLaki.setSelected(false);
+
+        cbIdPengguna.setItems(getUsers());
+
+    }
+
+    public ObservableList<User> getUsers() {
+        if (users == null) {
+            users = FXCollections.observableArrayList();
+            users.addAll(getUserDao().showAllData());
         }
 
+        return users;
+    }
+
+    public UserDaoImpl getUserDao() {
+        if (userDaoImpl == null) {
+            userDaoImpl = new UserDaoImpl();
+        }
+        return userDaoImpl;
     }
 
     public ObservableList<UserRole> getRoles() {
         if (roles == null) {
             roles = FXCollections.observableArrayList();
-            roles.add(userListController.selectedUser.getIdUserRole());
+            roles.add(cbIdPengguna.getValue().getIdUserRole());
         }
         return roles;
 
@@ -117,18 +121,65 @@ public class EditCashierFormController implements Initializable {
     }
 
     @FXML
-    private void btnSubmitAddCashierAct(ActionEvent event) {
-        if (!Utility.isEmptyField(txtIdPengguna, txtNamaDepan, txtNamaBelakang,
+    private void cbIdUserRoleAct(ActionEvent event) {
+
+    }
+
+    @FXML
+    private void txtVerifyPassAct(ActionEvent event) {
+        if (!txtPass.equals(txtVerifyPass)) {
+
+        }
+    }
+
+    public static final boolean isNumber(String number, String name) {
+        try {
+            Integer.parseInt(number);
+        } catch (NumberFormatException numberFormatException) {
+            Utility.showAlert("Not a number", name + " is not a number",
+                    Alert.AlertType.ERROR);
+            return false;
+        }
+        return true;
+    }
+
+    @FXML
+    private void cbIdPenggunaAct(ActionEvent event) {
+        cbIdUserRole.setItems(getRoles());
+        cbIdUserRole.setValue(cbIdPengguna.getValue().getIdUserRole());
+        txtNamaDepan.setText(cbIdPengguna.getValue().getNamaDepan());
+        txtNamaBelakang.setText(cbIdPengguna.getValue().
+                getNamaBelakang());
+        txtAlamat.setText(cbIdPengguna.getValue().getAlamat());
+        txtNoTelepon.setText(cbIdPengguna.getValue().getNoTelepon());
+        txtPass.setText(cbIdPengguna.getValue().getPassword());
+        txtVerifyPass.setText(cbIdPengguna.getValue().getPassword());
+        if (cbIdPengguna.getValue().getJenisKelamin().
+                equals("Laki-laki")) {
+            rbLaki.setSelected(true);
+            rbPerempuan.setSelected(false);
+        } else if (cbIdPengguna.getValue().getJenisKelamin().equals(
+                "Perempuan")) {
+            rbPerempuan.setSelected(true);
+            rbLaki.setSelected(false);
+        }
+
+    }
+
+    @FXML
+    private void btnSubmitEditCashierAct(ActionEvent event) {
+
+        if (!Utility.isEmptyField(txtNamaDepan, txtNamaBelakang,
                 txtAlamat, txtNoTelepon, txtPass, txtVerifyPass)) {
             User user = new User();
-            user.setIdPengguna(txtIdPengguna.getText().trim());
+            user.setIdPengguna(cbIdPengguna.getValue().getIdPengguna());
             user.setNamaDepan(txtNamaDepan.getText().trim());
             user.setNamaBelakang(txtNamaBelakang.getText().trim());
             user.setAlamat(txtAlamat.getText().trim());
 
             if (group.getSelectedToggle().equals(rbLaki)) {
                 user.setJenisKelamin("Laki-laki");
-            } else if (group.getToggles().equals(rbPerempuan)) {
+            } else if (group.getSelectedToggle().equals(rbPerempuan)) {
                 user.setJenisKelamin("Perempuan");
             }
             user.setIdUserRole(cbIdUserRole.getValue());
@@ -153,15 +204,13 @@ public class EditCashierFormController implements Initializable {
                 user.setPassword(txtPass.getText().trim());
             }
 
-            if (userListController.getUserDao().updateData(
-                    user) == 1) {
+            if (userListController.getUserDao().updateData(user) == 1) {
 
                 userListController.getUsers().clear();
                 userListController.getUsers().addAll(userListController.
                         getUserDao().showAllData());
             }
 
-            txtIdPengguna.clear();
             txtNamaDepan.clear();
             txtNamaBelakang.clear();
             txtAlamat.clear();
@@ -175,28 +224,6 @@ public class EditCashierFormController implements Initializable {
             alert.setContentText("Masih ada yang kosong");
             alert.showAndWait();
         }
-    }
-
-    @FXML
-    private void cbIdUserRoleAct(ActionEvent event) {
-    }
-
-    @FXML
-    private void txtVerifyPassAct(ActionEvent event) {
-        if (!txtPass.equals(txtVerifyPass)) {
-
-        }
-    }
-
-    public static final boolean isNumber(String number, String name) {
-        try {
-            Integer.parseInt(number);
-        } catch (NumberFormatException numberFormatException) {
-            Utility.showAlert("Not a number", name + " is not a number",
-                    Alert.AlertType.ERROR);
-            return false;
-        }
-        return true;
     }
 
 }

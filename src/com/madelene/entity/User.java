@@ -123,4 +123,7 @@ public class User {
         return NamaDepan;
     }
 
+    public String toString() {
+        return getIdPengguna();
+    }
 }

@@ -32,6 +32,20 @@ public class RelasiBarangNotaPenjualan {
     public ObjectProperty KodeBarangProperty() {
         return KodeBarang;
     }
+
+//    private final IntegerProperty KodePenjualan = new SimpleIntegerProperty();
+//
+//    public int getKodePenjualan() {
+//        return KodePenjualan.get();
+//    }
+//
+//    public void setKodePenjualan(int value) {
+//        KodePenjualan.set(value);
+//    }
+//
+//    public IntegerProperty KodePenjualanProperty() {
+//        return KodePenjualan;
+//    }
     private final ObjectProperty<NotaPenjualan> KodePenjualan
             = new SimpleObjectProperty<>();
 
@@ -46,7 +60,6 @@ public class RelasiBarangNotaPenjualan {
     public ObjectProperty KodePenjualanProperty() {
         return KodePenjualan;
     }
-
     private final IntegerProperty JumlahBarangTerjual
             = new SimpleIntegerProperty();
 

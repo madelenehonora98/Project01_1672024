@@ -45,8 +45,7 @@ public class ProductPriceListFormController implements Initializable {
     private TableColumn<Barang, String> colKodeBarang;
     @FXML
     private TableColumn<Barang, String> colNamaBarang;
-    @FXML
-    private TableColumn<Barang, Double> colHargaBeli;
+
     @FXML
     private TableColumn<Barang, Double> colHargaJual;
     @FXML
@@ -84,8 +83,7 @@ public class ProductPriceListFormController implements Initializable {
                 "KodeBarang"));
         colNamaBarang.
                 setCellValueFactory(new PropertyValueFactory<>("NamaBarang"));
-        colHargaBeli.setCellValueFactory(new PropertyValueFactory<>(
-                "HargaBeli"));
+
         colHargaJual.
                 setCellValueFactory(new PropertyValueFactory<>("HargaJual"));
         colStok.

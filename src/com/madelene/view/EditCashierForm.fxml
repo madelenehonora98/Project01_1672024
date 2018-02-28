@@ -12,7 +12,7 @@
    <bottom>
       <HBox alignment="CENTER_RIGHT" prefHeight="75.0" prefWidth="761.0" BorderPane.alignment="CENTER_RIGHT">
          <children>
-            <Button fx:id="btnSubmitAddCashier" mnemonicParsing="false" onAction="#btnSubmitAddCashierAct" text="Submit" />
+            <Button fx:id="btnSubmitEditCashier" mnemonicParsing="false" onAction="#btnSubmitEditCashierAct" text="Submit" />
          </children>
          <padding>
             <Insets right="30.0" />

@@ -192,6 +192,8 @@ public class ProductPriceListOwnerFormController implements Initializable {
         } else {
             editBarangStage.toFront();
         }
+        selectedBarang = null;
+        btnDelProduct.setDisable(true);
     }
 
     @FXML
@@ -211,6 +213,9 @@ public class ProductPriceListOwnerFormController implements Initializable {
             }
 
         });
+
+        selectedBarang = null;
+        btnDelProduct.setDisable(true);
     }
 
     @FXML
@@ -218,7 +223,7 @@ public class ProductPriceListOwnerFormController implements Initializable {
         selectedBarang = tbleProduct.getSelectionModel().getSelectedItem();
         if (selectedBarang != null) {
             btnDelProduct.setDisable(false);
-            btnEditProduct.setDisable(false);
+
         }
     }
 

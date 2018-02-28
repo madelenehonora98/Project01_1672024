@@ -7,12 +7,18 @@ package com.madelene.controller;
 
 import com.madelene.MainApp;
 import com.madelene.dao.BarangDaoImpl;
+import com.madelene.dao.NotaPenjualanDaoImpl;
 import com.madelene.dao.RelasiBarangNotaPenjualanDaoImpl;
 import com.madelene.entity.Barang;
+import com.madelene.entity.NotaPenjualan;
 import com.madelene.entity.RelasiBarangNotaPenjualan;
+import com.madelene.entity.User;
 import com.madelene.utility.Utility;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,9 +37,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  * FXML Controller class
@@ -64,8 +73,7 @@ public class TransactionFormController implements Initializable {
     private TextField txtJumlahBarang;
     @FXML
     private TextField txtKodeTransaksi;
-    @FXML
-    private TableColumn<RelasiBarangNotaPenjualan, Integer> colKodeTransaksi;
+
     @FXML
     private TableColumn<RelasiBarangNotaPenjualan, String> colKodeBarang;
     @FXML
@@ -75,19 +83,40 @@ public class TransactionFormController implements Initializable {
     @FXML
     private TableColumn<RelasiBarangNotaPenjualan, String> colTotal;
 
-    private ObservableList<RelasiBarangNotaPenjualan> notaPenjualans;
+    private ObservableList<RelasiBarangNotaPenjualan> relasiNotaPenjualans;
+    private ObservableList<NotaPenjualan> notaPenjualans;
 
-    private int tmpNominal = 0;
+    private double tmpNominal = 0;
     private String tmpKodeTransaksi;
     private RelasiBarangNotaPenjualanDaoImpl relasiDao;
+    private NotaPenjualanDaoImpl notaPenjualanDao;
+    private ObservableList<Integer> tmpStock;
+    public RelasiBarangNotaPenjualan relasiBarangNotaPenjualan;
+    public RelasiBarangNotaPenjualan selectedProduct;
+
+    private int noUrut = 1;
+    @FXML
+    private TextField txtIdCashier;
+
+    private BarangDaoImpl barangDao;
+    private ObservableList<Barang> barangs;
 
     /**
      * Initializes the controller class.
      */
-    public ObservableList<RelasiBarangNotaPenjualan> getNotaPenjualans() {
+    // <editor-fold defaultstate="collapsed" desc="initiate getter">
+    public ObservableList<RelasiBarangNotaPenjualan> getRelasiNotaPenjualans() {
+        if (relasiNotaPenjualans == null) {
+            relasiNotaPenjualans = FXCollections.observableArrayList();
+//            relasiNotaPenjualans.addAll(getRelasiDao().showAllData());
+        }
+        return relasiNotaPenjualans;
+    }
+
+    public ObservableList<NotaPenjualan> getNotaPenjualans() {
         if (notaPenjualans == null) {
             notaPenjualans = FXCollections.observableArrayList();
-
+            notaPenjualans.addAll(getNotaPenjualanDao().showAllData());
         }
         return notaPenjualans;
     }
@@ -99,21 +128,38 @@ public class TransactionFormController implements Initializable {
         return relasiDao;
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        //notaPenjualans = relasiDao.showAllData();
-        if (getNotaPenjualans().isEmpty()) {
-            tmpKodeTransaksi = "1";
-        } else {
-            tmpKodeTransaksi = String.valueOf(getNotaPenjualans().size() + 1);
+    public NotaPenjualanDaoImpl getNotaPenjualanDao() {
+        if (notaPenjualanDao == null) {
+            notaPenjualanDao = new NotaPenjualanDaoImpl();
+        }
+        return notaPenjualanDao;
+    }
+
+    public ObservableList<Barang> getBarang() {
+        if (barangs == null) {
+            barangs = FXCollections.observableArrayList();
+            barangs.addAll(getBarangDao().showAllData());
         }
 
-        txtKodeTransaksi.setText(tmpKodeTransaksi);
+        return barangs;
+    }
+
+    public BarangDaoImpl getBarangDao() {
+        if (barangDao == null) {
+            barangDao = new BarangDaoImpl();
+        }
+        return barangDao;
+    }
+
+    // </editor-fold>
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        txtKodeTransaksi.setText(String.
+                valueOf(getNotaPenjualans().size() + 1));
+        txtIdCashier.setText(LoginFormController.tmpIdUser);
         lblTotal.setText(String.valueOf(tmpNominal));
         cbKodeBarang.setItems(getBarang());
-        tbCart.setItems(getNotaPenjualans());
-        colKodeTransaksi.setCellValueFactory(new PropertyValueFactory<>(
-                txtKodeTransaksi.getText()));
+        tbCart.setItems(getRelasiNotaPenjualans());
 
         colKodeBarang.setCellValueFactory((
                 TableColumn.CellDataFeatures<RelasiBarangNotaPenjualan, String> param)
@@ -137,24 +183,7 @@ public class TransactionFormController implements Initializable {
                         "Rp." + String.valueOf(param.getValue().getKodeBarang().
                                 getHargaJual() * param.getValue().
                                 getJumlahBarangTerjual())));
-    }
-    private BarangDaoImpl barangDao;
-    private ObservableList<Barang> barangs;
 
-    public ObservableList<Barang> getBarang() {
-        if (barangs == null) {
-            barangs = FXCollections.observableArrayList();
-            barangs.addAll(getBarangDao().showAllData());
-        }
-
-        return barangs;
-    }
-
-    public BarangDaoImpl getBarangDao() {
-        if (barangDao == null) {
-            barangDao = new BarangDaoImpl();
-        }
-        return barangDao;
     }
 
     @FXML
@@ -179,47 +208,187 @@ public class TransactionFormController implements Initializable {
 
     @FXML
     private void btnSubmitAct(ActionEvent event) {
+        RelasiBarangNotaPenjualan relasi = new RelasiBarangNotaPenjualan();
+        NotaPenjualan notaPenjualan = new NotaPenjualan();
+        User user = new User();
+        Barang barang = new Barang();
+
+        Timestamp t = new Timestamp(System.currentTimeMillis());
+        user.setIdPengguna(LoginFormController.tmpIdUser);
+        notaPenjualan.setKodePenjualan(getNotaPenjualans().size() + 1);
+        notaPenjualan.setIdPengguna(user);
+        notaPenjualan.setNominal(tmpNominal);
+        notaPenjualan.setTanggalPenjualan(String.valueOf(t));
+
+        getNotaPenjualanDao().addData(notaPenjualan);
+
+        for (RelasiBarangNotaPenjualan relasiNotaPenjualan
+                : relasiNotaPenjualans) {
+            relasi.
+                    setHargaJualSaatItu(relasiNotaPenjualan.
+                            getHargaJualSaatItu());
+            relasi.setJumlahBarangTerjual(relasiNotaPenjualan.
+                    getJumlahBarangTerjual());
+            relasi.setKodeBarang(relasiNotaPenjualan.getKodeBarang());
+
+            relasi.setKodePenjualan(notaPenjualan);
+
+            barang.setKodeBarang(relasi.getKodeBarang().getKodeBarang());
+            barang.setNamaBarang(relasi.getKodeBarang().getNamaBarang());
+            barang.setHargaBeli(relasi.getKodeBarang().getHargaBeli());
+            barang.setHargaJual(relasi.getKodeBarang().getHargaJual());
+            barang.setStok(relasi.getKodeBarang().getStok() - relasi.
+                    getJumlahBarangTerjual());
+
+            getBarangDao().updateData(barang);
+            getRelasiDao().addData(relasi);
+
+        }
+
+        try {
+            Map param = new HashMap();
+
+            JasperPrint jp = JasperFillManager.fillReport(
+                    "iReport\\TransactionReportProject01.jasper", param,
+                    Utility.creatConnection());
+            JasperViewer view = new JasperViewer(jp, false);
+            view.setTitle("Transaction Report");
+            view.setVisible(true);
+            txtJumlahBarang.clear();
+            relasiNotaPenjualans.clear();
+            txtKodeTransaksi.setText(String.
+                    valueOf(getNotaPenjualanDao().showAllData().size() + 1));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
     @FXML
     private void cbKodeBarangAct(ActionEvent event) {
+        int i = 0;
+        boolean isFound = false;
+        for (RelasiBarangNotaPenjualan relasi : relasiNotaPenjualans) {
+            if (cbKodeBarang.getValue().getKodeBarang().equals(relasi.
+                    getKodeBarang().getKodeBarang())) {
+                txtJumlahBarang.setText(String.valueOf(relasiNotaPenjualans.get(
+                        i).getJumlahBarangTerjual()));
+                isFound = true;
+                i++;
+            }
+        }
+        if (!isFound) {
+            txtJumlahBarang.setText("0");
+        }
 
     }
 
     @FXML
-    private void btnAddCartAct(ActionEvent event) {
+    private void btnAddCartAct(ActionEvent event
+    ) {
 
-        if (isNumber((txtJumlahBarang.getText()))) {
+        if (isNumber((txtJumlahBarang.getText())) && cbKodeBarang.getValue()
+                != null) {
 
-            if (Integer.parseInt(txtJumlahBarang.getText()) > getBarangDao().
+            if (Integer.parseInt(txtJumlahBarang.getText())
+                    > getBarangDao().
                     getData(
                             cbKodeBarang.getValue()).getStok()) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setContentText("Product stock is not enough");
                 alert.showAndWait();
             } else {
-                RelasiBarangNotaPenjualan relasiBarangNotaPenjualan
-                        = new RelasiBarangNotaPenjualan(Integer.parseInt(
-                                txtJumlahBarang.getText()), 5.00, cbKodeBarang.
-                                getValue());
 
-                tmpNominal += Integer.parseInt(txtJumlahBarang.getText())
+                relasiBarangNotaPenjualan = new RelasiBarangNotaPenjualan(
+                        Integer.parseInt(
+                                txtJumlahBarang.getText()), cbKodeBarang.
+                        getValue().getHargaJual(),
+                        cbKodeBarang.
+                        getValue());
+
+                tmpNominal += Double.parseDouble(txtJumlahBarang.getText())
                         * cbKodeBarang.getValue().getHargaJual();
-                getNotaPenjualans().add(relasiBarangNotaPenjualan);
+                boolean isFind = false;
+                for (RelasiBarangNotaPenjualan rbnp : relasiNotaPenjualans) {
+                    if (rbnp.getKodeBarang().getKodeBarang().
+                            equalsIgnoreCase(
+                                    relasiBarangNotaPenjualan.
+                                    getKodeBarang().
+                                    getKodeBarang())) {
+                        if (rbnp.
+                                getJumlahBarangTerjual() + Integer.valueOf(
+                                        txtJumlahBarang.getText())
+                                > getBarangDao().
+                                getData(cbKodeBarang.getValue()).getStok()) {
+
+                            Alert alert = new Alert(
+                                    Alert.AlertType.INFORMATION);
+                            alert.setContentText(
+                                    "Product stock is not enough");
+                            alert.showAndWait();
+
+                        } else {
+                            rbnp.setJumlahBarangTerjual(rbnp.
+                                    getJumlahBarangTerjual() + Integer.
+                                    valueOf(
+                                            txtJumlahBarang.getText()));
+                        }
+                        isFind = true;
+                        tbCart.refresh();
+                    }
+                }
+                if (!isFind) {
+                    getRelasiNotaPenjualans().add(relasiBarangNotaPenjualan);
+                }
                 lblTotal.setText(String.valueOf(tmpNominal));
+                noUrut++;
             }
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Missiong product code");
+            alert.setContentText("You haven't pick your product code");
+            alert.show();
 
         }
 
     }
 
     @FXML
-    private void btnEditCartAct(ActionEvent event) {
+    private void btnEditCartAct(ActionEvent event
+    ) {
+
+        selectedProduct.setJumlahBarangTerjual(Integer.parseInt(txtJumlahBarang.
+                getText()));
+        tmpNominal = 0;
+        for (RelasiBarangNotaPenjualan relasiNotaPenjualan
+                : relasiNotaPenjualans) {
+            System.out.println(relasiNotaPenjualan.getHargaJualSaatItu());
+            tmpNominal += relasiNotaPenjualan.getJumlahBarangTerjual()
+                    * relasiNotaPenjualan.getHargaJualSaatItu();
+        }
+        tbCart.refresh();
+        lblTotal.setText(String.valueOf(tmpNominal));
+        selectedProduct = null;
+        btnAddCart.setDisable(false);
+        btnEditCart.setDisable(true);
+        btnDelCart.setDisable(true);
+        cbKodeBarang.setDisable(false);
     }
 
     @FXML
-    private void btnDelCartAct(ActionEvent event) {
+    private void btnDelCartAct(ActionEvent event
+    ) {
+        tmpNominal -= selectedProduct.getJumlahBarangTerjual()
+                * cbKodeBarang.getValue().getHargaJual();
+        relasiNotaPenjualans.remove(selectedProduct);
+        tbCart.refresh();
+        selectedProduct = null;
+        btnAddCart.setDisable(false);
+        btnEditCart.setDisable(true);
+        btnDelCart.setDisable(true);
+        lblTotal.setText(String.valueOf(tmpNominal));
+        cbKodeBarang.setDisable(false);
     }
 
     public static final boolean isNumber(String number) {
@@ -231,6 +400,18 @@ public class TransactionFormController implements Initializable {
             return false;
         }
         return true;
+    }
+
+    @FXML
+    private void tbCartClickedAction(MouseEvent event) {
+        selectedProduct = tbCart.getSelectionModel().getSelectedItem();
+        if (selectedProduct != null) {
+            cbKodeBarang.setDisable(true);
+            cbKodeBarang.setValue(selectedProduct.getKodeBarang());
+            btnDelCart.setDisable(false);
+            btnEditCart.setDisable(false);
+            btnAddCart.setDisable(true);
+        }
     }
 
 }

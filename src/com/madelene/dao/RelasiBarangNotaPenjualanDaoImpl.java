@@ -35,11 +35,12 @@ public class RelasiBarangNotaPenjualanDaoImpl implements
             try (Connection connection = Utility.creatConnection()) {
                 connection.setAutoCommit(false);
                 String query
-                        = "INSERT INTO RelasiBarangNotaPenjualan(KodePenjualan, KodeBarang, JumlahBarangTerjual) VALUES (?,?,?)";
+                        = "INSERT INTO barang_has_notapenjualan(NotaPenjualan_KodePenjualan, Barang_KodeBarang, JumlahBarangTerjual,HargaJualSaatIni) VALUES (?,?,?,?)";
                 PreparedStatement ps = connection.prepareStatement(query);
                 ps.setInt(1, object.getKodePenjualan().getKodePenjualan());
                 ps.setString(2, object.getKodeBarang().getKodeBarang());
                 ps.setInt(3, object.getJumlahBarangTerjual());
+                ps.setDouble(4, object.getHargaJualSaatItu());
 
                 if (ps.executeUpdate() != 0) {
                     connection.commit();
@@ -157,6 +158,48 @@ public class RelasiBarangNotaPenjualanDaoImpl implements
                     log(Level.SEVERE, null, ex);
         }
         return relasiPenjualans;
+    }
+
+    @Override
+    public List<RelasiBarangNotaPenjualan> showTopData(String object,
+            String object2) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+//        ObservableList<NotaPenjualan> notas = FXCollections.
+//                observableArrayList();
+//        try {
+//            try (Connection connection = Utility.creatConnection()) {
+//                String query
+//                        = "SELECT b.KodeBarang,b.NamaBarang,SUM(r.JumlahBarangTerjual) AS 'Total Terjual'from notapenjualan np JOIN barang_has_notapenjualan r ON r.NotaPenjualan_KodePenjualan = np.KodePenjualan JOIN Barang b ON b.KodeBarang = r.Barang_KodeBarangwhere np.TanggalPenjualan >'?' AND np.TanggalPenjualan < '?' GROUP BY b.KodeBarang, b.NamaBarangORDER BY SUM(r.JumlahBarangTerjual) DESC;";
+//                PreparedStatement ps = connection.prepareStatement(query);
+//                ps.setString(0, object);
+//                ps.setString(1, object2);
+//                ResultSet rs = ps.executeQuery();
+//                while (rs.next()) {
+//                    Barang barang = new Barang();
+//                    RelasiBarangNotaPenjualan relasi = new RelasiBarangNotaPenjualan();
+//                    NotaPenjualan nota = new NotaPenjualan();
+//
+//                    barang.setKodeBarang(rs.getString("KodeBarang"));
+//                    barang.setNamaBarang(rs.getString("NamaBarang"));
+//
+//                    relasi.setJumlahBarangTerjual(rs.getInt("Total Terjual"));
+//                    relasi.setKodeBarang(barang);
+//                    relasi.setKodePenjualan(nota);
+//
+//                    nota.se
+//
+//                    notas.add(nota);
+//                }
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(UserDaoImpl.class.getName()).
+//                    log(Level.SEVERE, null, ex);
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(UserDaoImpl.class.getName()).
+//                    log(Level.SEVERE, null, ex);
+//        }
+//        return notas;
     }
 
 }

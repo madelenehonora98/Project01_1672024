@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="bpUserListForm" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="806.0" style="-fx-background-color: #ccf2ff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.madelene.controller.UserListController">
+<BorderPane fx:id="bpUserListForm" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="626.0" prefWidth="859.0" style="-fx-background-color: #ccf2ff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.madelene.controller.UserListController">
    <left>
       <HBox prefHeight="300.0" prefWidth="23.0" BorderPane.alignment="CENTER" />
    </left>
@@ -80,7 +80,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                            <children>
-                              <Button fx:id="btnEditUser" disable="true" mnemonicParsing="false" onAction="#btnEditUserAct" text="Edit" />
+                              <Button fx:id="btnEditUser" mnemonicParsing="false" onAction="#btnEditUserAct" text="Edit" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
@@ -99,9 +99,10 @@
       <TableView fx:id="tbUserList" onMouseClicked="#tbUserClickedAct" prefHeight="200.0" prefWidth="200.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="colIdPengguna" prefWidth="115.0" text="IdPengguna" />
-          <TableColumn fx:id="colNamaDepan" prefWidth="122.0" text="Nama Depan" />
-            <TableColumn fx:id="colNamaBelakang" minWidth="0.0" prefWidth="149.0" text="Nama Belakang" />
-            <TableColumn fx:id="colAlamat" minWidth="0.0" prefWidth="112.0" text="Alamat" />
+            <TableColumn fx:id="colPassword" minWidth="0.0" prefWidth="98.0" text="Password" />
+          <TableColumn fx:id="colNamaDepan" prefWidth="124.0" text="Nama Depan" />
+            <TableColumn fx:id="colNamaBelakang" minWidth="0.0" prefWidth="146.0" text="Nama Belakang" />
+            <TableColumn fx:id="colAlamat" minWidth="0.0" prefWidth="107.0" text="Alamat" />
             <TableColumn fx:id="colNoTelepon" prefWidth="116.0" text="No Telepon" />
             <TableColumn fx:id="colJabatan" minWidth="0.0" prefWidth="92.0" text="Jabatan" />
         </columns>
